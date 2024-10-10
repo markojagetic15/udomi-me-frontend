@@ -18,6 +18,7 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
+      className={`bg-green-500 text-white rounded-md p-3 w-[${width}]`}
       className={`bg-green-500 text-white rounded-md p-3 w-[${width}] ${className}`}
       {...props}
       style={{ margin: margin }}

@@ -2,7 +2,6 @@ import { useRegister } from '../hooks';
 import { Button, Checkbox, Input } from '@shared';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 import './styles.css';
 
 export const Register = () => {
@@ -20,12 +19,8 @@ export const Register = () => {
 
   return (
     <div className='flex items-center h-screen'>
-      <div className='w-1/2 flex justify-center items-center bg-green-500 h-screen relative'>
-        <FaArrowLeftLong
-          className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform hover:text-green-700'
-          onClick={() => navigate('/')}
-        />
-        <h1 className='text-8xl text-white text-shadow'>Register</h1>
+      <div className='w-1/2 flex justify-center items-center bg-green-50 h-screen'>
+        <h1 className='text-7xl text-white text-shadow'>Register</h1>
       </div>
       <div className='w-1/2 flex flex-col items-center'>
         <form
@@ -61,11 +56,7 @@ export const Register = () => {
             register={register}
             endIcon={
               <div onClick={handleTogglePassword}>
-                {showPassword ? (
-                  <FaEyeSlash className='text-green-500' />
-                ) : (
-                  <FaEye className='text-green-500' />
-                )}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
             }
           />
@@ -77,11 +68,7 @@ export const Register = () => {
             register={register}
             endIcon={
               <div onClick={handleToggleConfirmPassword}>
-                {showConfirmPassword ? (
-                  <FaEyeSlash className='text-green-500' />
-                ) : (
-                  <FaEye className='text-green-500' />
-                )}
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
             }
           />
@@ -94,11 +81,7 @@ export const Register = () => {
               error={errors.term_and_conditions?.message}
             />
           </div>
-          <Button
-            type='submit'
-            margin='54px 0 0 0'
-            className='hover:text-green-500 hover:bg-green-50 hover:outline outline-green-500 outline-1 transition duration-300 ease-in-out'
-          >
+          <Button type='submit' margin='54px 0 0 0'>
             Register
           </Button>
         </form>
