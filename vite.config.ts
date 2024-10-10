@@ -5,6 +5,7 @@ import tailwindcss from 'tailwindcss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/udomi-me-frontend',
   plugins: [react()],
 
   css: {
