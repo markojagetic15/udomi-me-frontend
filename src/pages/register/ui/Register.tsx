@@ -56,7 +56,11 @@ export const Register = () => {
             register={register}
             endIcon={
               <div onClick={handleTogglePassword}>
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {showPassword ? (
+                  <FaEyeSlash className='text-green-500' />
+                ) : (
+                  <FaEye className='text-green-500' />
+                )}
               </div>
             }
           />
@@ -68,7 +72,11 @@ export const Register = () => {
             register={register}
             endIcon={
               <div onClick={handleToggleConfirmPassword}>
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                {showConfirmPassword ? (
+                  <FaEyeSlash className='text-green-500' />
+                ) : (
+                  <FaEye className='text-green-500' />
+                )}
               </div>
             }
           />

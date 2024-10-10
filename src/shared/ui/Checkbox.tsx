@@ -12,10 +12,10 @@ export const Checkbox = ({
 }) => {
   return (
     <div className='flex gap-2 flex-col w-full'>
-      <div className='flex gap-2 w-full'>
+      <div className='flex gap-2 w-full items-center'>
         <input
           type='checkbox'
-          className='rounded-md p-2 accent-green-500'
+          className='rounded-md p-3 accent-green-500 w-4 h-4 cursor-pointer'
           {...register(name)}
           {...props}
         />
