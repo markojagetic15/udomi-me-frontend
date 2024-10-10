@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Register } from '@pages';
+import { Login, Register } from '@pages';
 
 export const Routing = () => {
   return (
@@ -7,6 +7,7 @@ export const Routing = () => {
       <div>
         <Routes>
           <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </div>
     </Router>

@@ -1,5 +1,5 @@
-import { AxiosProvider, Routing } from '@app';
 import { ToastContainer } from 'react-toastify';
+import { AxiosProvider, Routing } from '@application';
 
 function App() {
   return (
