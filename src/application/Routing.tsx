@@ -1,15 +1,33 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Login, Register } from '@pages';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
+import { Home, Login, Register } from '@pages';
+import { AppDrawer } from '@widgets';
+
+const AppLayout = () => {
+  const location = useLocation();
+
+  const hideAppDrawerRoutes = ['/login', '/register'];
+
+  return (
+    <div>
+      {!hideAppDrawerRoutes.includes(location.pathname) && <AppDrawer />}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
+    </div>
+  );
+};
 
 export const Routing = () => {
   return (
     <Router>
-      <div>
-        <Routes>
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-        </Routes>
-      </div>
+      <AppLayout />
     </Router>
   );
 };
