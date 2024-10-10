@@ -1,0 +1,13 @@
+{
+  "extends": "react-app",
+  "ignorePatterns": ["src/tests/**"],
+  "rules": {
+    "no-duplicate-imports": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-console": "warn",
+    "no-empty": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "quotes": [2, "single", { "avoidEscape": false }],
+    "react-hooks/exhaustive-deps": "off"
+  }
+}
