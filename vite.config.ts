@@ -5,7 +5,7 @@ import tailwindcss from 'tailwindcss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/udomi-me-frontend',
+  base: '/',
   plugins: [react()],
 
   css: {
@@ -45,8 +45,8 @@ export default defineConfig({
         replacement: path.resolve(__dirname, './src/shared'),
       },
       {
-        find: '@app',
-        replacement: path.resolve(__dirname, './src/app'),
+        find: '@application',
+        replacement: path.resolve(__dirname, './src/application'),
       },
     ],
   },
