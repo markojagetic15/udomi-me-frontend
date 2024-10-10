@@ -5,7 +5,6 @@ import tailwindcss from 'tailwindcss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
   plugins: [react()],
 
   css: {
@@ -45,8 +44,8 @@ export default defineConfig({
         replacement: path.resolve(__dirname, './src/shared'),
       },
       {
-        find: '@application',
-        replacement: path.resolve(__dirname, './src/application'),
+        find: '@app',
+        replacement: path.resolve(__dirname, './src/app'),
       },
     ],
   },

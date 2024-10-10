@@ -25,8 +25,13 @@
       "@features": ["features"],
       "@widgets": ["widgets"],
       "@shared": ["shared"],
-      "@application": ["application"]
+      "@app": ["app"]
     }
   },
   "include": ["src"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
