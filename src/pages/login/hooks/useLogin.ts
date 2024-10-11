@@ -3,6 +3,9 @@ import { object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const schema = object({
   email: string().email().required('Email is required'),
@@ -29,8 +32,29 @@ export const useLogin = () => {
     resolver: yupResolver(schema),
   });
 
+  const mutation = useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) => {
+      return axios.post(
+        'http://localhost:9000/api/login',
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+    },
+    onSuccess: () => {
+      // navigate('/');
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+
   const onSubmit = (data: { email: string; password: string }) => {
-    console.log(data);
+    mutation.mutate(data);
   };
 
   const handleTogglePassword = () => {

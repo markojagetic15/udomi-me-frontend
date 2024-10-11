@@ -16,9 +16,6 @@ export const AxiosProvider = ({
     return Axios.create({
       baseURL,
       withCredentials: true,
-      headers: {
-        Authorization: 'Bearer',
-      },
     });
   };
 
