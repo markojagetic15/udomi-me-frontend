@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 const schema = object({
   first_name: string().required('First name is required'),
@@ -32,6 +34,27 @@ export const useRegister = () => {
 
   const navigate = useNavigate();
 
+  const mutation = useMutation({
+    mutationFn: ({
+      first_name,
+      last_name,
+      email,
+      password,
+    }: {
+      first_name: string;
+      last_name: string;
+      email: string;
+      password: string;
+    }) => {
+      return axios.post('http://localhost:9000/register', {
+        first_name,
+        last_name,
+        email,
+        password,
+      });
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -46,7 +69,7 @@ export const useRegister = () => {
     email: string;
     password: string;
   }) => {
-    console.log(data);
+    mutation.mutate(data);
   };
 
   const handleTogglePassword = () => {
