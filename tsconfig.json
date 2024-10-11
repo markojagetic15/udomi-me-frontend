@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -17,16 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["vite/client"],
-    "paths": {
-      "@assets": ["assets"],
-      "@pages": ["pages"],
-      "@tests": ["tests"],
-      "@entities": ["entities"],
-      "@features": ["features"],
-      "@widgets": ["widgets"],
-      "@shared": ["shared"],
-      "@application": ["application"]
-    }
   },
   "include": ["src"],
 }

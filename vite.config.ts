@@ -5,7 +5,6 @@ import tailwindcss from 'tailwindcss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
   plugins: [react()],
 
   css: {
@@ -14,40 +13,18 @@ export default defineConfig({
     },
   },
 
+  server: {
+    port: 3000,
+  },
+
   resolve: {
-    alias: [
-      {
-        find: '@assets',
-        replacement: path.resolve(__dirname, './src/assets'),
-      },
-      {
-        find: '@pages',
-        replacement: path.resolve(__dirname, './src/pages'),
-      },
-      {
-        find: '@tests',
-        replacement: path.resolve(__dirname, './src/tests'),
-      },
-      {
-        find: '@entities',
-        replacement: path.resolve(__dirname, './src/entities'),
-      },
-      {
-        find: '@features',
-        replacement: path.resolve(__dirname, './src/features'),
-      },
-      {
-        find: '@widgets',
-        replacement: path.resolve(__dirname, './src/widgets'),
-      },
-      {
-        find: '@shared',
-        replacement: path.resolve(__dirname, './src/shared'),
-      },
-      {
-        find: '@application',
-        replacement: path.resolve(__dirname, './src/application'),
-      },
-    ],
+    alias: {
+      _features: path.resolve(__dirname, 'src/_features/'),
+      _entities: path.resolve(__dirname, 'src/_entities/'),
+      _shared: path.resolve(__dirname, 'src/_shared/'),
+      _pages: path.resolve(__dirname, 'src/_pages/'),
+      _app: path.resolve(__dirname, 'src/_app/'),
+      _widgets: path.resolve(__dirname, 'src/_widgets/'),
+    },
   },
 });
