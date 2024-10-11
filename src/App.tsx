@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { AxiosProvider, Routing } from '@app';
+import { AxiosProvider, Routing } from '_app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
