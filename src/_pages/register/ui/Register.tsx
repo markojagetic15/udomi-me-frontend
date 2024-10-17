@@ -23,7 +23,7 @@ export const Register = () => {
       <div className='w-1/2 flex justify-center items-center bg-green-500 h-screen relative'>
         <FaArrowLeftLong
           className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform hover:text-green-700'
-          onClick={() => navigate('/')}
+          onClick={() => navigate(-1)}
         />
         <h1 className='text-8xl text-white text-shadow'>Register</h1>
       </div>
