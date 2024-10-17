@@ -29,7 +29,7 @@ export const Input = ({
           type={type}
           hidden={hide}
           {...props}
-          className={`border border-gray-300 rounded-md p-1.5 outline-none focus:border-green-500 w-full text-green-500`}
+          className={`border border-gray-300 rounded-md p-1.5 outline-none focus:border-green-500 w-full`}
           {...(register && register(name))}
         />
         {endIcon && (
