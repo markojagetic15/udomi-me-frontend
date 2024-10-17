@@ -4,13 +4,13 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import { Home, Login, Register } from '_pages';
+import { ForgotPassword, Home, Login, Register } from '_pages';
 import { AppDrawer } from '_widgets';
 
 const AppLayout = () => {
   const location = useLocation();
 
-  const hideAppDrawerRoutes = ['/login', '/register'];
+  const hideAppDrawerRoutes = ['/login', '/register', '/forgot-password'];
 
   return (
     <div>
@@ -19,6 +19,7 @@ const AppLayout = () => {
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
       </Routes>
     </div>
   );
