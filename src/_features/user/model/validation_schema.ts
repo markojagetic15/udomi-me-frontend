@@ -2,8 +2,8 @@ import { boolean, object, string } from 'yup';
 import * as Yup from 'yup';
 
 export const login_schema = object({
-  email: string().email(),
-  password: string(),
+  email: string().email().required(),
+  password: string().required(),
 });
 
 export const register_schema = object({
