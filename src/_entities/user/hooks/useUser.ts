@@ -18,7 +18,7 @@ export const useUser = () => {
       return axios.post('/logout');
     },
     onSuccess: () => {
-      navigate('/');
+      window.location.href = '/';
     },
   });
 

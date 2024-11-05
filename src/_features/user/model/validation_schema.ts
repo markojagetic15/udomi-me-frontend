@@ -2,15 +2,8 @@ import { boolean, object, string } from 'yup';
 import * as Yup from 'yup';
 
 export const login_schema = object({
-  email: string().email().required('Email is required'),
-  password: string()
-    .min(8)
-    .max(20)
-    .matches(
-      /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
-      'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number or special character'
-    )
-    .required('Password is required'),
+  email: string().email(),
+  password: string(),
 });
 
 export const register_schema = object({
@@ -32,4 +25,8 @@ export const register_schema = object({
     [true],
     'You must accept the terms and conditions'
   ),
+});
+
+export const forgot_password_schema = object({
+  email: string().email().required('Email is required'),
 });

@@ -1,45 +1,58 @@
+import { Input as InputComponent } from '@nextui-org/react';
+import { UseFormRegisterReturn } from 'react-hook-form';
+
 export const Input = ({
   name,
   label,
   type = 'text',
-  width,
   error,
   register,
   endIcon,
+  startIcon,
   hide,
+  onChange,
+  multiple,
+  value,
   ...props
 }: {
-  name: string;
+  name?: string;
   label?: string;
   type?: string;
   placeholder?: string;
-  width?: string;
   error?: string;
-  register?: any;
+  register?: UseFormRegisterReturn<string>;
   hide?: boolean;
   endIcon?: React.ReactNode;
+  startIcon?: React.ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  multiple?: boolean;
+  value?: string;
 }) => {
   return (
-    <div className='flex flex-col gap-1.5'>
-      <label htmlFor={name}>{label}</label>
-      <div className={`relative w-full w-[${width}]`}>
-        <input
+    <div className='flex flex-col gap-1.5 relative'>
+      <div className=''>
+        <InputComponent
           id={name}
           name={name}
           type={type}
           hidden={hide}
           {...props}
-          className={`border border-gray-300 rounded-md p-1.5 outline-none focus:border-green-500 w-full`}
-          {...(register && register(name))}
+          className='border border-accent rounded-md p-1.5 outline-none focus:border-green-500 w-full'
+          {...register}
+          onChange={onChange}
+          label={label}
+          multiple={multiple}
+          value={value}
+          endContent={endIcon}
+          startContent={startIcon}
         />
-        {endIcon && (
-          <div className='absolute right-2.5 top-1/2 flex justify-end -translate-x-1/2 -translate-y-1/2 cursor-pointer'>
-            {endIcon}
-          </div>
-        )}
       </div>
 
-      {error && <span className='text-red-500 text-xs'>{error}</span>}
+      {error && (
+        <span className='text-danger text-xs absolute top-[95%] left-2'>
+          {error}
+        </span>
+      )}
     </div>
   );
 };

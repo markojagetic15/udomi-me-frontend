@@ -1,17 +1,20 @@
-import { useLogin } from '_features/user';
+import { useForgotPassword } from '_features/user';
 import { Button, Input } from '_shared';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 
 export const ForgotPassword = () => {
-  const { register, handleSubmit, errors, onSubmit, navigate } = useLogin();
+  const { register, handleSubmit, errors, onSubmit, navigate } =
+    useForgotPassword();
 
   return (
-    <div className='flex items-center h-screen relative'>
+    <div className="flex items-center h-screen justify-center bg-[url('_assets/circles.svg')] relative bg-cover bg-no-repeat">
       <FaArrowLeftLong
-        className='text-3xl text-green-500 absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform hover:text-green-700'
+        className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform'
         onClick={() => navigate(-1)}
       />
-      <div className='w-1/2 flex flex-col items-center relative'>
+      <div className='w-1/2 flex flex-col items-center gap-14'>
+        <h1 className='text-8xl text-white text-shadow'>Forgot Password</h1>
+
         <form
           className='w-1/2 flex flex-col gap-3'
           onSubmit={handleSubmit(onSubmit)}
@@ -21,21 +24,13 @@ export const ForgotPassword = () => {
             label='Enter your email address and we will send you instructions to reset your password.'
             name='email'
             error={errors.email?.message}
-            register={register}
+            register={register('email')}
           />
 
-          <Button
-            type='submit'
-            margin='24px 0 0 0'
-            className='hover:text-green-500 hover:bg-green-50 hover:outline outline-green-500 outline-1 transition duration-300 ease-in-out'
-          >
+          <Button type='submit' variant='flat'>
             Submit
           </Button>
         </form>
-      </div>
-
-      <div className='w-1/2 flex justify-center items-center bg-green-500 h-screen relative'>
-        <h1 className='text-8xl text-white text-shadow'>Forgot Password</h1>
       </div>
     </div>
   );
