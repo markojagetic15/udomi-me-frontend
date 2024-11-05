@@ -9,7 +9,6 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    errors,
     onSubmit,
     showPassword,
     handleTogglePassword,
@@ -17,49 +16,48 @@ export const Login = () => {
   } = useLogin();
 
   return (
-    <div className='flex items-center h-screen'>
-      <div className='w-1/2 flex justify-center items-center bg-green-500 h-screen relative'>
-        <FaArrowLeftLong
-          className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform hover:text-green-700'
-          onClick={() => navigate(-1)}
-        />
-        <h1 className='text-8xl text-white text-shadow'>Login</h1>
-      </div>
-      <div className='w-1/2 flex flex-col items-center'>
+    <div className="flex items-center h-screen justify-center bg-[url('_assets/register_waves.svg')] relative bg-cover bg-no-repeat">
+      <FaArrowLeftLong
+        className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform'
+        onClick={() => navigate(-1)}
+      />
+
+      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl'>
+        <h1 className='text-8xl text-white pt-12'>Login</h1>
+
         <form
-          className='w-1/2 flex flex-col gap-3'
+          className='w-[500px] flex flex-col gap-3 p-8'
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
             type='email'
-            label='Email*'
+            label='Email'
             name='email'
-            error={errors.email?.message}
-            register={register}
+            register={register('email')}
           />
           <Input
             type={showPassword ? 'text' : 'password'}
-            label='Password*'
+            label='Password'
             name='password'
-            error={errors.password?.message}
-            register={register}
+            register={register('password')}
             endIcon={
-              <div onClick={handleTogglePassword}>
+              <div onClick={handleTogglePassword} className='cursor-pointer'>
                 {showPassword ? (
-                  <FaEyeSlash className='text-green-500' />
+                  <FaEyeSlash className='text-primary' />
                 ) : (
-                  <FaEye className='text-green-500' />
+                  <FaEye className='text-primary' />
                 )}
               </div>
             }
           />
 
-          <div className='w-1/2 mt-2'>
+          <div className='w-full mt-2'>
             <div className='flex gap-2 w-full'>
               <div>
                 <button
-                  className='text-green-500'
+                  className='text-primary'
                   onClick={() => navigate('/forgot-password')}
+                  type='button'
                 >
                   Forgot password?
                 </button>
@@ -67,28 +65,24 @@ export const Login = () => {
             </div>
           </div>
 
-          <Button
-            type='submit'
-            margin='24px 0 0 0'
-            className='hover:text-green-500 hover:bg-green-50 hover:outline outline-green-500 outline-1 transition duration-300 ease-in-out'
-          >
+          <Button type='submit' variant='flat'>
             Login
           </Button>
-        </form>
 
-        <div className='w-1/2 mt-5'>
-          <div className='flex gap-2 w-full'>
-            Don't have an account?{' '}
-            <div>
-              <button
-                className='text-green-500'
-                onClick={() => navigate('/register')}
-              >
-                Register
-              </button>
+          <div className='w-full mt-5 pb-12'>
+            <div className='flex gap-2 w-full'>
+              Don't have an account?{' '}
+              <div>
+                <button
+                  className='text-primary'
+                  onClick={() => navigate('/register')}
+                >
+                  Register
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
