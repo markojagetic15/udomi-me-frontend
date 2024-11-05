@@ -17,6 +17,8 @@ export default defineConfig({
     port: 3000,
   },
 
+  define: { global: 'window' },
+
   resolve: {
     alias: {
       _features: path.resolve(__dirname, 'src/_features/'),
@@ -25,6 +27,7 @@ export default defineConfig({
       _pages: path.resolve(__dirname, 'src/_pages/'),
       _app: path.resolve(__dirname, 'src/_app/'),
       _widgets: path.resolve(__dirname, 'src/_widgets/'),
+      _assets: path.resolve(__dirname, 'src/_assets/'),
     },
   },
 });

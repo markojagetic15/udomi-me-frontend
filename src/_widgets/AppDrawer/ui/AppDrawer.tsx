@@ -1,71 +1,90 @@
 import { useAppDrawer } from '../hooks';
-import { Avatar, Button, Dropdown, DropdownItem } from '_shared';
+import { Avatar, Button, Dropdown } from '_shared';
 import { TbLogout2 } from 'react-icons/tb';
 import { CgProfile } from 'react-icons/cg';
 import { FaList } from 'react-icons/fa';
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from '@nextui-org/react';
 
 export const AppDrawer = () => {
   const { navigate, user, isError, logout } = useAppDrawer();
 
   if (user && !isError) {
     return (
-      <div className='flex justify-between items-center pt-4 pb-4 pl-20 pr-20 bg-[#ECF6EC] fixed w-screen'>
-        <img
-          src={`${import.meta.env.VITE_APP_S3_ASSETS}/logo.png`}
-          alt='logo'
-          className='w-14 cursor-pointer'
-          onClick={() => navigate('/')}
-        />
-        <div className='flex gap-8 items-center'>
-          <Dropdown
-            trigger={
-              <div>
-                {' '}
-                <Avatar user={user} />
-              </div>
-            }
+      <Navbar shouldHideOnScroll isBordered isBlurred>
+        <NavbarBrand>
+          <p
+            className='font-bold text-inherit cursor-pointer'
+            onClick={() => navigate('/')}
           >
-            <DropdownItem className='flex gap-2'>
-              <FaList />
-              My listings
-            </DropdownItem>
-            <DropdownItem className='flex gap-2'>
-              <CgProfile />
-              My profile
-            </DropdownItem>
-            <DropdownItem className='flex gap-2' onClick={() => logout()}>
-              <TbLogout2 />
-              Logout
-            </DropdownItem>
-          </Dropdown>
-        </div>
-      </div>
+            UDOMI ME
+          </p>
+        </NavbarBrand>
+        <NavbarContent justify='end'>
+          <NavbarItem className='hidden lg:flex'>
+            <Button
+              onClick={() => navigate('/create-listing')}
+              variant='bordered'
+            >
+              Create listing
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Dropdown
+              trigger={
+                <div>
+                  {' '}
+                  <Avatar user={user} />
+                </div>
+              }
+              items={[
+                {
+                  key: 'my-listings',
+                  label: 'My Listings',
+                  icon: <FaList />,
+                  onClick: () => navigate('/my-listings'),
+                },
+                { key: 'profile', label: 'Profile', icon: <CgProfile /> },
+                {
+                  key: 'logout',
+                  label: 'Logout',
+                  icon: <TbLogout2 />,
+                  onClick: logout,
+                },
+              ]}
+            />
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
     );
   }
 
   return (
-    <div className='flex justify-between items-center pt-4 pb-4 pl-20 pr-20 bg-[#ECF6EC] fixed w-screen'>
-      <img
-        src={`${import.meta.env.VITE_APP_S3_ASSETS}/logo.png`}
-        alt='logo'
-        className='w-14 cursor-pointer'
-        onClick={() => navigate('/')}
-      />
-      <div className='flex gap-8 items-center'>
-        <span
-          onClick={() => navigate('/login')}
-          className='cursor-pointer hover:text-green-500 transition duration-300 ease-in-out'
+    <Navbar shouldHideOnScroll>
+      <NavbarBrand>
+        <p
+          className='font-bold text-inherit cursor-pointer'
+          onClick={() => navigate('/')}
         >
-          Register
-        </span>
-
-        <Button
-          onClick={() => navigate('/login')}
-          className='cursor-pointer pl-8 pr-8 hover:bg-[#F0F0F0] hover:text-[#000000] transition duration-300 ease-in-out'
-        >
-          Login
-        </Button>
-      </div>
-    </div>
+          UDOMI ME
+        </p>
+      </NavbarBrand>
+      <NavbarContent justify='end'>
+        <NavbarItem className='hidden lg:flex'>
+          <Button onClick={() => navigate('/register')} variant='bordered'>
+            Register
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <Button onClick={() => navigate('/login')} variant='solid'>
+            Login
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
   );
 };

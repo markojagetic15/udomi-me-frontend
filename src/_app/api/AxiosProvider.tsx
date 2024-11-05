@@ -13,10 +13,26 @@ export const AxiosProvider = ({
   children,
 }: React.PropsWithChildren<unknown>) => {
   const createAxiosWithBaseUrl = (baseURL: string) => {
-    return Axios.create({
+    const instance = Axios.create({
       baseURL,
       withCredentials: true,
     });
+
+    instance.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          error.message = error.response.data.message;
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return instance;
   };
 
   const backendService = useMemo(() => {
@@ -25,13 +41,9 @@ export const AxiosProvider = ({
     );
   }, []);
 
-  return React.createElement(
-    AxiosContext.Provider,
-    {
-      value: {
-        axios: backendService,
-      },
-    },
-    children
+  return (
+    <AxiosContext.Provider value={{ axios: backendService }}>
+      {children}
+    </AxiosContext.Provider>
   );
 };

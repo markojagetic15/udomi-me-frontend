@@ -1,28 +1,52 @@
+import { Button as ButtonComponent } from '@nextui-org/button';
+
 export const Button = ({
   type = 'button',
-  width,
   children,
   onClick,
-  margin,
-  className,
+  isLoading,
+  isDisabled,
+  startIcon,
+  endIcon,
+  color,
   ...props
 }: {
   type?: 'button' | 'submit' | 'reset';
-  width?: string;
   children: React.ReactNode;
   onClick?: () => void;
-  margin?: string;
-  className?: string;
+  variant:
+    | 'solid'
+    | 'bordered'
+    | 'light'
+    | 'flat'
+    | 'faded'
+    | 'shadow'
+    | 'ghost';
+  isLoading?: boolean;
+  isDisabled?: boolean;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  color?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning'
+    | 'default'
+    | 'danger';
 }) => {
   return (
-    <button
+    <ButtonComponent
       type={type}
       onClick={onClick}
-      className={`bg-green-500 text-white rounded-md p-3 w-[${width}] ${className}`}
+      isLoading={isLoading}
+      isDisabled={isDisabled}
+      startContent={startIcon}
+      endContent={endIcon}
+      color={color || 'primary'}
       {...props}
-      style={{ margin: margin }}
+      variant={props.variant}
     >
       {children}
-    </button>
+    </ButtonComponent>
   );
 };
