@@ -1,20 +1,23 @@
 import { User } from '_entities/user';
+import { Avatar as AvatarComponent } from '@nextui-org/avatar';
 
 export const Avatar = ({
+  size = 'md',
   user,
-  width = 40,
-  height = 40,
+  src,
 }: {
   user: User;
-  width?: number;
-  height?: number;
+  src?: string;
+  size?: 'sm' | 'md' | 'lg';
 }) => {
-  return (
-    <div
-      className={`w-[${width}] h-[${height}] rounded-full cursor-pointer bg-green-500 p-2 text-white flex items-center justify-center`}
-    >
-      {user.first_name[0]}
-      {user.last_name[0]}
-    </div>
-  );
+  if (src) {
+    return <AvatarComponent src={src} size={size} />;
+  } else {
+    return (
+      <div className='rounded-full cursor-pointer bg-cream p-2 text-white flex items-center justify-center'>
+        {user.first_name[0]}
+        {user.last_name[0]}
+      </div>
+    );
+  }
 };

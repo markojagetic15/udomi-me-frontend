@@ -19,17 +19,17 @@ export const Register = () => {
   } = useRegister();
 
   return (
-    <div className='flex items-center h-screen'>
-      <div className='w-1/2 flex justify-center items-center bg-green-500 h-screen relative'>
-        <FaArrowLeftLong
-          className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform hover:text-green-700'
-          onClick={() => navigate(-1)}
-        />
-        <h1 className='text-8xl text-white text-shadow'>Register</h1>
-      </div>
-      <div className='w-1/2 flex flex-col items-center'>
+    <div className="flex items-center h-screen justify-center bg-[url('_assets/register_circles.svg')] relative bg-cover bg-no-repeat">
+      <FaArrowLeftLong
+        className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform'
+        onClick={() => navigate(-1)}
+      />
+
+      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl'>
+        <h1 className='text-8xl text-white pt-12'>Register</h1>
+
         <form
-          className='w-1/2 flex flex-col gap-3'
+          className='w-[600px] flex flex-col gap-3 p-8'
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
@@ -37,34 +37,34 @@ export const Register = () => {
             label='First name*'
             name='first_name'
             error={errors.first_name?.message}
-            register={register}
+            register={register('first_name')}
           />
           <Input
             type='text'
             label='Last name*'
             name='last_name'
             error={errors.last_name?.message}
-            register={register}
+            register={register('last_name')}
           />
           <Input
             type='email'
             label='Email*'
             name='email'
             error={errors.email?.message}
-            register={register}
+            register={register('email')}
           />
           <Input
             type={showPassword ? 'text' : 'password'}
             label='Password*'
             name='password'
             error={errors.password?.message}
-            register={register}
+            register={register('password')}
             endIcon={
               <div onClick={handleTogglePassword}>
                 {showPassword ? (
-                  <FaEyeSlash className='text-green-500' />
+                  <FaEyeSlash className='text-primary' />
                 ) : (
-                  <FaEye className='text-green-500' />
+                  <FaEye className='text-primary' />
                 )}
               </div>
             }
@@ -74,13 +74,13 @@ export const Register = () => {
             label='Confirm Password*'
             name='confirm_password'
             error={errors.confirm_password?.message}
-            register={register}
+            register={register('confirm_password')}
             endIcon={
               <div onClick={handleToggleConfirmPassword}>
                 {showConfirmPassword ? (
-                  <FaEyeSlash className='text-green-500' />
+                  <FaEyeSlash className='text-primary' />
                 ) : (
-                  <FaEye className='text-green-500' />
+                  <FaEye className='text-primary' />
                 )}
               </div>
             }
@@ -89,33 +89,27 @@ export const Register = () => {
           <div className='mt-3'>
             <Checkbox
               label='I agree with terms and conditions'
-              name='term_and_conditions'
-              register={register}
+              register={register('term_and_conditions')}
               error={errors.term_and_conditions?.message}
             />
           </div>
-          <Button
-            type='submit'
-            margin='54px 0 0 0'
-            className='hover:text-green-500 hover:bg-green-50 hover:outline outline-green-500 outline-1 transition duration-300 ease-in-out'
-          >
+          <Button type='submit' variant='flat'>
             Register
           </Button>
-        </form>
-
-        <div className='w-1/2 mt-5'>
-          <div className='flex gap-2 w-full'>
-            Already a member?{' '}
-            <div>
-              <button
-                className='text-green-500'
-                onClick={() => navigate('/login')}
-              >
-                Login
-              </button>
+          <div className='w-1/2 mt-5 pb-12'>
+            <div className='flex gap-2 w-full'>
+              Already a member?{' '}
+              <div>
+                <button
+                  className='text-primary'
+                  onClick={() => navigate('/login')}
+                >
+                  Login
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

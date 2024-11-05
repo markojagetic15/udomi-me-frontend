@@ -4,7 +4,14 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import { ForgotPassword, Home, Login, Register } from '_pages';
+import {
+  CreateListing,
+  ForgotPassword,
+  Home,
+  Login,
+  Register,
+  MyListings,
+} from '_pages';
 import { AppDrawer } from '_widgets';
 
 const AppLayout = () => {
@@ -19,7 +26,9 @@ const AppLayout = () => {
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/create-listing' element={<CreateListing />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/my-listings' element={<MyListings />} />
       </Routes>
     </div>
   );
