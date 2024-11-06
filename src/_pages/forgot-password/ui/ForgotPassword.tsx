@@ -13,10 +13,12 @@ export const ForgotPassword = () => {
         onClick={() => navigate(-1)}
       />
       <div className='w-1/2 flex flex-col items-center gap-14'>
-        <h1 className='text-8xl text-white text-shadow'>Forgot Password</h1>
+        <h1 className='text-8xl text-white text-center w-full'>
+          Forgot Password
+        </h1>
 
         <form
-          className='w-1/2 flex flex-col gap-3'
+          className='w-full flex flex-col gap-3'
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
