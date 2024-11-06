@@ -17,6 +17,10 @@ export default defineConfig({
     port: 3000,
   },
 
+  build: {
+    target: 'esnext',
+  },
+
   define: { global: 'window' },
 
   resolve: {
