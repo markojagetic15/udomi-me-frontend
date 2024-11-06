@@ -22,7 +22,6 @@ export const ForgotPassword = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
-            type='email'
             label='Enter your email address and we will send you instructions to reset your password.'
             name='email'
             error={errors.email?.message}

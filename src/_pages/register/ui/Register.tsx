@@ -25,29 +25,26 @@ export const Register = () => {
         onClick={() => navigate(-1)}
       />
 
-      <div className='flex flex-col items-center gap-2 bg-[rgba(185,205,218,0.4)] rounded-2xl'>
-        <h1 className='text-8xl text-white pt-2'>Register</h1>
+      <div className='flex flex-col items-center gap-2 bg-[rgba(185,205,218,0.4)] rounded-2xl border-secondary border-1 border-solid'>
+        <h1 className='text-8xl text-white pt-4'>Register</h1>
 
         <form
           className='w-[700px] flex flex-col gap-3 p-8'
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
-            type='text'
             label='First name*'
             name='first_name'
             error={errors.first_name?.message}
             register={register('first_name')}
           />
           <Input
-            type='text'
             label='Last name*'
             name='last_name'
             error={errors.last_name?.message}
             register={register('last_name')}
           />
           <Input
-            type='email'
             label='Email*'
             name='email'
             error={errors.email?.message}
@@ -60,7 +57,7 @@ export const Register = () => {
             error={errors.password?.message}
             register={register('password')}
             endIcon={
-              <div onClick={handleTogglePassword}>
+              <div onClick={handleTogglePassword} className='cursor-pointer'>
                 {showPassword ? (
                   <FaEyeSlash className='text-primary' />
                 ) : (
@@ -76,7 +73,10 @@ export const Register = () => {
             error={errors.confirm_password?.message}
             register={register('confirm_password')}
             endIcon={
-              <div onClick={handleToggleConfirmPassword}>
+              <div
+                onClick={handleToggleConfirmPassword}
+                className='cursor-pointer'
+              >
                 {showConfirmPassword ? (
                   <FaEyeSlash className='text-primary' />
                 ) : (

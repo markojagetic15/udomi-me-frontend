@@ -29,27 +29,25 @@ export const Input = ({
   value?: string;
 }) => {
   return (
-    <div className='flex flex-col gap-1.5 relative'>
-      <div className=''>
-        <InputComponent
-          id={name}
-          name={name}
-          type={type}
-          hidden={hide}
-          {...props}
-          className='border border-accent rounded-md p-1.5 outline-none focus:border-green-500 w-full'
-          {...register}
-          onChange={onChange}
-          label={label}
-          multiple={multiple}
-          value={value}
-          endContent={endIcon}
-          startContent={startIcon}
-        />
-      </div>
+    <div className='relative'>
+      <InputComponent
+        id={name}
+        name={name}
+        type={type}
+        hidden={hide}
+        {...props}
+        className='p-1.5'
+        {...register}
+        onChange={onChange}
+        label={label}
+        multiple={multiple}
+        value={value}
+        endContent={endIcon}
+        startContent={startIcon}
+      />
 
       {error && (
-        <span className='text-danger text-xs absolute top-[95%] left-2'>
+        <span className='text-danger text-xs absolute top-[92.5%] left-2'>
           {error}
         </span>
       )}

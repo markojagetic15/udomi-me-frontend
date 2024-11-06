@@ -2,14 +2,16 @@ import { boolean, object, string } from 'yup';
 import * as Yup from 'yup';
 
 export const login_schema = object({
-  email: string().email().required(),
-  password: string().required(),
+  email: string().email('Email must be a valid email address'),
+  password: string(),
 });
 
 export const register_schema = object({
   first_name: string().required('First name is required'),
   last_name: string().required('Last name is required'),
-  email: string().email().required('Email is required'),
+  email: string()
+    .email('Email must be a valid email address')
+    .required('Email is required'),
   password: string()
     .min(8)
     .max(20)
