@@ -25,11 +25,11 @@ export const Register = () => {
         onClick={() => navigate(-1)}
       />
 
-      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl'>
-        <h1 className='text-8xl text-white pt-12'>Register</h1>
+      <div className='flex flex-col items-center gap-2 bg-[rgba(185,205,218,0.4)] rounded-2xl'>
+        <h1 className='text-8xl text-white pt-2'>Register</h1>
 
         <form
-          className='w-[600px] flex flex-col gap-3 p-8'
+          className='w-[700px] flex flex-col gap-3 p-8'
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
@@ -96,7 +96,7 @@ export const Register = () => {
           <Button type='submit' variant='flat'>
             Register
           </Button>
-          <div className='w-1/2 mt-5 pb-12'>
+          <div className='w-1/2 mt-5 pb-2'>
             <div className='flex gap-2 w-full'>
               Already a member?{' '}
               <div>
