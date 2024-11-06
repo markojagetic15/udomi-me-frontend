@@ -13,6 +13,7 @@ export const Login = () => {
     showPassword,
     handleTogglePassword,
     navigate,
+    errors,
   } = useLogin();
 
   return (
@@ -22,7 +23,7 @@ export const Login = () => {
         onClick={() => navigate(-1)}
       />
 
-      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl'>
+      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl border-secondary border-1 border-solid'>
         <h1 className='text-8xl text-white pt-12'>Login</h1>
 
         <form
@@ -30,16 +31,17 @@ export const Login = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
-            type='email'
             label='Email'
             name='email'
             register={register('email')}
+            error={errors.email?.message}
           />
           <Input
             type={showPassword ? 'text' : 'password'}
             label='Password'
             name='password'
             register={register('password')}
+            error={errors.password?.message}
             endIcon={
               <div onClick={handleTogglePassword} className='cursor-pointer'>
                 {showPassword ? (
@@ -76,6 +78,7 @@ export const Login = () => {
                 <button
                   className='text-primary'
                   onClick={() => navigate('/register')}
+                  type='button'
                 >
                   Register
                 </button>
