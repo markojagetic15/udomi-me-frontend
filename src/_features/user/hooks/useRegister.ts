@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { useAxios } from '_app';
 import { register_schema } from '../model';
+import { toast } from 'react-toastify';
 
 export const useRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,12 +27,15 @@ export const useRegister = () => {
       email: string;
       password: string;
     }) => {
-      return axios.post('/register', {
+      return axios.post('/signup', {
         first_name,
         last_name,
         email,
         password,
       });
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
