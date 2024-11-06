@@ -20,6 +20,7 @@ export const useLogin = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(login_schema),
+    reValidateMode: 'onChange',
   });
 
   const mutation = useMutation({
