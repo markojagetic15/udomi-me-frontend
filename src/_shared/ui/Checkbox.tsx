@@ -19,6 +19,7 @@ export const Checkbox = ({
           className='rounded-md p-3 accent-green-500 w-4 h-4 cursor-pointer'
           {...register}
           {...props}
+          color='secondary'
         />
         <label>{label}</label>
       </div>
