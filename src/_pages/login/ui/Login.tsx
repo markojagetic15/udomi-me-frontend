@@ -20,14 +20,14 @@ export const Login = () => {
     <div className="flex items-center h-screen justify-center bg-[url('_assets/register_waves.svg')] relative bg-cover bg-no-repeat">
       <FaArrowLeftLong
         className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform'
-        onClick={() => navigate(-1)}
+        onClick={() => navigate('/')}
       />
 
-      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl border-secondary border-1 border-solid'>
-        <h1 className='text-8xl text-white pt-12'>Login</h1>
+      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl border-secondary border-1 border-solid lg:w-auto w-[95%]'>
+        <h1 className='text-6xl text-white pt-12 lg:text-8xl'>Login</h1>
 
         <form
-          className='w-[500px] flex flex-col gap-3 p-8'
+          className='w-[95%] flex flex-col gap-3 lg:p-8 p-4 lg:w-[600px]'
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
