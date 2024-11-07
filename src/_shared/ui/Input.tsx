@@ -29,7 +29,7 @@ export const Input = ({
   value?: string;
 }) => {
   return (
-    <div className='relative'>
+    <div className='relative w-full'>
       <InputComponent
         id={name}
         name={name}

@@ -10,10 +10,10 @@ export const ForgotPassword = () => {
     <div className="flex items-center h-screen justify-center bg-[url('_assets/circles.svg')] relative bg-cover bg-no-repeat">
       <FaArrowLeftLong
         className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform'
-        onClick={() => navigate(-1)}
+        onClick={() => navigate('/login')}
       />
-      <div className='w-1/2 flex flex-col items-center gap-14'>
-        <h1 className='text-8xl text-white text-center w-full'>
+      <div className='w-[90%] flex flex-col items-center gap-14 lg:w-1/2'>
+        <h1 className='text-6xl text-white text-center w-full lg:text-8xl'>
           Forgot Password
         </h1>
 
