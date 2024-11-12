@@ -29,7 +29,7 @@ export interface Listing {
   id: string;
   title: string;
   description?: string;
-  images?: { url: string; id: string }[];
+  images: { url: string; id: string }[];
   address?: string;
   phone_number?: string;
   email?: string;

@@ -5,4 +5,5 @@ export * from './DropdownItem';
 export * from './Dropdown';
 export * from './Avatar';
 export * from './Spinner';
+export * from './ImageCarousel';
 export * from './TextArea';

@@ -14,15 +14,7 @@ export const create_listing_schema = yup.object().shape({
     .min(5, 'Description must be at least 5 characters')
     .max(500, 'Description must be at most 500 characters'),
 
-  images: yup
-    .array()
-    .of(
-      yup.object().shape({
-        url: yup.string().required('Image URL is required'),
-        id: yup.string().required('Image ID is required'),
-      })
-    )
-    .required('Images are required'),
+  images: yup.string(),
 
   address: yup
     .string()
@@ -46,7 +38,7 @@ export const create_listing_schema = yup.object().shape({
 
   is_vaccinated: yup.boolean().optional(),
 
-  breed: yup.string().optional(),
+  breed: yup.string().required('Breed is required'),
 
   gender: yup
     .string()

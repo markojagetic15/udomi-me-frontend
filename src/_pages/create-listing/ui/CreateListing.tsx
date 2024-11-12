@@ -41,7 +41,7 @@ export const CreateListing = () => {
           name='description'
         />
 
-        <div className='flex justify-between items-center w-full'>
+        <div className='flex items-center w-full gap-4'>
           <Select
             label='Select Category'
             className='max-w-xs'
@@ -64,23 +64,23 @@ export const CreateListing = () => {
             ))}
           </Select>
 
-          <Checkbox
-            register={register('is_vaccinated')}
-            error={errors.is_vaccinated?.message}
-            label='Is Vaccinated'
-          />
-
           <Input
             register={register('breed')}
             name='breed'
             error={errors.breed?.message}
             label='Breed'
+            width='w-64'
           />
 
           <DatePicker
             label='Birth date'
             className='max-w-[284px]'
             errorMessage={errors.date_of_birth?.message}
+          />
+          <Checkbox
+            register={register('is_vaccinated')}
+            error={errors.is_vaccinated?.message}
+            label='Vaccinated'
           />
         </div>
 
@@ -106,7 +106,6 @@ export const CreateListing = () => {
         />
 
         <Input
-          register={register('images')}
           error={errors.images?.message}
           label='Images'
           name='Images'

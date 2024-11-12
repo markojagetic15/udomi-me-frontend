@@ -13,6 +13,7 @@ export const Input = ({
   onChange,
   multiple,
   value,
+  width,
   ...props
 }: {
   name?: string;
@@ -27,16 +28,17 @@ export const Input = ({
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   multiple?: boolean;
   value?: string;
+  width?: string;
 }) => {
   return (
-    <div className='relative w-full'>
+    <div className='relative'>
       <InputComponent
         id={name}
         name={name}
         type={type}
         hidden={hide}
         {...props}
-        className='p-1.5'
+        className={`${width ? width : 'w-full'} p-1.5`}
         {...register}
         onChange={onChange}
         label={label}
