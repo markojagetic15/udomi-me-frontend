@@ -11,6 +11,7 @@ import {
   Login,
   Register,
   MyListings,
+  AnimalInfo,
 } from '_pages';
 import { AppDrawer } from '_widgets';
 
@@ -29,6 +30,7 @@ const AppLayout = () => {
         <Route path='/create-listing' element={<CreateListing />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/my-listings' element={<MyListings />} />
+        <Route path='/animal/:id' element={<AnimalInfo />} />
       </Routes>
     </div>
   );

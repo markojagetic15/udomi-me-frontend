@@ -1,6 +1,6 @@
 import { useMyListings } from '../hooks';
 import { Spinner } from '_shared';
-import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
+import { ListingItem } from '_entities/listing';
 
 export const MyListings = () => {
   const { listings, isLoading } = useMyListings();
@@ -8,7 +8,7 @@ export const MyListings = () => {
   return (
     <div
       className='
-        grid grid-cols-4 gap-4 p-44
+        w-full lg:max-w-6xl m-auto mt-24 mb-24
     '
     >
       {isLoading ? (
@@ -20,23 +20,17 @@ export const MyListings = () => {
           ) : (
             <div>
               {' '}
-              {listings?.map((listing) => (
-                <Card className='py-4'>
-                  <CardBody className='overflow-visible py-2'>
-                    <Image
-                      src={listing.images?.[0].url}
-                      alt={listing.title}
-                      isZoomed
-                    />
-                  </CardBody>
-                  <CardHeader className='pb-0 pt-2 px-4 flex-col items-start'>
-                    <p className='text-tiny uppercase font-bold'>
-                      {listing.description}
-                    </p>
-                    <h4 className='font-bold text-large'>{listing.title}</h4>
-                  </CardHeader>
-                </Card>
-              ))}
+              <div>
+                {listings?.length === 0 ? (
+                  <div className='col-span-4 text-center'>No animals found</div>
+                ) : (
+                  <div className='grid 2xl:grid-cols-3 gap-5 md:grid-cols-3 sm:grid-cols-2'>
+                    {listings?.map((listing) => (
+                      <ListingItem listing={listing} key={listing.id} />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { create_listing_schema, useCreateListing } from '_features/listing';
-import { CreateListingDto } from '_entities/listing';
 import { uploadFile } from '_entities/resource';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Category } from '_entities/listing';
 
 export const useCreateListingPage = () => {
   const [images, setImages] = useState<
@@ -25,11 +25,31 @@ export const useCreateListingPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm({
     resolver: yupResolver(create_listing_schema),
   });
 
-  const onSubmit = (data: CreateListingDto) => {
+  const onSubmit = (data: {
+    title: string;
+    description: string;
+    address: string;
+    phone_number: string;
+    email: string;
+    category: Category;
+    date_of_birth?: Date | null;
+    is_vaccinated?: boolean;
+    breed?: string | null;
+    gender: 'male' | 'female';
+  }) => {
+    if (images.length === 0) {
+      setError('images', {
+        type: 'manual',
+        message: 'Please upload at least one image',
+      });
+      return;
+    }
+
     createListing({ ...data, images: images });
 
     toast.success(

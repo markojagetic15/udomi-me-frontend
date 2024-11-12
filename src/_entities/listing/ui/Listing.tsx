@@ -6,10 +6,17 @@ import {
   Image,
 } from '@nextui-org/react';
 import { Listing } from '../model';
+import { useNavigate } from 'react-router-dom';
 
 export const ListingItem = ({ listing }: { listing: Listing }) => {
+  const navigate = useNavigate();
   return (
-    <Card className='py-2 cursor-pointer' isPressable shadow='md'>
+    <Card
+      className='py-2 cursor-pointer'
+      isPressable
+      shadow='md'
+      onClick={() => navigate(`/animal/${listing.id}`)}
+    >
       <CardBody className='overflow-visible py-2'>
         <Image
           shadow='sm'
@@ -21,8 +28,8 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
           isZoomed
         />
       </CardBody>
-      <CardHeader className='pb-0 pt-2 px-4 flex-col items-start'></CardHeader>
-      <CardFooter className='text-small justify-between'>
+      <CardHeader className='pb-0 pt-0 px-4 flex-col items-start'></CardHeader>
+      <CardFooter className='text-small flex-col justify-start items-start'>
         <h4 className='font-bold text-large'>{listing.title}</h4>
         <p className='text-tiny uppercase font-bold'>
           {listing.category} &#x2022; {listing.gender}
