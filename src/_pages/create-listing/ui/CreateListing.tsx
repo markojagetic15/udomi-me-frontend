@@ -22,16 +22,17 @@ export const CreateListing = () => {
   } = useCreateListingPage();
 
   return (
-    <div className='w-screen h-screen p-96 pt-32'>
+    <div className='w-screen h-screen p-40 pt-12'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='rounded-2xl bg-green-100 p-12 flex flex-col gap-6'
+        className='rounded-2xl bg-green-100 p-12 flex flex-col gap-6 w-full'
       >
         <Input
           register={register('title')}
           name='title'
           error={errors.title?.message}
           label='Title'
+          isRequired
         />
 
         <TextArea
@@ -39,6 +40,7 @@ export const CreateListing = () => {
           error={errors.description?.message}
           label='Description'
           name='description'
+          isRequired
         />
 
         <div className='flex items-center w-full gap-4'>
@@ -47,6 +49,7 @@ export const CreateListing = () => {
             className='max-w-xs'
             errorMessage={errors.category?.message}
             {...register('category')}
+            isInvalid={!!errors.category?.message}
           >
             {CategoryItems.map((animal) => (
               <SelectItem key={animal.key}>{animal.label}</SelectItem>
@@ -58,6 +61,7 @@ export const CreateListing = () => {
             className='max-w-xs'
             errorMessage={errors.gender?.message}
             {...register('gender')}
+            isInvalid={!!errors.gender?.message}
           >
             {GenderItems.map((animal) => (
               <SelectItem key={animal.key}>{animal.label}</SelectItem>
@@ -70,6 +74,7 @@ export const CreateListing = () => {
             error={errors.breed?.message}
             label='Breed'
             width='w-64'
+            isRequired
           />
 
           <DatePicker
@@ -77,6 +82,7 @@ export const CreateListing = () => {
             className='max-w-[284px]'
             errorMessage={errors.date_of_birth?.message}
           />
+
           <Checkbox
             register={register('is_vaccinated')}
             error={errors.is_vaccinated?.message}
@@ -89,6 +95,7 @@ export const CreateListing = () => {
           name='email'
           error={errors.email?.message}
           label='Email'
+          isRequired
         />
 
         <Input

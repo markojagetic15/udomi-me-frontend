@@ -1,4 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
+import 'leaflet/dist/leaflet.css';
 import { ToastContainer } from 'react-toastify';
 import { AxiosProvider, Routing } from '_app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

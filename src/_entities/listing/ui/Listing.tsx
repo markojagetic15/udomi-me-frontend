@@ -25,7 +25,6 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
           alt={listing.title}
           className='w-full object-cover h-[240px]'
           src={listing.images?.[0].url}
-          isZoomed
         />
       </CardBody>
       <CardHeader className='pb-0 pt-0 px-4 flex-col items-start'></CardHeader>
