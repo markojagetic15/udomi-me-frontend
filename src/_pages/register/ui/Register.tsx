@@ -1,7 +1,7 @@
 import { Button, Checkbox, Input } from '_shared';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
-import { FaArrowLeftLong } from 'react-icons/fa6';
+import { FaArrowLeftLong, FaGoogle } from 'react-icons/fa6';
 import { useRegister } from '_features/user';
 import './styles.css';
 
@@ -16,6 +16,7 @@ export const Register = () => {
     handleTogglePassword,
     handleToggleConfirmPassword,
     navigate,
+    handleGoogleRegister,
   } = useRegister();
 
   return (
@@ -99,6 +100,10 @@ export const Register = () => {
           </div>
           <Button type='submit' variant='flat'>
             Register
+          </Button>
+          <Button variant='flat' onClick={handleGoogleRegister} color='default'>
+            <FaGoogle />
+            Register with Google
           </Button>
           <div className='w-full mt-5 pb-2'>
             <div className='flex gap-2 w-full'>

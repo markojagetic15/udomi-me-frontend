@@ -12,8 +12,10 @@ import {
   Register,
   MyListings,
   AnimalInfo,
+  GoogleCallback,
 } from '_pages';
 import { AppDrawer } from '_widgets';
+import { AuthGuard } from './api';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -31,6 +33,7 @@ const AppLayout = () => {
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/my-listings' element={<MyListings />} />
         <Route path='/animal/:id' element={<AnimalInfo />} />
+        <Route path='/google-callback' element={<GoogleCallback />} />
       </Routes>
     </div>
   );
@@ -39,7 +42,9 @@ const AppLayout = () => {
 export const Routing = () => {
   return (
     <Router>
-      <AppLayout />
+      <AuthGuard>
+        <AppLayout />
+      </AuthGuard>
     </Router>
   );
 };

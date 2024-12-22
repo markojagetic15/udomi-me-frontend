@@ -14,6 +14,7 @@ export const Input = ({
   multiple,
   value,
   width,
+  isRequired,
   ...props
 }: {
   name?: string;
@@ -29,9 +30,10 @@ export const Input = ({
   multiple?: boolean;
   value?: string;
   width?: string;
+  isRequired?: boolean;
 }) => {
   return (
-    <div className='relative'>
+    <div className='relative w-full'>
       <InputComponent
         id={name}
         name={name}
@@ -46,6 +48,8 @@ export const Input = ({
         value={value}
         endContent={endIcon}
         startContent={startIcon}
+        isRequired={isRequired}
+        size='sm'
       />
 
       {error && (

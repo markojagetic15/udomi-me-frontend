@@ -64,6 +64,10 @@ export const useRegister = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  const handleGoogleRegister = () => {
+    window.location.href = `${import.meta.env.VITE_APP_BACKEND_URL as string}/google`;
+  };
+
   return {
     register,
     handleSubmit,
@@ -74,5 +78,6 @@ export const useRegister = () => {
     handleTogglePassword,
     handleToggleConfirmPassword,
     navigate,
+    handleGoogleRegister,
   };
 };

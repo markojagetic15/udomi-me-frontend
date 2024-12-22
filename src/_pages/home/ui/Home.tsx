@@ -19,7 +19,7 @@ export const Home = () => {
   } = useHome();
 
   return (
-    <div className='w-full lg:max-w-6xl m-auto mt-24 mb-24'>
+    <div className='w-full lg:max-w-6xl m-auto mt-24 pb-24'>
       <div className='gap-2 flex mb-4 items-center'>
         <Input
           placeholder='Search for an animal'

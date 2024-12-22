@@ -10,6 +10,7 @@ export const TextArea = ({
   endIcon,
   hide,
   onChange,
+  isRequired,
   ...props
 }: {
   name: string;
@@ -21,6 +22,7 @@ export const TextArea = ({
   hide?: boolean;
   endIcon?: React.ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isRequired?: boolean;
 }) => {
   return (
     <div className='flex flex-col gap-1.5 relative'>
@@ -35,6 +37,7 @@ export const TextArea = ({
           {...register}
           onChange={onChange}
           label={label}
+          isRequired={isRequired}
         />
         {endIcon && (
           <div className='absolute right-2.5 top-1/2 flex justify-end -translate-x-1/2 -translate-y-1/2 cursor-pointer'>
