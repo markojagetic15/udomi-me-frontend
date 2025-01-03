@@ -1,4 +1,4 @@
-import { useGetListing } from '_features/listing';
+import { useGetListing } from '_entities/listing';
 import { useParams } from 'react-router-dom';
 
 export const useAnimalInfo = () => {

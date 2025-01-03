@@ -1,7 +1,6 @@
-import { useGetListings } from '_features/listing';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { Category } from '_entities/listing';
+import { Category, useGetListings } from '_entities/listing';
 
 export const useHome = () => {
   const [currentPage, setCurrentPage] = useState(1);

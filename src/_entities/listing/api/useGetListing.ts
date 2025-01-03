@@ -1,5 +1,5 @@
 import { useAxios } from '_app';
-import { Listing } from '_entities/listing';
+import { Listing } from '../model';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetListing = (id: string) => {
@@ -8,8 +8,7 @@ export const useGetListing = (id: string) => {
   const getListing = useQuery({
     queryKey: ['listings', id],
     queryFn: async (): Promise<{ listing: Listing }> => {
-      const response = await axios.get(`/listings/${id}`);
-      return response.data;
+      return await axios.get(`/listings/${id}`);
     },
   });
 

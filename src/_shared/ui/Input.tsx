@@ -15,6 +15,8 @@ export const Input = ({
   value,
   width,
   isRequired,
+  description,
+  className,
   ...props
 }: {
   name?: string;
@@ -31,16 +33,30 @@ export const Input = ({
   value?: string;
   width?: string;
   isRequired?: boolean;
+  description?: string;
+  className?: string;
 }) => {
+  const renderErrorAndDescription = () => {
+    if (error) {
+      return <span className='text-red-500 text-xs'>{error}</span>;
+    }
+
+    if (description) {
+      return <span className='text-gray-400 text-xs'>{description}</span>;
+    }
+
+    return null;
+  };
+
   return (
-    <div className='relative w-full'>
+    <div className={`relative w-full ${className}`}>
       <InputComponent
         id={name}
         name={name}
         type={type}
         hidden={hide}
         {...props}
-        className={`${width ? width : 'w-full'} p-1.5`}
+        className={`${width ? width : 'w-full'}`}
         {...register}
         onChange={onChange}
         label={label}
@@ -49,14 +65,13 @@ export const Input = ({
         endContent={endIcon}
         startContent={startIcon}
         isRequired={isRequired}
-        size='sm'
+        isInvalid={!!error}
+        autoComplete='new-password'
       />
 
-      {error && (
-        <span className='text-danger text-xs absolute top-[92.5%] left-2'>
-          {error}
-        </span>
-      )}
+      <div className='absolute top-[97.5%] left-0'>
+        {renderErrorAndDescription()}
+      </div>
     </div>
   );
 };

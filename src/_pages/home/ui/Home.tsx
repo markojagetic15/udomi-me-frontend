@@ -4,6 +4,7 @@ import { CategoryItems, ListingItem } from '_entities/listing';
 import { Dropdown, Input } from '_shared';
 import { IoIosSearch } from 'react-icons/io';
 import { FaFilter } from 'react-icons/fa';
+import SadDog from '_assets/sad_dog_outline_transparent.png';
 
 export const Home = () => {
   const {
@@ -19,7 +20,7 @@ export const Home = () => {
   } = useHome();
 
   return (
-    <div className='w-full lg:max-w-6xl m-auto mt-24 pb-24'>
+    <div className='w-full lg:max-w-6xl m-auto mt-24 pb-24 h-full'>
       <div className='gap-2 flex mb-4 items-center'>
         <Input
           placeholder='Search for an animal'
@@ -39,6 +40,7 @@ export const Home = () => {
             key: category.key,
             label: category.label,
             onClick: () => handleSetCategory(category.key),
+            icon: category.icon,
           }))}
           selectedKeys={categories}
         />
@@ -53,7 +55,10 @@ export const Home = () => {
           ) : (
             <div>
               {listings?.length === 0 ? (
-                <div className='col-span-4 text-center'>No animals found</div>
+                <div className='mt-24 flex flex-col items-center'>
+                  Sorry, no animals found for adoption{' '}
+                  <img src={SadDog} className='h-auto w-96 translate-x-8' />
+                </div>
               ) : (
                 <div className='grid 2xl:grid-cols-3 gap-5 md:grid-cols-3 sm:grid-cols-2'>
                   {listings?.map((listing) => (

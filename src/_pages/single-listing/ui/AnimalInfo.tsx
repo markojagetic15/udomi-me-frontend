@@ -3,9 +3,15 @@ import { Divider } from '@nextui-org/divider';
 import dayjs from 'dayjs';
 import { CiCircleCheck } from 'react-icons/ci';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import { ImageCarousel } from '_shared';
+import { MdFavoriteBorder } from 'react-icons/md';
+import { ImageCarousel, Spinner } from '_shared';
 import { InfoItem } from './InfoItem';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Tooltip } from '@nextui-org/react';
+import { AiOutlineLike } from 'react-icons/ai';
+import { AiFillLike } from 'react-icons/ai';
+import { MdOutlineFavorite } from 'react-icons/md';
+import { MdReportGmailerrorred } from 'react-icons/md';
 
 export const AnimalInfo = () => {
   const { listing, isError, isLoading } = useAnimalInfo();
@@ -13,7 +19,9 @@ export const AnimalInfo = () => {
   return (
     <div className='xl:p-12 m-auto xl:w-10/12 md:w-full sm:w-full lg:p-10 md:p-5 p-2 max-w-6xl'>
       {isLoading ? (
-        <div>Loading...</div>
+        <div>
+          <Spinner />
+        </div>
       ) : isError ? (
         <div>Error</div>
       ) : (
@@ -28,9 +36,32 @@ export const AnimalInfo = () => {
                 mt-12
                 mb-12
                 text-primary-600
+                flex
+                justify-between
               '
               >
                 {listing.title}
+                <div className='flex items-center gap-2'>
+                  <Tooltip content='Favorite this animal'>
+                    <div className='cursor-pointer'>
+                      <AiOutlineLike className='text-primary' />
+                    </div>
+                  </Tooltip>
+                  <Tooltip
+                    content='Show interest in this animal.
+                  When you show interest, the owner will be notified.
+                  '
+                  >
+                    <div className='cursor-pointer'>
+                      <MdFavoriteBorder className='text-primary' />
+                    </div>
+                  </Tooltip>
+                  <Tooltip content='Report this listing'>
+                    <div className='cursor-pointer'>
+                      <MdReportGmailerrorred className='text-primary' />
+                    </div>
+                  </Tooltip>
+                </div>
               </h1>
               <Divider className='bg-primary' />
               <h2

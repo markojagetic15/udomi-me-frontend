@@ -2,7 +2,7 @@ import { useLogin } from '_features/user';
 import { Button, Input } from '_shared';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
-import { FaArrowLeftLong, FaGoogle, FaFacebook } from 'react-icons/fa6';
+import { FaArrowLeftLong, FaGoogle } from 'react-icons/fa6';
 import './styles.css';
 
 export const Login = () => {

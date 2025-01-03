@@ -17,23 +17,14 @@ export const create_listing_schema = yup.object().shape({
     .min(5, 'Description must be at least 5 characters')
     .max(500, 'Description must be at most 500 characters'),
 
-  images: yup.string(),
+  images: yup.string().required('Please upload at least one image'),
 
-  address: yup
-    .string()
-    .required('Address is required')
-    .min(5, 'Address must be at least 5 characters')
-    .max(500, 'Address must be at most 500 characters'),
+  area_code: yup.string(),
 
-  phone_number: yup
-    .string()
-    .required('Phone number is required')
-    .matches(phoneRegExp, 'Phone number is not valid'),
-
-  email: yup
-    .string()
-    .email('Email must be a valid email')
-    .required('Email is required'),
+  phone_number: yup.string().notRequired().matches(phoneRegExp, {
+    message: 'Phone number is not valid',
+    excludeEmptyString: true,
+  }),
 
   category: yup
     .string()
@@ -44,7 +35,9 @@ export const create_listing_schema = yup.object().shape({
 
   is_vaccinated: yup.boolean().optional(),
 
-  breed: yup.string().required('Breed is required'),
+  is_urgent: yup.boolean().optional(),
+
+  breed: yup.string().optional(),
 
   gender: yup
     .string()
