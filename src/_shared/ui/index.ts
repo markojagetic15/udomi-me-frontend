@@ -7,3 +7,7 @@ export * from './Avatar';
 export * from './Spinner';
 export * from './ImageCarousel';
 export * from './TextArea';
+export * from './Select';
+export * from './Switch';
+export * from './DatePicker';
+export * from './Autocomplete';
