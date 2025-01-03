@@ -19,7 +19,7 @@ export const AxiosProvider = ({
     });
 
     instance.interceptors.response.use(
-      (response) => response,
+      (response) => response.data,
       (error) => {
         if (
           error.response &&

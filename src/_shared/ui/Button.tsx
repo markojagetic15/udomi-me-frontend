@@ -9,6 +9,8 @@ export const Button = ({
   startIcon,
   endIcon,
   color,
+  width,
+  className,
   ...props
 }: {
   type?: 'button' | 'submit' | 'reset';
@@ -33,6 +35,8 @@ export const Button = ({
     | 'warning'
     | 'default'
     | 'danger';
+  width?: string;
+  className?: string;
 }) => {
   return (
     <ButtonComponent
@@ -45,6 +49,7 @@ export const Button = ({
       color={color || 'primary'}
       {...props}
       variant={props.variant}
+      className={`w-${width} ${className}`}
     >
       {children}
     </ButtonComponent>

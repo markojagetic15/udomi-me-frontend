@@ -1,5 +1,5 @@
 import { useAxios } from '_app';
-import { Category, GetAllListingsResponse } from '_entities/listing';
+import { Category, GetAllListingsResponse } from '../model';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetListings = (
@@ -13,10 +13,9 @@ export const useGetListings = (
   const getAllListings = useQuery({
     queryKey: ['listings', page, limit, search, categories],
     queryFn: async (): Promise<GetAllListingsResponse> => {
-      const response = await axios.get(
+      return await axios.get(
         `/listings?page=${page}&limit=${limit}&search=${search}${categories.length > 0 ? `&category=${JSON.stringify(categories)}` : ``}`
       );
-      return response.data;
     },
   });
 
