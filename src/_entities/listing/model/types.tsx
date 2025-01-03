@@ -1,4 +1,8 @@
 import { User } from '../../user';
+import { FaCat, FaDog, FaHorseHead } from 'react-icons/fa';
+import { PiBirdFill, PiRabbitFill } from 'react-icons/pi';
+import { GiPig, GiReptileTail } from 'react-icons/gi';
+import { AreaCodes } from './area-codes';
 
 export enum Category {
   DOG = 'dog',
@@ -11,13 +15,13 @@ export enum Category {
 }
 
 export const CategoryItems = [
-  { label: 'Dog', key: Category.DOG },
-  { label: 'Cat', key: Category.CAT },
-  { label: 'Rabbit', key: Category.RABBIT },
-  { label: 'Bird', key: Category.BIRD },
-  { label: 'Reptile', key: Category.REPTILE },
-  { label: 'Horse', key: Category.HORSE },
-  { label: 'Other', key: Category.OTHER },
+  { label: 'Dog', key: Category.DOG, icon: <FaDog /> },
+  { label: 'Cat', key: Category.CAT, icon: <FaCat /> },
+  { label: 'Rabbit', key: Category.RABBIT, icon: <PiRabbitFill /> },
+  { label: 'Bird', key: Category.BIRD, icon: <PiBirdFill /> },
+  { label: 'Reptile', key: Category.REPTILE, icon: <GiReptileTail /> },
+  { label: 'Horse', key: Category.HORSE, icon: <FaHorseHead /> },
+  { label: 'Other', key: Category.OTHER, icon: <GiPig /> },
 ];
 
 export const GenderItems = [
@@ -25,11 +29,16 @@ export const GenderItems = [
   { label: 'Female', key: 'female' },
 ];
 
+export const AreaCodesItems = AreaCodes.map((areaCode) => ({
+  label: `${areaCode.dial_code} (${areaCode.code})`,
+  key: `${areaCode.dial_code} (${areaCode.code})`,
+}));
+
 export interface Listing {
   id: string;
   title: string;
   description?: string;
-  images?: { url: string; id: string }[];
+  images: { url: string; id: string }[];
   address?: string;
   phone_number?: string;
   email?: string;
@@ -60,9 +69,8 @@ export type CreateListingDto = {
     url: string;
     id: string;
   }[];
-  address: string;
-  phone_number: string;
-  email: string;
+  address?: string;
+  phone_number?: string | null;
   category: Category;
   date_of_birth?: Date | null;
   is_vaccinated?: boolean;

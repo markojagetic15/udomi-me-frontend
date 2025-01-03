@@ -12,7 +12,7 @@ export const Checkbox = ({
   error: string | undefined;
 }) => {
   return (
-    <div className='flex gap-2 flex-col'>
+    <div className='flex gap-2 flex-col '>
       <div className='flex gap-6 w-full items-center'>
         <CheckboxComponent
           type='checkbox'
@@ -21,7 +21,7 @@ export const Checkbox = ({
           {...props}
           color='secondary'
         />
-        <label>{label}</label>
+        <label className='text-nowrap'>{label}</label>
       </div>
       {error && <span className='text-red-500 text-xs'>{error}</span>}
     </div>

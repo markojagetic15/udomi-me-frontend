@@ -10,7 +10,9 @@ import {
   Home,
   Login,
   Register,
-  MyListings,
+  AnimalInfo,
+  GoogleCallback,
+  Profile,
 } from '_pages';
 import { AppDrawer } from '_widgets';
 
@@ -26,9 +28,11 @@ const AppLayout = () => {
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/create-listing' element={<CreateListing />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/my-listings' element={<MyListings />} />
+        <Route path='/animal/:id' element={<AnimalInfo />} />
+        <Route path='/google-callback' element={<GoogleCallback />} />
       </Routes>
     </div>
   );

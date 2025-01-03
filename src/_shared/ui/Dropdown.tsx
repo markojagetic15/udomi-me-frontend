@@ -15,13 +15,23 @@ interface DropdownProps {
     onClick?: () => void;
   }[];
   onAction?: (key: Key) => void;
+  selectedKeys?: Key[];
 }
 
-export const Dropdown = ({ trigger, items, onAction }: DropdownProps) => {
+export const Dropdown = ({
+  trigger,
+  items,
+  onAction,
+  selectedKeys,
+}: DropdownProps) => {
   return (
     <DropdownComponent>
-      <DropdownTrigger>{trigger}</DropdownTrigger>
-      <DropdownMenu aria-label='Dynamic Actions' onAction={onAction}>
+      <DropdownTrigger className='cursor-pointer'>{trigger}</DropdownTrigger>
+      <DropdownMenu
+        onAction={onAction}
+        selectedKeys={selectedKeys as any}
+        selectionMode='multiple'
+      >
         {items.map((item) => (
           <DropdownItem
             key={item.key}

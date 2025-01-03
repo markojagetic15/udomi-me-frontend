@@ -2,7 +2,7 @@ import { useAppDrawer } from '../hooks';
 import { Avatar, Button, Dropdown } from '_shared';
 import { TbLogout2 } from 'react-icons/tb';
 import { CgProfile } from 'react-icons/cg';
-import { FaList } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 import {
   Navbar,
   NavbarBrand,
@@ -11,9 +11,9 @@ import {
 } from '@nextui-org/react';
 
 export const AppDrawer = () => {
-  const { navigate, user, isError, logout } = useAppDrawer();
+  const { navigate, user, logout } = useAppDrawer();
 
-  if (user && !isError) {
+  if (user?.id) {
     return (
       <Navbar shouldHideOnScroll isBordered isBlurred>
         <NavbarBrand>
@@ -30,6 +30,7 @@ export const AppDrawer = () => {
               onClick={() => navigate('/create-listing')}
               variant='bordered'
             >
+              <FaPlus />
               Create listing
             </Button>
           </NavbarItem>
@@ -43,12 +44,11 @@ export const AppDrawer = () => {
               }
               items={[
                 {
-                  key: 'my-listings',
-                  label: 'My Listings',
-                  icon: <FaList />,
-                  onClick: () => navigate('/my-listings'),
+                  key: 'profile',
+                  label: 'Profile',
+                  icon: <CgProfile />,
+                  onClick: () => navigate('/profile'),
                 },
-                { key: 'profile', label: 'Profile', icon: <CgProfile /> },
                 {
                   key: 'logout',
                   label: 'Logout',

@@ -47,6 +47,10 @@ export const useLogin = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = `${import.meta.env.VITE_APP_BACKEND_URL as string}/google`;
+  };
+
   return {
     register,
     handleSubmit,
@@ -55,5 +59,6 @@ export const useLogin = () => {
     showPassword,
     handleTogglePassword,
     navigate,
+    handleGoogleLogin,
   };
 };

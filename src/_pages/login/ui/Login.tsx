@@ -2,7 +2,7 @@ import { useLogin } from '_features/user';
 import { Button, Input } from '_shared';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
-import { FaArrowLeftLong } from 'react-icons/fa6';
+import { FaArrowLeftLong, FaGoogle } from 'react-icons/fa6';
 import './styles.css';
 
 export const Login = () => {
@@ -14,6 +14,7 @@ export const Login = () => {
     handleTogglePassword,
     navigate,
     errors,
+    handleGoogleLogin,
   } = useLogin();
 
   return (
@@ -69,6 +70,11 @@ export const Login = () => {
 
           <Button type='submit' variant='flat'>
             Login
+          </Button>
+
+          <Button variant='flat' onClick={handleGoogleLogin} color='default'>
+            <FaGoogle />
+            Login with Google
           </Button>
 
           <div className='w-full mt-5 pb-12'>
