@@ -4,13 +4,30 @@ import {
   CardFooter,
   CardHeader,
   Image,
+  Tooltip,
 } from '@nextui-org/react';
 import { Listing } from '../model';
 import { useNavigate } from 'react-router-dom';
 import { MdFavoriteBorder } from 'react-icons/md';
+import { MdFavorite } from 'react-icons/md';
+import { useFavoriteListing } from '../api';
+import { useGlobalContext } from '../../../_app';
 
 export const ListingItem = ({ listing }: { listing: Listing }) => {
   const navigate = useNavigate();
+
+  const { favoriteListing } = useFavoriteListing();
+
+  const handleFavorite = () => {
+    favoriteListing({ id: listing.id });
+  };
+
+  const { user } = useGlobalContext();
+
+  const favoriteListings = user?.favorite_listings || [];
+
+  const favoriteListingsIds = favoriteListings.map((listing) => listing.id);
+
   return (
     <Card
       className='py-2 cursor-pointer'
@@ -36,7 +53,23 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
             {listing.category} &#x2022; {listing.gender}
           </p>
         </div>
-        <MdFavoriteBorder />
+        <Tooltip content='Favorite this animal' className='z-10'>
+          {favoriteListingsIds.includes(listing.id) ? (
+            <MdFavorite
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFavorite();
+              }}
+            />
+          ) : (
+            <MdFavoriteBorder
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFavorite();
+              }}
+            />
+          )}
+        </Tooltip>
       </CardFooter>
     </Card>
   );

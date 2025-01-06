@@ -58,6 +58,7 @@ export interface Listing {
   updated_at: Date;
   is_urgent: boolean;
   size: number;
+  favorite: boolean;
 }
 
 export interface GetAllListingsResponse {

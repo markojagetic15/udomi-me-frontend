@@ -202,12 +202,12 @@ export const CreateListing = () => {
             </DragDropContext>
             {images.length < 8 && (
               <div
-                className={`w-32 h-32 ${errors.images?.message ? 'bg-danger-50' : 'bg-gray-400'} flex items-center justify-center rounded-2xl cursor-pointer`}
+                className={`w-32 h-32 ${errors.images?.message ? 'bg-danger-50' : 'bg-complement'} flex items-center justify-center rounded-2xl cursor-pointer border-solid border-1 border-gray-500`}
                 onClick={() => {
                   document.getElementById('images-upload')?.click();
                 }}
               >
-                <FaPlus className='text-gray-300 w-6 h-6' />
+                <FaPlus className='text-gray-500 w-6 h-6' />
               </div>
             )}
           </div>
