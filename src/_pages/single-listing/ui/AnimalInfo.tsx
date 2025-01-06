@@ -6,11 +6,8 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { ImageCarousel, Spinner } from '_shared';
 import { InfoItem } from './InfoItem';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { Tooltip } from '@nextui-org/react';
 import { AiOutlineLike } from 'react-icons/ai';
-import { AiFillLike } from 'react-icons/ai';
-import { MdOutlineFavorite } from 'react-icons/md';
 import { MdReportGmailerrorred } from 'react-icons/md';
 
 export const AnimalInfo = () => {
@@ -78,8 +75,12 @@ export const AnimalInfo = () => {
               <Divider className='bg-primary' />
               <div className='mt-12 flex justify-between items-center w-full mb-12'>
                 <InfoItem value={listing.category} label='Category' />
-                <InfoItem value={listing.breed} label='Breed' />
                 <InfoItem value={listing.gender} label='Gender' />
+                <InfoItem value={listing.size} label='Size' />
+                {listing.breed && (
+                  <InfoItem value={listing.breed} label='Breed' />
+                )}
+
                 {listing.date_of_birth && (
                   <InfoItem
                     value={dayjs(listing.date_of_birth).format('DD MMM YYYY')}
@@ -98,37 +99,38 @@ export const AnimalInfo = () => {
                   }
                   label='Is Vaccinated'
                 />
+                <InfoItem
+                  value={
+                    <>
+                      {listing.is_urgent ? (
+                        <CiCircleCheck className='text-primary w-6 h-6 stroke-1' />
+                      ) : (
+                        <IoIosCloseCircleOutline className='text-red-500 w-6 h-6' />
+                      )}
+                    </>
+                  }
+                  label='Is Urgent'
+                />
               </div>
               <Divider className='bg-primary' />
-              <div className='mt-12 mb-12'>
-                <h2
-                  className='
+              {listing.address && (
+                <div>
+                  <div className='mt-12 mb-12'>
+                    <h2
+                      className='
                 text-xl
                 font-bold
                 mt-12
                 mb-6
               '
-                >
-                  Location
-                </h2>
-                <MapContainer
-                  center={[51.505, -0.09]}
-                  zoom={13}
-                  scrollWheelZoom={false}
-                  style={{ height: '500px', width: '100%' }}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                  />
-                  <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                      A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                  </Marker>
-                </MapContainer>
-              </div>
-              <Divider className='bg-primary' />
+                    >
+                      Location
+                    </h2>
+                  </div>
+                  <Divider className='bg-primary' />
+                </div>
+              )}
+
               <h2
                 className='
                 text-xl
@@ -140,7 +142,6 @@ export const AnimalInfo = () => {
                 Contact info
               </h2>
               <div className='mt-12 flex gap-40 items-center w-full mb-12'>
-                <InfoItem value={listing.email} label='Email' />
                 <InfoItem
                   value={
                     listing.phone_number ? listing.phone_number : 'Not provided'

@@ -10,10 +10,12 @@ import {
   TextArea,
 } from '_shared';
 import { FaLocationDot } from 'react-icons/fa6';
-import { Image, Progress } from '@nextui-org/react';
+import { Image, Progress, Tooltip } from '@nextui-org/react';
 import { AreaCodesItems, CategoryItems, GenderItems } from '_entities/listing';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { IoMdCloseCircle } from 'react-icons/io';
+import { FaPlus } from 'react-icons/fa';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 
 export const CreateListing = () => {
   const {
@@ -23,13 +25,13 @@ export const CreateListing = () => {
     onSubmit,
     handleUploadImages,
     images,
-    imagesUploadingProgress,
     isPending,
     handleOnDateChange,
     handleGetCurrentLocation,
     address,
     setAddress,
     handleRemoveImage,
+    onDragEnd,
   } = useCreateListingPage();
 
   return (
@@ -72,6 +74,15 @@ export const CreateListing = () => {
             register={register('gender')}
             items={GenderItems}
             isRequired
+          />
+
+          <Input
+            label='Enter Size'
+            error={errors.size?.message}
+            register={register('size')}
+            isRequired
+            type='number'
+            endIcon={<span className='text-gray-400'>kg</span>}
           />
 
           <Input
@@ -135,6 +146,82 @@ export const CreateListing = () => {
           </Button>
         </div>
 
+        <div className='flex flex-col mt-4'>
+          <div className='mb-2'>
+            Images <span className='text-red-500'>*</span>
+          </div>
+          <div className='flex'>
+            <DragDropContext
+              onDragEnd={(result) => {
+                onDragEnd(result);
+              }}
+            >
+              <Droppable droppableId='droppable' direction='horizontal'>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className='flex'
+                  >
+                    {images.map((image, index) => (
+                      <Draggable
+                        key={image.id}
+                        draggableId={image.id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <Tooltip content='You can re-order images'>
+                            <div
+                              className='relative cursor-pointer pr-2'
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <IoMdCloseCircle
+                                className='absolute -top-2 -right-2 cursor-pointer z-20 w-6 h-6 text-primary'
+                                onClick={() => {
+                                  handleRemoveImage(image.id);
+                                }}
+                              />
+                              <Image
+                                key={image.id}
+                                src={image.url}
+                                alt='listing'
+                                className='w-32 h-32 object-cover'
+                                isLoading={image.url === 'placeholder'}
+                              />
+                            </div>
+                          </Tooltip>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+            {images.length < 8 && (
+              <div
+                className={`w-32 h-32 ${errors.images?.message ? 'bg-danger-50' : 'bg-gray-400'} flex items-center justify-center rounded-2xl cursor-pointer`}
+                onClick={() => {
+                  document.getElementById('images-upload')?.click();
+                }}
+              >
+                <FaPlus className='text-gray-300 w-6 h-6' />
+              </div>
+            )}
+          </div>
+          {errors.images?.message ? (
+            <span className='text-red-500 text-xs mt-2'>
+              {errors.images.message}
+            </span>
+          ) : (
+            <span className='text-gray-400 text-xs mt-2'>
+              Upload at least one image
+            </span>
+          )}
+        </div>
+
         <Input
           error={errors.images?.message}
           label='Images'
@@ -142,38 +229,12 @@ export const CreateListing = () => {
           type='file'
           onChange={handleUploadImages}
           multiple
-          className='mt-6 cursor-pointer w-64'
+          className='hidden'
           isRequired
-          register={register('images')}
           description='Upload at least one image'
+          width='64'
+          id='images-upload'
         />
-
-        {imagesUploadingProgress !== 0 && (
-          <Progress
-            aria-label='Loading...'
-            value={imagesUploadingProgress}
-            className='max-w-md'
-          />
-        )}
-
-        <div className='flex gap-2 items-center mt-6'>
-          {images.map((image) => (
-            <div className='relative'>
-              <IoMdCloseCircle
-                className='absolute -top-2 -right-2 cursor-pointer z-20 w-6 h-6 text-primary'
-                onClick={() => {
-                  handleRemoveImage(image.id);
-                }}
-              />
-              <Image
-                key={image.id}
-                src={image.url}
-                alt='listing'
-                className='w-32 h-32 object-cover'
-              />
-            </div>
-          ))}
-        </div>
 
         <Button type='submit' variant='solid'>
           {isPending ? <Spinner /> : 'Create Listing'}

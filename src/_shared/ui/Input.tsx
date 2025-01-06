@@ -17,6 +17,8 @@ export const Input = ({
   isRequired,
   description,
   className,
+  id,
+  hidden,
   ...props
 }: {
   name?: string;
@@ -35,6 +37,8 @@ export const Input = ({
   isRequired?: boolean;
   description?: string;
   className?: string;
+  id?: string;
+  hidden?: boolean;
 }) => {
   const renderErrorAndDescription = () => {
     if (error) {
@@ -49,12 +53,12 @@ export const Input = ({
   };
 
   return (
-    <div className={`relative w-full ${className}`}>
+    <div className={`relative ${width ? `w-${width}` : 'w-full'} ${className}`}>
       <InputComponent
-        id={name}
+        id={id}
         name={name}
         type={type}
-        hidden={hide}
+        hidden={hidden}
         {...props}
         className={`${width ? width : 'w-full'}`}
         {...register}

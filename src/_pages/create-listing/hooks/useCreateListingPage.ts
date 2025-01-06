@@ -5,19 +5,13 @@ import { uploadFile } from '_entities/resource';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Category, useCreateListing } from '_entities/listing';
+import { Category, Image, useCreateListing } from '_entities/listing';
 import { DateValue } from '@nextui-org/react';
 import axios from 'axios';
+import { DropResult } from '@hello-pangea/dnd';
 
 export const useCreateListingPage = () => {
-  const [images, setImages] = useState<
-    {
-      url: string;
-      id: string;
-    }[]
-  >([]);
-  const [imagesUploadingProgress, setImagesUploadingProgress] =
-    useState<number>(0);
+  const [images, setImages] = useState<Image[]>([]);
   const [dateOfBirth, setDateOfBirth] = useState<DateValue | undefined>();
   const [address, setAddress] = useState<string | undefined>(undefined);
 
@@ -28,14 +22,17 @@ export const useCreateListingPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
     setValue,
+    getValues,
   } = useForm({
     resolver: yupResolver(create_listing_schema),
     mode: 'onSubmit',
+    defaultValues: {
+      images: [],
+    },
   });
 
-  const onSubmit = (data: {
+  const onSubmit = async (data: {
     title: string;
     description: string;
     area_code?: string | null;
@@ -45,15 +42,8 @@ export const useCreateListingPage = () => {
     is_vaccinated?: boolean;
     breed?: string | null;
     gender: 'male' | 'female';
+    images: Image[];
   }) => {
-    if (images.length === 0) {
-      setError('images', {
-        type: 'manual',
-        message: 'Please upload at least one image',
-      });
-      return;
-    }
-
     const date =
       dateOfBirth?.day && dateOfBirth?.month && dateOfBirth?.year
         ? new Date(dateOfBirth.year, dateOfBirth.month, dateOfBirth.day)
@@ -62,7 +52,6 @@ export const useCreateListingPage = () => {
     const newData = {
       ...data,
       date_of_birth: date,
-      images: images,
       address,
     };
 
@@ -76,34 +65,63 @@ export const useCreateListingPage = () => {
   };
 
   const handleUploadImages = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImagesUploadingProgress(1);
-
     const files = e.target.files;
 
     if (!files) return;
 
-    const uploadPromises = [...files].map(async (file) => {
-      const response = await uploadFile(file);
+    if (files.length + images.length > 8) {
+      toast.error('You can only upload 8 images');
+      return;
+    }
 
-      if (!response) return null;
+    try {
+      const placeholderImages = Array.from({ length: files.length }).map(
+        (_, index) => ({
+          id: index.toString(),
+          url: 'placeholder',
+          position: index,
+        })
+      );
 
-      const publicUrl = `https://${import.meta.env.VITE_S3_BUCKET_NAME || ''}.s3.${import.meta.env.VITE_AWS_REGION || ''}.amazonaws.com/${file.name}`;
-      const id = response.ETag || '';
+      setImages([...images, ...placeholderImages]);
 
-      return { id, url: publicUrl };
-    });
+      const uploadPromises = [...files].map(async (file) => {
+        if (file.size > 1024 * 1024 * 5) {
+          toast.error('Image size must be less than 5MB');
+        }
 
-    const imagesArray = (await Promise.all(uploadPromises)).filter(
-      (image) => image !== null
-    );
+        const response = await uploadFile(file);
 
-    setImagesUploadingProgress(100);
+        if (!response) return null;
 
-    setImages((prevState) => [...prevState, ...imagesArray]);
+        const publicUrl = `https://${import.meta.env.VITE_S3_BUCKET_NAME || ''}.s3.${import.meta.env.VITE_AWS_REGION || ''}.amazonaws.com/${file.name}`;
+        const id = response.ETag || '';
 
-    setTimeout(() => {
-      setImagesUploadingProgress(0);
-    }, 1000);
+        return { id, url: publicUrl };
+      });
+
+      const uploadedImages = (await Promise.all(uploadPromises)).filter(
+        (image) => image !== null
+      );
+
+      const updatedImages = images
+        .filter((img) => img.id !== 'placeholder')
+        .concat(
+          uploadedImages.map((image, index) => ({
+            ...image,
+            position: images.length + index,
+          }))
+        );
+
+      setImages([...updatedImages]);
+
+      setValue('images', [...(getValues('images') || []), ...updatedImages], {
+        shouldValidate: true,
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to upload images');
+    }
   };
 
   const handleOnDateChange = (date: DateValue | undefined) => {
@@ -132,10 +150,44 @@ export const useCreateListingPage = () => {
     const filteredImages = images.filter((image) => image.id !== id);
 
     if (filteredImages.length === 0) {
-      setValue('images', '');
+      setValue('images', []);
+      const input = document.getElementById(
+        'images-upload'
+      ) as HTMLInputElement;
+
+      if (input) {
+        input.value = '';
+      }
     }
 
     setImages(filteredImages);
+  };
+
+  const reorder = (list: Image[], startIndex: number, endIndex: number) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      images,
+      result.source.index,
+      result.destination.index
+    );
+
+    const newOrder = items.map((item, index) => ({
+      ...item,
+      position: index,
+    }));
+
+    setImages(newOrder);
   };
 
   return {
@@ -146,11 +198,11 @@ export const useCreateListingPage = () => {
     isPending,
     handleUploadImages,
     images,
-    imagesUploadingProgress,
     handleOnDateChange,
     handleGetCurrentLocation,
     address,
     setAddress,
     handleRemoveImage,
+    onDragEnd,
   };
 };
