@@ -17,7 +17,18 @@ export const create_listing_schema = yup.object().shape({
     .min(5, 'Description must be at least 5 characters')
     .max(500, 'Description must be at most 500 characters'),
 
-  images: yup.string().required('Please upload at least one image'),
+  images: yup
+    .array()
+    .max(8, 'You can upload at most 8 images')
+    .of(
+      yup.object().shape({
+        id: yup.string().required(),
+        url: yup.string().url().required(),
+        position: yup.number().required(),
+      })
+    )
+    .min(1, 'Please upload at least one image')
+    .required('Images are required'),
 
   area_code: yup.string(),
 
@@ -38,6 +49,11 @@ export const create_listing_schema = yup.object().shape({
   is_urgent: yup.boolean().optional(),
 
   breed: yup.string().optional(),
+
+  size: yup
+    .number()
+    .typeError('Size must be a number')
+    .required('Size is required'),
 
   gender: yup
     .string()

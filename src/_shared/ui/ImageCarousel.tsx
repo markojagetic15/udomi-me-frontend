@@ -1,10 +1,7 @@
 import { useState } from 'react';
+import { Image } from '_entities/listing';
 
-export const ImageCarousel = ({
-  images,
-}: {
-  images: { id: string; url: string }[];
-}) => {
+export const ImageCarousel = ({ images }: { images: Image[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -24,15 +21,17 @@ export const ImageCarousel = ({
           className='flex transition-transform duration-500 ease-in-out'
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {images?.map((image) => (
-            <div
-              key={image.id}
-              style={{ backgroundImage: `url(${image.url})` }}
-              className={
-                'h-[700px] w-full bg-cover bg-center bg-no-repeat rounded-2xl flex-shrink-0'
-              }
-            />
-          ))}
+          {images
+            .sort((a, b) => a.position - b.position)
+            ?.map((image) => (
+              <div
+                key={image.id}
+                style={{ backgroundImage: `url(${image.url})` }}
+                className={
+                  'h-[700px] w-full bg-cover bg-center bg-no-repeat rounded-2xl flex-shrink-0'
+                }
+              />
+            ))}
         </div>
 
         {images.length > 1 && (

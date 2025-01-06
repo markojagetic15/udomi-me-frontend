@@ -30,15 +30,21 @@ export const GenderItems = [
 ];
 
 export const AreaCodesItems = AreaCodes.map((areaCode) => ({
-  label: `${areaCode.dial_code} (${areaCode.code})`,
-  key: `${areaCode.dial_code} (${areaCode.code})`,
+  label: `(${areaCode.code}) ${areaCode.dial_code} `,
+  key: `(${areaCode.code}) ${areaCode.dial_code} `,
 }));
+
+export interface Image {
+  position: number;
+  url: string;
+  id: string;
+}
 
 export interface Listing {
   id: string;
   title: string;
   description?: string;
-  images: { url: string; id: string }[];
+  images: Image[];
   address?: string;
   phone_number?: string;
   email?: string;
@@ -50,6 +56,8 @@ export interface Listing {
   user: User;
   created_at: Date;
   updated_at: Date;
+  is_urgent: boolean;
+  size: number;
 }
 
 export interface GetAllListingsResponse {

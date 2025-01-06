@@ -7,6 +7,7 @@ import {
 } from '@nextui-org/react';
 import { Listing } from '../model';
 import { useNavigate } from 'react-router-dom';
+import { MdFavoriteBorder } from 'react-icons/md';
 
 export const ListingItem = ({ listing }: { listing: Listing }) => {
   const navigate = useNavigate();
@@ -28,11 +29,14 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
         />
       </CardBody>
       <CardHeader className='pb-0 pt-0 px-4 flex-col items-start'></CardHeader>
-      <CardFooter className='text-small flex-col justify-start items-start'>
-        <h4 className='font-bold text-large'>{listing.title}</h4>
-        <p className='text-tiny uppercase font-bold'>
-          {listing.category} &#x2022; {listing.gender}
-        </p>
+      <CardFooter className='flex justify-between items-start'>
+        <div className='text-small flex-col justify-start items-start text-start'>
+          <h4 className='font-bold text-large'>{listing.title}</h4>
+          <p className='text-tiny uppercase font-bold'>
+            {listing.category} &#x2022; {listing.gender}
+          </p>
+        </div>
+        <MdFavoriteBorder />
       </CardFooter>
     </Card>
   );
