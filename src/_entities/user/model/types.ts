@@ -1,3 +1,5 @@
+import { Listing } from '../../listing';
+
 export interface User {
   first_name: string;
   last_name: string;
@@ -5,6 +7,7 @@ export interface User {
   id: string;
   created_at: Date;
   avatar: string;
+  favorite_listings: Listing[];
 }
 
 export interface GetUserDto {

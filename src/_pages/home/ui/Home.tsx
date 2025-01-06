@@ -21,7 +21,7 @@ export const Home = () => {
 
   return (
     <div className='w-full lg:max-w-6xl m-auto mt-24 pb-24 h-full'>
-      <div className='gap-2 flex mb-4 items-center'>
+      <div className='gap-6 flex mb-8 items-center'>
         <Input
           placeholder='Search for an animal'
           onChange={handleOnSearch}
@@ -33,7 +33,7 @@ export const Home = () => {
           trigger={
             <div>
               {' '}
-              <FaFilter />
+              <FaFilter className='text-white' />
             </div>
           }
           items={CategoryItems.map((category) => ({
@@ -60,7 +60,7 @@ export const Home = () => {
                   <img src={SadDog} className='h-auto w-96 translate-x-8' />
                 </div>
               ) : (
-                <div className='grid 2xl:grid-cols-3 gap-5 md:grid-cols-3 sm:grid-cols-2'>
+                <div className='grid 2xl:grid-cols-4 gap-5 md:grid-cols-4 grid-cols-2'>
                   {listings?.map((listing) => (
                     <ListingItem listing={listing} key={listing.id} />
                   ))}
