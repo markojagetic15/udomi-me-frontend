@@ -9,8 +9,7 @@ import {
   Switch,
   TextArea,
 } from '_shared';
-import { FaLocationDot } from 'react-icons/fa6';
-import { Image, Progress, Tooltip } from '@nextui-org/react';
+import { Image, Tooltip } from '@nextui-org/react';
 import { AreaCodesItems, CategoryItems, GenderItems } from '_entities/listing';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { IoMdCloseCircle } from 'react-icons/io';
@@ -27,9 +26,6 @@ export const CreateListing = () => {
     images,
     isPending,
     handleOnDateChange,
-    handleGetCurrentLocation,
-    address,
-    setAddress,
     handleRemoveImage,
     onDragEnd,
   } = useCreateListingPage();
@@ -76,6 +72,14 @@ export const CreateListing = () => {
             isRequired
           />
 
+          <DatePicker
+            label='Birth date'
+            error={errors.date_of_birth?.message}
+            maxValue={today(getLocalTimeZone())}
+            onChange={handleOnDateChange}
+            isRequired
+          />
+
           <Input
             label='Enter Size'
             error={errors.size?.message}
@@ -90,13 +94,6 @@ export const CreateListing = () => {
             name='breed'
             error={errors.breed?.message}
             label='Breed'
-          />
-
-          <DatePicker
-            label='Birth date'
-            error={errors.date_of_birth?.message}
-            maxValue={today(getLocalTimeZone())}
-            onChange={handleOnDateChange}
           />
         </div>
 
@@ -114,8 +111,8 @@ export const CreateListing = () => {
             label='Area code'
             items={AreaCodesItems}
             register={register('area_code')}
-            className='w-44'
           />
+
           <Input
             register={register('phone_number')}
             name='phone_number'
@@ -123,27 +120,21 @@ export const CreateListing = () => {
             label='Phone Number'
             description='The phone number will be used to contact you'
           />
-        </div>
 
-        <div className='flex items-center gap-2.5'>
+          <Input
+            register={register('email')}
+            name='email'
+            error={errors.email?.message}
+            label='Email'
+          />
+        </div>
+        <div className='flex gap-2.5 mb-2.5'>
           <Input
             name='address'
             label='Address'
-            value={address}
-            onChange={(e) => {
-              setAddress(e.target.value);
-            }}
+            register={register('address')}
             description='The address will be used to show the location of the listing'
           />
-
-          <Button
-            variant='bordered'
-            onClick={handleGetCurrentLocation}
-            width='96'
-            className='h-full text-md'
-          >
-            Get my location <FaLocationDot />
-          </Button>
         </div>
 
         <div className='flex flex-col mt-4'>

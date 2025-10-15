@@ -10,8 +10,8 @@ export const Home = () => {
   const {
     listings,
     isLoading,
-    currentPage,
-    setCurrentPage,
+    page,
+    setPage,
     isError,
     totalPages,
     handleOnSearch,
@@ -67,13 +67,13 @@ export const Home = () => {
                 </div>
               )}
 
-              <div className='flex flex-col gap-5 mt-10 justify-end w-full'>
+              <div className='flex flex-col gap-5 mt-10 justify-center w-full'>
                 {!!totalPages && (
                   <Pagination
                     total={totalPages}
                     color='primary'
-                    page={currentPage}
-                    onChange={setCurrentPage}
+                    page={page}
+                    onChange={setPage}
                     initialPage={1}
                     showControls
                   />

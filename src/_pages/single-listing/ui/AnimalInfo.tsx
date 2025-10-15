@@ -7,11 +7,18 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import { ImageCarousel, Spinner } from '_shared';
 import { InfoItem } from './InfoItem';
 import { Tooltip } from '@nextui-org/react';
-import { AiOutlineLike } from 'react-icons/ai';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { MdReportGmailerrorred } from 'react-icons/md';
 
 export const AnimalInfo = () => {
-  const { listing, isError, isLoading } = useAnimalInfo();
+  const {
+    listing,
+    isError,
+    isLoading,
+    handleFavorite,
+    isFavoritePending,
+    isFavorited,
+  } = useAnimalInfo();
 
   return (
     <div className='xl:p-12 m-auto xl:w-10/12 md:w-full sm:w-full lg:p-10 md:p-5 p-2 max-w-6xl'>
@@ -41,16 +48,17 @@ export const AnimalInfo = () => {
                 <div className='flex items-center gap-2'>
                   <Tooltip content='Favorite this animal'>
                     <div className='cursor-pointer'>
-                      <AiOutlineLike className='text-primary' />
-                    </div>
-                  </Tooltip>
-                  <Tooltip
-                    content='Show interest in this animal.
-                  When you show interest, the owner will be notified.
-                  '
-                  >
-                    <div className='cursor-pointer'>
-                      <MdFavoriteBorder className='text-primary' />
+                      {isFavorited ? (
+                        <AiFillLike
+                          className='text-primary'
+                          onClick={handleFavorite}
+                        />
+                      ) : (
+                        <AiOutlineLike
+                          className='text-primary'
+                          onClick={handleFavorite}
+                        />
+                      )}
                     </div>
                   </Tooltip>
                   <Tooltip content='Report this listing'>
@@ -74,16 +82,24 @@ export const AnimalInfo = () => {
               <div className='mb-12'>{listing.description}</div>
               <Divider className='bg-primary' />
               <div className='mt-12 flex justify-between items-center w-full mb-12'>
-                <InfoItem value={listing.category} label='Category' />
-                <InfoItem value={listing.gender} label='Gender' />
+                <InfoItem
+                  value={listing.category?.toUpperCase()}
+                  label='Category'
+                />
+                <InfoItem
+                  value={listing.gender?.toUpperCase()}
+                  label='Gender'
+                />
                 <InfoItem value={listing.size} label='Size' />
                 {listing.breed && (
-                  <InfoItem value={listing.breed} label='Breed' />
+                  <InfoItem value={listing.breed.toUpperCase()} label='Breed' />
                 )}
 
                 {listing.date_of_birth && (
                   <InfoItem
-                    value={dayjs(listing.date_of_birth).format('DD MMM YYYY')}
+                    value={dayjs(listing.date_of_birth)
+                      .format('DD MMM YYYY')
+                      .toUpperCase()}
                     label='Date of Birth'
                   />
                 )}
@@ -126,6 +142,7 @@ export const AnimalInfo = () => {
                     >
                       Location
                     </h2>
+                    <div>{listing.address}</div>
                   </div>
                   <Divider className='bg-primary' />
                 </div>
@@ -146,6 +163,10 @@ export const AnimalInfo = () => {
                   value={
                     listing.phone_number ? listing.phone_number : 'Not provided'
                   }
+                  label='Phone number'
+                />
+                <InfoItem
+                  value={listing.email ? listing.email : 'Not provided'}
                   label='Phone number'
                 />
               </div>

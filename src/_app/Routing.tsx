@@ -15,6 +15,7 @@ import {
   Profile,
 } from '_pages';
 import { AppDrawer } from '_widgets';
+import { Footer } from '_shared';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const AppLayout = () => {
         <Route path='/animal/:id' element={<AnimalInfo />} />
         <Route path='/google-callback' element={<GoogleCallback />} />
       </Routes>
+      <Footer />
     </div>
   );
 };

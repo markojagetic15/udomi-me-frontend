@@ -7,15 +7,19 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Category, Image, useCreateListing } from '_entities/listing';
 import { DateValue } from '@nextui-org/react';
-import axios from 'axios';
 import { DropResult } from '@hello-pangea/dnd';
 
 export const useCreateListingPage = () => {
   const [images, setImages] = useState<Image[]>([]);
-  const [dateOfBirth, setDateOfBirth] = useState<DateValue | undefined>();
-  const [address, setAddress] = useState<string | undefined>(undefined);
+  const [dateOfBirth, setDateOfBirth] = useState<DateValue | null>();
 
-  const { createListing, isPending } = useCreateListing();
+  const { createListing, isPending } = useCreateListing({
+    onSuccess: () => {
+      toast.success('Listing created successfully!');
+
+      navigate('/');
+    },
+  });
   const navigate = useNavigate();
 
   const {
@@ -24,11 +28,13 @@ export const useCreateListingPage = () => {
     formState: { errors },
     setValue,
     getValues,
+    trigger,
   } = useForm({
     resolver: yupResolver(create_listing_schema),
     mode: 'onSubmit',
     defaultValues: {
       images: [],
+      date_of_birth: new Date(),
     },
   });
 
@@ -38,7 +44,7 @@ export const useCreateListingPage = () => {
     area_code?: string | null;
     phone_number?: string | null;
     category: Category;
-    date_of_birth?: Date | null;
+    date_of_birth: Date;
     is_vaccinated?: boolean;
     breed?: string | null;
     gender: 'male' | 'female';
@@ -49,19 +55,17 @@ export const useCreateListingPage = () => {
         ? new Date(dateOfBirth.year, dateOfBirth.month, dateOfBirth.day)
         : undefined;
 
+    if (!date) {
+      await trigger('date_of_birth');
+      return;
+    }
+
     const newData = {
       ...data,
       date_of_birth: date,
-      address,
     };
 
     createListing(newData);
-
-    toast.success('Listing created successfully!');
-
-    setTimeout(() => {
-      navigate('/');
-    }, 1000);
   };
 
   const handleUploadImages = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,8 +73,8 @@ export const useCreateListingPage = () => {
 
     if (!files) return;
 
-    if (files.length + images.length > 8) {
-      toast.error('You can only upload 8 images');
+    if (files.length + images.length > 10) {
+      toast.error('You can only upload 10 images');
       return;
     }
 
@@ -86,8 +90,8 @@ export const useCreateListingPage = () => {
       setImages([...images, ...placeholderImages]);
 
       const uploadPromises = [...files].map(async (file) => {
-        if (file.size > 1024 * 1024 * 5) {
-          toast.error('Image size must be less than 5MB');
+        if (file.size > 1024 * 1024 * 10) {
+          toast.error('Image size must be less than 10MB');
         }
 
         const response = await uploadFile(file);
@@ -126,24 +130,6 @@ export const useCreateListingPage = () => {
 
   const handleOnDateChange = (date: DateValue | undefined) => {
     setDateOfBirth(date);
-  };
-
-  const handleGetCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const { latitude, longitude } = position.coords;
-
-      try {
-        const response = await axios.get(
-          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-        );
-
-        const address = response.data.display_name;
-
-        setAddress(address);
-      } catch (e) {
-        console.error(e);
-      }
-    });
   };
 
   const handleRemoveImage = (id: string) => {
@@ -199,9 +185,6 @@ export const useCreateListingPage = () => {
     handleUploadImages,
     images,
     handleOnDateChange,
-    handleGetCurrentLocation,
-    address,
-    setAddress,
     handleRemoveImage,
     onDragEnd,
   };
