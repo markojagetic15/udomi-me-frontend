@@ -81,7 +81,7 @@ export type CreateListingDto = {
   address?: string;
   phone_number?: string | null;
   category: Category;
-  date_of_birth?: Date | null;
+  date_of_birth: Date | null;
   is_vaccinated?: boolean;
   breed?: string | null;
   gender: 'male' | 'female';

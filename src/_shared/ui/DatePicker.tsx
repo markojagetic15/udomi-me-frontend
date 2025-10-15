@@ -7,12 +7,14 @@ export const DatePicker = ({
   maxValue,
   description,
   onChange,
+  isRequired,
 }: {
   error?: string;
   label?: string;
   maxValue?: DateValue;
   description?: string;
   onChange: (date: DateValue) => void;
+  isRequired?: boolean;
 }) => {
   const renderErrorAndDescription = () => {
     if (error) {
@@ -33,6 +35,8 @@ export const DatePicker = ({
         maxValue={maxValue}
         isInvalid={!!error}
         onChange={onChange}
+        isRequired={isRequired}
+        showMonthAndYearPickers
       />
 
       <div className='absolute top-[97.5%] left-0'>

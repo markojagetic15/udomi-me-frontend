@@ -37,12 +37,16 @@ export const create_listing_schema = yup.object().shape({
     excludeEmptyString: true,
   }),
 
+  address: yup.string().optional(),
+
+  email: yup.string().email().optional(),
+
   category: yup
     .string()
     .oneOf(Object.values(Category), 'Category is required')
     .required('Category is required'),
 
-  date_of_birth: yup.date().optional(),
+  date_of_birth: yup.date().required('Date of birth is required'),
 
   is_vaccinated: yup.boolean().optional(),
 

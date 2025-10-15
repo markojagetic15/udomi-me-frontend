@@ -3,23 +3,19 @@ import { useDebouncedCallback } from 'use-debounce';
 import { Category, useGetListings } from '_entities/listing';
 
 export const useHome = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
   const [search, setSearch] = useState('');
   const [categories, setCategories] = useState<Category[]>([]);
 
-  const { getAllListings } = useGetListings(
-    currentPage,
-    10,
-    search,
-    categories
-  );
+  const { getAllListings } = useGetListings(page, perPage, search, categories);
 
   const { data, isError, isLoading } = getAllListings;
 
   const handleOnSearch = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearch(e.target.value);
-      setCurrentPage(1);
+      setPage(1);
     },
     500
   );
@@ -38,8 +34,8 @@ export const useHome = () => {
     totalPages: data?.meta.totalPages,
     isLoading,
     isError,
-    currentPage,
-    setCurrentPage,
+    page,
+    setPage,
     handleOnSearch,
     search,
     handleSetCategory,
