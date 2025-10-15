@@ -73,9 +73,7 @@ export const Input = ({
         autoComplete='new-password'
       />
 
-      <div className='absolute top-[97.5%] left-0'>
-        {renderErrorAndDescription()}
-      </div>
+      <div className=' top-[97.5%] left-0'>{renderErrorAndDescription()}</div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ export const InfoItem = ({
                     text-lg
                     font-bold
                     text-primary
+                    font-mono
                   '
       >
         {value}
