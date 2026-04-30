@@ -1,29 +1,18 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME as string;
+const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET as string;
 
-const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+export const uploadFile = async (file: File): Promise<{ url: string; id: string } | null> => {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', UPLOAD_PRESET);
 
-export const uploadFile = async (file: File) => {
-  const S3_BUCKET = import.meta.env.VITE_S3_BUCKET_NAME as string;
-  const REGION = import.meta.env.VITE_AWS_REGION as string;
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+    { method: 'POST', body: formData },
+  );
 
-  const s3Client = new S3Client({
-    region: REGION,
-    credentials: {
-      accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID as string,
-      secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY as string,
-    },
-  });
+  if (!res.ok) return null;
 
-  const params = {
-    Bucket: S3_BUCKET,
-    Key: file.name,
-    Body: file,
-  };
-
-  try {
-    const command = new PutObjectCommand(params);
-    return await s3Client.send(command);
-  } catch (error) {
-    console.error(error);
-  }
+  const data = await res.json();
+  return { url: data.secure_url as string, id: data.public_id as string };
 };

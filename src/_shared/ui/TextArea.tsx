@@ -25,6 +25,7 @@ export const TextArea = ({
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isRequired?: boolean;
   description?: string;
+  maxLength?: number;
 }) => {
   const renderErrorAndDescription = () => {
     if (error) {

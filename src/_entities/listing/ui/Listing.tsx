@@ -1,90 +1,129 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Image,
-} from '@nextui-org/react';
 import { Listing } from '../model';
 import { useNavigate } from 'react-router-dom';
-import { MdFavoriteBorder } from 'react-icons/md';
-import { MdFavorite } from 'react-icons/md';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 import { useFavoriteListing } from '../api';
 import { useGlobalContext } from '_app';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { toast } from 'react-toastify';
 
+const categoryColors: Record<string, string> = {
+  dog: 'bg-amber-100 text-amber-700',
+  cat: 'bg-orange-100 text-orange-700',
+  rabbit: 'bg-pink-100 text-pink-700',
+  bird: 'bg-emerald-100 text-emerald-700',
+  reptile: 'bg-lime-100 text-lime-700',
+  horse: 'bg-yellow-100 text-yellow-700',
+  other: 'bg-blue-100 text-blue-700',
+};
+
+function formatAge(dateOfBirth?: Date): string | null {
+  if (!dateOfBirth) return null;
+  const months = dayjs().diff(dayjs(dateOfBirth), 'month');
+  if (months < 1) return 'Newborn';
+  if (months < 12) return `${months}mo`;
+  const years = Math.floor(months / 12);
+  return years === 1 ? '1 yr' : `${years} yrs`;
+}
+
 export const ListingItem = ({ listing }: { listing: Listing }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-
   const { favoriteListing } = useFavoriteListing();
   const { user } = useGlobalContext();
   const navigate = useNavigate();
 
-  const handleFavorite = () => {
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!user) {
-      toast.info('You need to login to favorite a listing');
+      toast.info('You need to login to favourite a listing');
       navigate('/login');
       return;
     }
-    setIsFavorite(!isFavorite);
+    setIsFavorite((prev) => !prev);
     favoriteListing({ id: listing.id });
   };
 
   useEffect(() => {
-    const favoriteListings = user?.favorite_listings || [];
-    const favoriteListingsIds = favoriteListings.map((listing) => listing.id);
-    setIsFavorite(favoriteListingsIds.includes(listing.id));
+    const ids = (user?.favorite_listings || []).map((l) => l.id);
+    setIsFavorite(ids.includes(listing.id));
   }, [user]);
 
+  const age = formatAge(listing.date_of_birth);
+  const categoryColor = listing.category ? (categoryColors[listing.category] ?? 'bg-gray-100 text-gray-700') : null;
+
   return (
-    <Card
-      className='py-2 cursor-pointer'
-      isPressable
-      shadow='md'
+    <div
+      className='group relative cursor-pointer rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300'
       onClick={() => navigate(`/animal/${listing.id}`)}
     >
-      <CardBody className='overflow-visible py-2'>
-        <Image
-          shadow='sm'
-          radius='lg'
-          width='100%'
-          alt={listing.title}
-          className='w-full object-cover h-[240px]'
-          src={listing.images?.[0].url}
-        />
-      </CardBody>
-      <CardHeader className='pb-0 pt-0 px-4 flex-col items-start'></CardHeader>
-      <CardFooter className='flex justify-between items-start'>
-        <div className='text-small flex-col justify-start items-start text-start'>
-          <p className='font-bold text-large'>{listing.title}</p>
-          <p className='text-tiny uppercase font-bold'>
-            {listing.category} &#x2022; {listing.gender} &#x2022;{' '}
-            {dayjs(listing.date_of_birth).format('MM.YYYY')}
-          </p>
-          <p className='text-tiny  text-gray-400 mt-1'>
-            Created on {dayjs(listing.created_at).format('DD.MM.YYYY')}
-          </p>
-        </div>
-        {isFavorite ? (
-          <MdFavorite
-            onClick={(e) => {
-              e.stopPropagation();
-              handleFavorite();
-            }}
-            className='text-primary'
+      {/* Image */}
+      <div className='relative h-52 overflow-hidden bg-gray-100'>
+        {listing.images?.[0]?.url ? (
+          <img
+            src={listing.images[0].url}
+            alt={listing.title}
+            className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
           />
         ) : (
-          <MdFavoriteBorder
-            onClick={(e) => {
-              e.stopPropagation();
-              handleFavorite();
-            }}
-            className='text-primary'
-          />
+          <div className='w-full h-full flex items-center justify-center text-5xl'>🐾</div>
         )}
-      </CardFooter>
-    </Card>
+
+        {/* Badges */}
+        <div className='absolute top-2 left-2 flex flex-col gap-1'>
+          {listing.category && categoryColor && (
+            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${categoryColor}`}>
+              {listing.category.toUpperCase()}
+            </span>
+          )}
+          {listing.is_urgent && (
+            <span className='text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600'>
+              URGENT
+            </span>
+          )}
+        </div>
+
+        {/* Favourite button */}
+        <button
+          className='absolute top-2 right-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:bg-white hover:scale-110 transition-all'
+          onClick={handleFavorite}
+          aria-label={isFavorite ? 'Remove from favourites' : 'Add to favourites'}
+        >
+          {isFavorite ? (
+            <MdFavorite className='text-primary w-4 h-4' />
+          ) : (
+            <MdFavoriteBorder className='text-gray-400 w-4 h-4' />
+          )}
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className='p-4'>
+        <h3 className='font-semibold text-gray-900 truncate mb-1 text-base'>{listing.title}</h3>
+        <div className='flex items-center flex-wrap gap-x-2 gap-y-0.5 text-xs text-gray-500'>
+          {listing.gender && <span className='capitalize'>{listing.gender}</span>}
+          {age && (
+            <>
+              <span className='text-gray-300'>·</span>
+              <span>{age}</span>
+            </>
+          )}
+          {listing.size && (
+            <>
+              <span className='text-gray-300'>·</span>
+              <span>{listing.size} kg</span>
+            </>
+          )}
+          {listing.breed && (
+            <>
+              <span className='text-gray-300'>·</span>
+              <span className='truncate max-w-[80px]'>{listing.breed}</span>
+            </>
+          )}
+        </div>
+        <div className='mt-2 text-[11px] text-gray-400'>
+          Listed {dayjs(listing.created_at).format('DD MMM YYYY')}
+        </div>
+      </div>
+    </div>
   );
 };

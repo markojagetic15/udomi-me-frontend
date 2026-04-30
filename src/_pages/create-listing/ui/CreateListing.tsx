@@ -1,20 +1,33 @@
 import { useCreateListingPage } from '../hooks';
 import {
-  Autocomplete,
   Button,
   DatePicker,
   Input,
+  LocationPicker,
   Select,
   Spinner,
   Switch,
   TextArea,
 } from '_shared';
-import { Image, Tooltip } from '@nextui-org/react';
+import { Image as NextImage, Tooltip } from '@nextui-org/react';
 import { AreaCodesItems, CategoryItems, GenderItems } from '_entities/listing';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { FaPlus } from 'react-icons/fa';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
+
+const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
+  <div className='mb-4'>
+    <h2 className='text-base font-semibold text-gray-800'>{title}</h2>
+    {subtitle && <p className='text-xs text-gray-400 mt-0.5'>{subtitle}</p>}
+  </div>
+);
+
+const CharCount = ({ value, max }: { value: string; max: number }) => (
+  <span className={`text-xs tabular-nums ${value.length >= max ? 'text-red-400' : 'text-gray-400'}`}>
+    {value.length}/{max}
+  </span>
+);
 
 export const CreateListing = () => {
   const {
@@ -28,157 +41,160 @@ export const CreateListing = () => {
     handleOnDateChange,
     handleRemoveImage,
     onDragEnd,
+    handleLocationChange,
+    titleValue,
+    descriptionValue,
+    locationValue,
   } = useCreateListingPage();
 
   return (
-    <div className='w-full lg:max-w-6xl m-auto mt-24 pb-24 h-full'>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='rounded-2xl p-12 flex flex-col gap-8 w-full isolate aspect-video bg-white/20 shadow-lg h-auto'
-      >
-        <Input
-          register={register('title')}
-          name='title'
-          error={errors.title?.message}
-          label='Title'
-          isRequired
-          description='The title must have at least 1 character'
-          className='mb-2.5'
-        />
+    <div className='w-full lg:max-w-4xl m-auto mt-24 pb-24'>
+      <div className='px-4'>
+        <h1 className='text-3xl font-extrabold text-primary-700 mb-2'>Create a Listing</h1>
+        <p className='text-gray-500 mb-8'>Help an animal find their forever home.</p>
+      </div>
 
-        <TextArea
-          register={register('description')}
-          error={errors.description?.message}
-          label='Description'
-          name='description'
-          isRequired
-          description='The title must have at least 5 characters'
-        />
-
-        <div className='flex items-center w-full gap-4'>
-          <Select
-            label='Select Category'
-            error={errors.category?.message}
-            register={register('category')}
-            items={CategoryItems}
-            isRequired
-          />
-
-          <Select
-            label='Select Gender'
-            error={errors.gender?.message}
-            register={register('gender')}
-            items={GenderItems}
-            isRequired
-          />
-
-          <DatePicker
-            label='Birth date'
-            error={errors.date_of_birth?.message}
-            maxValue={today(getLocalTimeZone())}
-            onChange={handleOnDateChange}
-            isRequired
-          />
-
-          <Input
-            label='Enter Size'
-            error={errors.size?.message}
-            register={register('size')}
-            isRequired
-            type='number'
-            endIcon={<span className='text-gray-400'>kg</span>}
-          />
-
-          <Input
-            register={register('breed')}
-            name='breed'
-            error={errors.breed?.message}
-            label='Breed'
-          />
-        </div>
-
-        <div className='flex items-center w-full gap-4'>
-          <Switch register={register('is_vaccinated')} label='Is vaccinated' />
-          <Switch
-            register={register('is_urgent')}
-            label='Is urgent'
-            description='awdawdawd'
-          />
-        </div>
-
-        <div className='flex gap-2.5 mb-2.5'>
-          <Autocomplete
-            label='Area code'
-            items={AreaCodesItems}
-            register={register('area_code')}
-          />
-
-          <Input
-            register={register('phone_number')}
-            name='phone_number'
-            error={errors.phone_number?.message}
-            label='Phone Number'
-            description='The phone number will be used to contact you'
-          />
-
-          <Input
-            register={register('email')}
-            name='email'
-            error={errors.email?.message}
-            label='Email'
-          />
-        </div>
-        <div className='flex gap-2.5 mb-2.5'>
-          <Input
-            name='address'
-            label='Address'
-            register={register('address')}
-            description='The address will be used to show the location of the listing'
-          />
-        </div>
-
-        <div className='flex flex-col mt-4'>
-          <div className='mb-2'>
-            Images <span className='text-red-500'>*</span>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6 px-4'>
+        {/* Basic info */}
+        <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
+          <SectionHeader title='Basic Information' />
+          <div className='flex flex-col gap-1'>
+            <Input
+              register={register('title')}
+              name='title'
+              error={errors.title?.message}
+              label='Title'
+              isRequired
+              maxLength={50}
+            />
+            <div className='flex justify-end pr-1'>
+              <CharCount value={titleValue} max={50} />
+            </div>
           </div>
-          <div className='flex'>
-            <DragDropContext
-              onDragEnd={(result) => {
-                onDragEnd(result);
-              }}
-            >
+          <div className='flex flex-col gap-1'>
+            <TextArea
+              register={register('description')}
+              error={errors.description?.message}
+              label='Description'
+              name='description'
+              isRequired
+              maxLength={500}
+            />
+            <div className='flex justify-end pr-1'>
+              <CharCount value={descriptionValue} max={500} />
+            </div>
+          </div>
+        </div>
+
+        {/* Animal details */}
+        <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
+          <SectionHeader title='Animal Details' />
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <Select
+              label='Category'
+              error={errors.category?.message}
+              register={register('category')}
+              items={CategoryItems}
+              isRequired
+            />
+            <Select
+              label='Gender'
+              error={errors.gender?.message}
+              register={register('gender')}
+              items={GenderItems}
+              isRequired
+            />
+            <DatePicker
+              label='Date of Birth'
+              error={errors.date_of_birth?.message}
+              maxValue={today(getLocalTimeZone())}
+              onChange={handleOnDateChange}
+              isRequired
+            />
+            <Input
+              label='Size'
+              error={errors.size?.message}
+              register={register('size')}
+              isRequired
+              type='number'
+              endIcon={<span className='text-gray-400 text-sm'>kg</span>}
+            />
+            <Input
+              register={register('breed')}
+              name='breed'
+              error={errors.breed?.message}
+              label='Breed'
+            />
+          </div>
+
+          <div className='flex items-center gap-6 flex-wrap pt-1'>
+            <Switch register={register('is_vaccinated')} label='Vaccinated' />
+            <Switch
+              register={register('is_urgent')}
+              label='Urgent adoption'
+              description='Animal needs immediate adoption'
+            />
+          </div>
+        </div>
+
+        {/* Contact & Location */}
+        <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
+          <SectionHeader title='Contact & Location' subtitle='Visible to potential adopters' />
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+            <Input
+              register={register('phone_number')}
+              name='phone_number'
+              error={errors.phone_number?.message}
+              label='Phone Number'
+            />
+            <Input
+              register={register('email')}
+              name='email'
+              error={errors.email?.message}
+              label='Email'
+            />
+          </div>
+          <div>
+            <label className='text-sm font-medium text-gray-700 mb-2 block'>
+              Address <span className='text-gray-400 font-normal text-xs'>(search or click the map)</span>
+            </label>
+            <LocationPicker
+              value={locationValue.lat ? locationValue : undefined}
+              onChange={handleLocationChange}
+            />
+          </div>
+        </div>
+
+        {/* Images */}
+        <div className='bg-white rounded-3xl p-6 shadow-sm'>
+          <SectionHeader title='Photos' subtitle='Optional. Drag to reorder. Up to 8 images.' />
+          <div className='flex flex-wrap gap-2'>
+            <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId='droppable' direction='horizontal'>
                 {(provided) => (
                   <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className='flex'
+                    className='flex flex-wrap gap-2'
                   >
                     {images.map((image, index) => (
-                      <Draggable
-                        key={image.id}
-                        draggableId={image.id}
-                        index={index}
-                      >
+                      <Draggable key={image.id} draggableId={image.id} index={index}>
                         {(provided) => (
-                          <Tooltip content='You can re-order images'>
+                          <Tooltip content='Drag to reorder'>
                             <div
-                              className='relative cursor-pointer pr-2'
+                              className='relative cursor-grab active:cursor-grabbing'
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
                               <IoMdCloseCircle
-                                className='absolute -top-2 -right-2 cursor-pointer z-20 w-6 h-6 text-primary'
-                                onClick={() => {
-                                  handleRemoveImage(image.id);
-                                }}
+                                className='absolute -top-2 -right-2 cursor-pointer z-20 w-5 h-5 text-primary bg-white rounded-full'
+                                onClick={() => handleRemoveImage(image.id)}
                               />
-                              <Image
-                                key={image.id}
+                              <NextImage
                                 src={image.url}
                                 alt='listing'
-                                className='w-32 h-32 object-cover'
+                                className='w-28 h-28 object-cover rounded-xl'
                                 isLoading={image.url === 'placeholder'}
                               />
                             </div>
@@ -191,44 +207,31 @@ export const CreateListing = () => {
                 )}
               </Droppable>
             </DragDropContext>
+
             {images.length < 8 && (
               <div
-                className={`w-32 h-32 ${errors.images?.message ? 'bg-danger-50' : 'bg-complement'} flex items-center justify-center rounded-2xl cursor-pointer border-solid border-1 border-gray-500`}
-                onClick={() => {
-                  document.getElementById('images-upload')?.click();
-                }}
+                className='w-28 h-28 bg-gray-50 border-gray-200 flex items-center justify-center rounded-xl cursor-pointer border-2 border-dashed hover:border-primary hover:bg-primary/5 transition-colors'
+                onClick={() => document.getElementById('images-upload')?.click()}
               >
-                <FaPlus className='text-gray-500 w-6 h-6' />
+                <FaPlus className='text-gray-400 w-5 h-5' />
               </div>
             )}
           </div>
-          {errors.images?.message ? (
-            <span className='text-red-500 text-xs mt-2'>
-              {errors.images.message}
-            </span>
-          ) : (
-            <span className='text-gray-400 text-xs mt-2'>
-              Upload at least one image
-            </span>
-          )}
+          <p className='text-gray-400 text-xs mt-3'>Upload up to 8 images</p>
         </div>
 
         <Input
-          error={errors.images?.message}
           label='Images'
           name='images'
           type='file'
           onChange={handleUploadImages}
           multiple
           className='hidden'
-          isRequired
-          description='Upload at least one image'
-          width='64'
           id='images-upload'
         />
 
-        <Button type='submit' variant='solid'>
-          {isPending ? <Spinner /> : 'Create Listing'}
+        <Button type='submit' variant='solid' className='rounded-2xl h-12 text-base font-semibold'>
+          {isPending ? <Spinner /> : 'Publish Listing'}
         </Button>
       </form>
     </div>

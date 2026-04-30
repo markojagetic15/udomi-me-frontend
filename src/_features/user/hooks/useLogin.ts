@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useAxios } from '_app';
 import { login_schema } from '../model';
@@ -11,6 +11,7 @@ export const useLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { axios } = useAxios();
 
@@ -30,9 +31,9 @@ export const useLogin = () => {
         password,
       });
     },
-    onSuccess: () => {
-      // TODO: Add deep linking
-      navigate('/');
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['me'] });
+      navigate('/browse');
     },
     onError: (error) => {
       toast.error(error.message);
@@ -60,5 +61,6 @@ export const useLogin = () => {
     handleTogglePassword,
     navigate,
     handleGoogleLogin,
+    isLoading: mutation.isPending,
   };
 };

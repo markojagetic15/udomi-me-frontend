@@ -15,9 +15,7 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const { user: me } = useGetMe();
 
   useEffect(() => {
-    if (me) {
-      setUser(me);
-    }
+    setUser(me ?? null);
   }, [me]);
 
   return (

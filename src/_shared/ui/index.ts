@@ -12,3 +12,4 @@ export * from './Switch';
 export * from './DatePicker';
 export * from './Autocomplete';
 export * from './Footer';
+export * from './LocationPicker';

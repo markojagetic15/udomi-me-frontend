@@ -13,14 +13,14 @@ export const useCreateListingPage = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [dateOfBirth, setDateOfBirth] = useState<DateValue | null>();
 
+  const navigate = useNavigate();
+
   const { createListing, isPending } = useCreateListing({
     onSuccess: () => {
       toast.success('Listing created successfully!');
-
-      navigate('/');
+      navigate('/browse');
     },
   });
-  const navigate = useNavigate();
 
   const {
     register,
@@ -29,6 +29,7 @@ export const useCreateListingPage = () => {
     setValue,
     getValues,
     trigger,
+    watch,
   } = useForm({
     resolver: yupResolver(create_listing_schema),
     mode: 'onSubmit',
@@ -37,6 +38,9 @@ export const useCreateListingPage = () => {
       date_of_birth: new Date(),
     },
   });
+
+  const titleValue = watch('title') ?? '';
+  const descriptionValue = watch('description') ?? '';
 
   const onSubmit = async (data: {
     title: string;
@@ -48,7 +52,9 @@ export const useCreateListingPage = () => {
     is_vaccinated?: boolean;
     breed?: string | null;
     gender: 'male' | 'female';
-    images: Image[];
+    images?: Image[];
+    lat?: number;
+    lng?: number;
   }) => {
     const date =
       dateOfBirth?.day && dateOfBirth?.month && dateOfBirth?.year
@@ -60,120 +66,81 @@ export const useCreateListingPage = () => {
       return;
     }
 
-    const newData = {
-      ...data,
-      date_of_birth: date,
-    };
-
-    createListing(newData);
+    createListing({ ...data, date_of_birth: date });
   };
 
   const handleUploadImages = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-
     if (!files) return;
 
-    if (files.length + images.length > 10) {
-      toast.error('You can only upload 10 images');
+    if (files.length + images.length > 8) {
+      toast.error('You can only upload up to 8 images');
       return;
     }
 
     try {
-      const placeholderImages = Array.from({ length: files.length }).map(
-        (_, index) => ({
-          id: index.toString(),
-          url: 'placeholder',
-          position: index,
-        })
-      );
-
+      const placeholderImages = Array.from({ length: files.length }).map((_, i) => ({
+        id: i.toString(),
+        url: 'placeholder',
+        position: i,
+      }));
       setImages([...images, ...placeholderImages]);
 
-      const uploadPromises = [...files].map(async (file) => {
-        if (file.size > 1024 * 1024 * 10) {
-          toast.error('Image size must be less than 10MB');
-        }
-
-        const response = await uploadFile(file);
-
-        if (!response) return null;
-
-        const publicUrl = `https://${import.meta.env.VITE_S3_BUCKET_NAME || ''}.s3.${import.meta.env.VITE_AWS_REGION || ''}.amazonaws.com/${file.name}`;
-        const id = response.ETag || '';
-
-        return { id, url: publicUrl };
-      });
-
-      const uploadedImages = (await Promise.all(uploadPromises)).filter(
-        (image) => image !== null
-      );
+      const uploadedImages = (
+        await Promise.all(
+          [...files].map(async (file) => {
+            if (file.size > 1024 * 1024 * 10) toast.error('Image size must be less than 10MB');
+            const response = await uploadFile(file);
+            if (!response) return null;
+            return { id: response.id, url: response.url };
+          }),
+        )
+      ).filter(Boolean) as Image[];
 
       const updatedImages = images
         .filter((img) => img.id !== 'placeholder')
-        .concat(
-          uploadedImages.map((image, index) => ({
-            ...image,
-            position: images.length + index,
-          }))
-        );
+        .concat(uploadedImages.map((img, i) => ({ ...img, position: images.length + i })));
 
-      setImages([...updatedImages]);
-
-      setValue('images', [...(getValues('images') || []), ...updatedImages], {
-        shouldValidate: true,
-      });
-    } catch (error) {
-      console.error(error);
+      setImages(updatedImages);
+      setValue('images', [...(getValues('images') || []), ...updatedImages], { shouldValidate: true });
+    } catch {
       toast.error('Failed to upload images');
     }
   };
 
-  const handleOnDateChange = (date: DateValue | undefined) => {
-    setDateOfBirth(date);
-  };
+  const handleOnDateChange = (date: DateValue | undefined) => setDateOfBirth(date);
 
   const handleRemoveImage = (id: string) => {
-    const filteredImages = images.filter((image) => image.id !== id);
-
-    if (filteredImages.length === 0) {
+    const filtered = images.filter((img) => img.id !== id);
+    if (filtered.length === 0) {
       setValue('images', []);
-      const input = document.getElementById(
-        'images-upload'
-      ) as HTMLInputElement;
-
-      if (input) {
-        input.value = '';
-      }
+      const input = document.getElementById('images-upload') as HTMLInputElement;
+      if (input) input.value = '';
     }
-
-    setImages(filteredImages);
+    setImages(filtered);
   };
 
-  const reorder = (list: Image[], startIndex: number, endIndex: number) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
+  const reorder = (list: Image[], from: number, to: number) => {
+    const result = [...list];
+    const [removed] = result.splice(from, 1);
+    result.splice(to, 0, removed);
     return result;
   };
 
   const onDragEnd = (result: DropResult) => {
-    if (!result.destination) {
-      return;
-    }
-
-    const items = reorder(
-      images,
-      result.source.index,
-      result.destination.index
+    if (!result.destination) return;
+    setImages(
+      reorder(images, result.source.index, result.destination.index).map((item, i) => ({
+        ...item,
+        position: i,
+      })),
     );
+  };
 
-    const newOrder = items.map((item, index) => ({
-      ...item,
-      position: index,
-    }));
-
-    setImages(newOrder);
+  const handleLocationChange = (v: { address: string; lat: number; lng: number }) => {
+    setValue('address', v.address);
+    setValue('lat', v.lat);
+    setValue('lng', v.lng);
   };
 
   return {
@@ -187,5 +154,13 @@ export const useCreateListingPage = () => {
     handleOnDateChange,
     handleRemoveImage,
     onDragEnd,
+    handleLocationChange,
+    titleValue,
+    descriptionValue,
+    locationValue: {
+      address: (watch('address') ?? '') as string,
+      lat: watch('lat') ?? 0,
+      lng: watch('lng') ?? 0,
+    },
   };
 };

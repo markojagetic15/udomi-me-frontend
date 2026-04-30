@@ -8,7 +8,7 @@ export const create_listing_schema = yup.object().shape({
   title: yup
     .string()
     .required('Title is required')
-    .min(1, 'Title must be at least 5 characters')
+    .min(3, 'Title must be at least 3 characters')
     .max(50, 'Title must be at most 50 characters'),
 
   description: yup
@@ -27,10 +27,12 @@ export const create_listing_schema = yup.object().shape({
         position: yup.number().required(),
       })
     )
-    .min(1, 'Please upload at least one image')
-    .required('Images are required'),
+    .optional()
+    .default([]),
 
-  area_code: yup.string(),
+  area_code: yup.string().optional(),
+  lat: yup.number().optional(),
+  lng: yup.number().optional(),
 
   phone_number: yup.string().notRequired().matches(phoneRegExp, {
     message: 'Phone number is not valid',

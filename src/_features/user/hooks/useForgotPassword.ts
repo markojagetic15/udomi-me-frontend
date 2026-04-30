@@ -26,8 +26,7 @@ export const useForgotPassword = () => {
       });
     },
     onSuccess: () => {
-      // TODO: Add deep linking
-      navigate('/');
+      toast.success('Password reset email sent. Check your inbox!');
     },
     onError: (error) => {
       toast.error(error.message);
@@ -44,5 +43,7 @@ export const useForgotPassword = () => {
     errors,
     onSubmit,
     navigate,
+    isLoading: mutation.isPending,
+    isSuccess: mutation.isSuccess,
   };
 };

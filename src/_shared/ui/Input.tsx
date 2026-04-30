@@ -9,7 +9,6 @@ export const Input = ({
   register,
   endIcon,
   startIcon,
-  hide,
   onChange,
   multiple,
   value,
@@ -19,6 +18,7 @@ export const Input = ({
   className,
   id,
   hidden,
+  placeholder,
   ...props
 }: {
   name?: string;
@@ -27,7 +27,6 @@ export const Input = ({
   placeholder?: string;
   error?: string;
   register?: UseFormRegisterReturn<string>;
-  hide?: boolean;
   endIcon?: React.ReactNode;
   startIcon?: React.ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -39,41 +38,39 @@ export const Input = ({
   className?: string;
   id?: string;
   hidden?: boolean;
+  maxLength?: number;
 }) => {
-  const renderErrorAndDescription = () => {
-    if (error) {
-      return <span className='text-red-500 text-xs'>{error}</span>;
-    }
-
-    if (description) {
-      return <span className='text-gray-400 text-xs'>{description}</span>;
-    }
-
-    return null;
-  };
-
   return (
-    <div className={`relative ${width ? `w-${width}` : 'w-full'} ${className}`}>
+    <div className={`${width ? `w-${width}` : 'w-full'} ${className ?? ''}`}>
       <InputComponent
         id={id}
         name={name}
         type={type}
         hidden={hidden}
+        placeholder={placeholder}
         {...props}
-        className={`${width ? width : 'w-full'}`}
+        className={width ? `w-${width}` : 'w-full'}
         {...register}
         onChange={onChange}
         label={label}
         multiple={multiple}
         value={value}
-        endContent={endIcon}
-        startContent={startIcon}
+        endContent={
+          endIcon ? (
+            <div className='flex items-center h-full'>{endIcon}</div>
+          ) : undefined
+        }
+        startContent={
+          startIcon ? (
+            <div className='flex items-center h-full'>{startIcon}</div>
+          ) : undefined
+        }
         isRequired={isRequired}
         isInvalid={!!error}
+        errorMessage={error}
+        description={!error ? description : undefined}
         autoComplete='new-password'
       />
-
-      <div className=' top-[97.5%] left-0'>{renderErrorAndDescription()}</div>
     </div>
   );
 };

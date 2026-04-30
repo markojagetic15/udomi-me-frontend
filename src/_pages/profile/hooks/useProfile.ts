@@ -8,7 +8,8 @@ export const useProfile = () => {
   const { data, isError, isLoading } = getAllListings;
 
   return {
-    listings: data?.listings,
+    myListings: data?.listings,
+    favoriteListings: user?.favorite_listings ?? [],
     isLoading,
     isError,
     user,

@@ -48,6 +48,9 @@ export interface Listing {
   address?: string;
   phone_number?: string;
   email?: string;
+  area_code?: string;
+  lat?: number;
+  lng?: number;
   date_of_birth?: Date;
   is_vaccinated?: boolean;
   breed?: string;
@@ -59,6 +62,9 @@ export interface Listing {
   is_urgent: boolean;
   size: number;
   favorite: boolean;
+  is_adopted: boolean;
+  is_active: boolean;
+  number_of_interested_users: number;
 }
 
 export interface GetAllListingsResponse {
@@ -74,7 +80,7 @@ export interface GetAllListingsResponse {
 export type CreateListingDto = {
   title: string;
   description: string;
-  images: {
+  images?: {
     url: string;
     id: string;
   }[];

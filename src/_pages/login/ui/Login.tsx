@@ -1,8 +1,8 @@
 import { useLogin } from '_features/user';
 import { Button, Input } from '_shared';
-import { FaEye } from 'react-icons/fa';
-import { FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FaArrowLeftLong, FaGoogle } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 import './styles.css';
 
 export const Login = () => {
@@ -15,28 +15,33 @@ export const Login = () => {
     navigate,
     errors,
     handleGoogleLogin,
+    isLoading,
   } = useLogin();
 
   return (
-    <div className="flex items-center h-screen justify-center bg-[url('_assets/register_waves.svg')] relative bg-cover bg-no-repeat">
-      <FaArrowLeftLong
-        className='text-3xl text-white absolute top-6 left-6 cursor-pointer hover:scale-125 transition duration-300 ease-in-out transform'
+    <div className="min-h-screen flex items-center justify-center bg-[url('_assets/register_waves.svg')] relative bg-cover bg-no-repeat px-4">
+      <button
+        className='absolute top-5 left-5 text-white hover:scale-110 transition-transform'
         onClick={() => navigate('/')}
-      />
+        aria-label='Go back'
+      >
+        <FaArrowLeftLong className='text-2xl' />
+      </button>
 
-      <div className='flex flex-col items-center gap-14 bg-[rgba(185,205,218,0.4)] rounded-2xl border-secondary border-1 border-solid lg:w-auto w-[95%]'>
-        <h1 className='text-6xl text-white pt-12 lg:text-8xl'>Login</h1>
+      <div className='w-full max-w-md bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden'>
+        <div className='bg-primary px-8 py-8 text-center'>
+          <h1 className='text-4xl font-extrabold text-white tracking-tight'>Welcome back</h1>
+          <p className='text-white/80 mt-2 text-sm'>Sign in to continue to Udomi Me</p>
+        </div>
 
-        <form
-          className='w-[95%] flex flex-col gap-3 lg:p-8 p-4 lg:w-[600px]'
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className='px-8 py-8 flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
           <Input
             label='Email'
             name='email'
             register={register('email')}
             error={errors.email?.message}
           />
+
           <Input
             type={showPassword ? 'text' : 'password'}
             label='Password'
@@ -44,53 +49,44 @@ export const Login = () => {
             register={register('password')}
             error={errors.password?.message}
             endIcon={
-              <div onClick={handleTogglePassword} className='cursor-pointer'>
-                {showPassword ? (
-                  <FaEyeSlash className='text-primary' />
-                ) : (
-                  <FaEye className='text-primary' />
-                )}
-              </div>
+              <button
+                type='button'
+                onClick={handleTogglePassword}
+                className='flex items-center justify-center text-gray-400 hover:text-gray-600'
+                tabIndex={-1}
+              >
+                {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </button>
             }
           />
 
-          <div className='w-full mt-2'>
-            <div className='flex gap-2 w-full'>
-              <div>
-                <button
-                  className='text-primary'
-                  onClick={() => navigate('/forgot-password')}
-                  type='button'
-                >
-                  Forgot password?
-                </button>
-              </div>
-            </div>
+          <div className='flex justify-end -mt-1'>
+            <Link to='/forgot-password' className='text-sm text-primary hover:underline'>
+              Forgot password?
+            </Link>
           </div>
 
-          <Button type='submit' variant='flat'>
-            Login
+          <Button type='submit' variant='solid' isLoading={isLoading}>
+            Sign In
           </Button>
 
-          <Button variant='flat' onClick={handleGoogleLogin} color='default'>
+          <div className='relative flex items-center gap-3'>
+            <div className='flex-1 h-px bg-gray-200' />
+            <span className='text-xs text-gray-400'>or</span>
+            <div className='flex-1 h-px bg-gray-200' />
+          </div>
+
+          <Button variant='bordered' onClick={handleGoogleLogin} color='default'>
             <FaGoogle />
-            Login with Google
+            Continue with Google
           </Button>
 
-          <div className='w-full mt-5 pb-12'>
-            <div className='flex gap-2 w-full'>
-              Don't have an account?{' '}
-              <div>
-                <button
-                  className='text-primary'
-                  onClick={() => navigate('/register')}
-                  type='button'
-                >
-                  Register
-                </button>
-              </div>
-            </div>
-          </div>
+          <p className='text-center text-sm text-gray-500 pb-2'>
+            Don't have an account?{' '}
+            <Link to='/register' className='text-primary font-medium hover:underline'>
+              Register
+            </Link>
+          </p>
         </form>
       </div>
     </div>

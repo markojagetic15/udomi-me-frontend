@@ -8,6 +8,7 @@ export interface User {
   created_at: Date;
   avatar: string;
   favorite_listings: Listing[];
+  interested_listings: Listing[];
 }
 
 export interface GetUserDto {

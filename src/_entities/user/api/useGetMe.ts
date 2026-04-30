@@ -10,6 +10,7 @@ export const useGetMe = () => {
     queryFn: async () => {
       return (await axios.get('/me')) as User;
     },
+    retry: false,
   });
 
   return {

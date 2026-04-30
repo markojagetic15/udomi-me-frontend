@@ -1,61 +1,58 @@
 import { useState } from 'react';
 import { Image } from '_entities/listing';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 export const ImageCarousel = ({ images }: { images: Image[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  const sorted = [...images].sort((a, b) => a.position - b.position);
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
+  const nextSlide = () => setCurrentIndex((i) => (i + 1) % sorted.length);
+  const prevSlide = () => setCurrentIndex((i) => (i === 0 ? sorted.length - 1 : i - 1));
 
   return (
-    <div className='relative w-full max-w-6xl overflow-hidden rounded-2xl'>
+    <div className='relative w-full max-w-6xl overflow-hidden rounded-3xl shadow-lg'>
       <div
         className='flex transition-transform duration-500 ease-in-out'
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {images
-          .sort((a, b) => a.position - b.position)
-          ?.map((image) => (
-            <div
-              key={image.id}
-              style={{ backgroundImage: `url(${image.url})` }}
-              className={
-                'h-[500px] w-full bg-cover bg-center bg-no-repeat rounded-2xl flex-shrink-0'
-              }
-            />
-          ))}
+        {sorted.map((image) => (
+          <div
+            key={image.id}
+            style={{ backgroundImage: `url(${image.url})` }}
+            className='h-[500px] w-full bg-cover bg-center bg-no-repeat flex-shrink-0'
+          />
+        ))}
       </div>
 
-      {images.length > 1 && (
+      {sorted.length > 1 && (
         <>
           <button
             onClick={prevSlide}
-            className='absolute top-1/2 left-2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200'
+            className='absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:bg-white transition-all hover:scale-110'
+            aria-label='Previous image'
           >
-            ‹
+            <MdChevronLeft className='w-6 h-6 text-gray-700' />
           </button>
           <button
             onClick={nextSlide}
-            className='absolute top-1/2 right-2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200'
+            className='absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:bg-white transition-all hover:scale-110'
+            aria-label='Next image'
           >
-            ›
+            <MdChevronRight className='w-6 h-6 text-gray-700' />
           </button>
 
-          <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2'>
-            {images?.map((_, index) => (
+          <div className='absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5'>
+            {sorted.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`h-2 w-2 rounded-full ${
-                  currentIndex !== index ? 'bg-gray-800' : 'bg-gray-400'
+                className={`rounded-full transition-all duration-300 ${
+                  currentIndex === index
+                    ? 'w-6 h-2 bg-white'
+                    : 'w-2 h-2 bg-white/50 hover:bg-white/80'
                 }`}
+                aria-label={`Go to image ${index + 1}`}
               />
             ))}
           </div>

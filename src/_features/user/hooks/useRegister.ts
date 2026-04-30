@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAxios } from '_app';
 import { register_schema } from '../model';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ export const useRegister = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { axios } = useAxios();
 
@@ -33,6 +34,11 @@ export const useRegister = () => {
         email,
         password,
       });
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['me'] });
+      toast.success('Account created! Check your email to verify your account.');
+      navigate('/browse');
     },
     onError: (error) => {
       toast.error(error.message);
@@ -79,5 +85,6 @@ export const useRegister = () => {
     handleToggleConfirmPassword,
     navigate,
     handleGoogleRegister,
+    isLoading: mutation.isPending,
   };
 };
