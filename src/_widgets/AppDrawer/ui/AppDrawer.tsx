@@ -156,16 +156,7 @@ export const AppDrawer = () => {
             UDOMI ME
           </p>
         </NavbarBrand>
-        <NavbarContent justify='center'>
-          <NavbarItem>
-            <button
-              className={`text-sm font-medium hover:text-primary transition-colors ${isLanding ? 'text-white' : 'text-gray-700'}`}
-              onClick={() => navigate('/browse')}
-            >
-              Browse
-            </button>
-          </NavbarItem>
-        </NavbarContent>
+        <NavbarContent justify='center' />
         <NavbarContent justify='end'>
           <NavbarItem className='hidden lg:flex'>
             <Button
