@@ -1,25 +1,26 @@
 import * as yup from 'yup';
 import { Category } from '_entities/listing';
+import type { TFunction } from 'i18next';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-export const create_listing_schema = yup.object().shape({
+export const create_listing_schema = (t: TFunction) => yup.object().shape({
   title: yup
     .string()
-    .required('Title is required')
-    .min(3, 'Title must be at least 3 characters')
-    .max(50, 'Title must be at most 50 characters'),
+    .required(t('validation.titleRequired'))
+    .min(3, t('validation.titleMin'))
+    .max(50, t('validation.titleMax')),
 
   description: yup
     .string()
-    .required('Description is required')
-    .min(5, 'Description must be at least 5 characters')
-    .max(500, 'Description must be at most 500 characters'),
+    .required(t('validation.descriptionRequired'))
+    .min(5, t('validation.descriptionMin'))
+    .max(500, t('validation.descriptionMax')),
 
   images: yup
     .array()
-    .max(8, 'You can upload at most 8 images')
+    .max(8, t('validation.imagesMax'))
     .of(
       yup.object().shape({
         id: yup.string().required(),
@@ -35,7 +36,7 @@ export const create_listing_schema = yup.object().shape({
   lng: yup.number().optional(),
 
   phone_number: yup.string().notRequired().matches(phoneRegExp, {
-    message: 'Phone number is not valid',
+    message: t('validation.phoneInvalid'),
     excludeEmptyString: true,
   }),
 
@@ -45,10 +46,10 @@ export const create_listing_schema = yup.object().shape({
 
   category: yup
     .string()
-    .oneOf(Object.values(Category), 'Category is required')
-    .required('Category is required'),
+    .oneOf(Object.values(Category), t('validation.categoryRequired'))
+    .required(t('validation.categoryRequired')),
 
-  date_of_birth: yup.date().required('Date of birth is required'),
+  date_of_birth: yup.date().required(t('validation.dateOfBirthRequired')),
 
   is_vaccinated: yup.boolean().optional(),
 
@@ -58,11 +59,11 @@ export const create_listing_schema = yup.object().shape({
 
   size: yup
     .number()
-    .typeError('Size must be a number')
-    .required('Size is required'),
+    .typeError(t('validation.sizeNumber'))
+    .required(t('validation.sizeRequired')),
 
   gender: yup
     .string()
-    .oneOf(['male', 'female'], 'Gender is required')
-    .required('Gender is required'),
+    .oneOf(['male', 'female'], t('validation.genderRequired'))
+    .required(t('validation.genderRequired')),
 });

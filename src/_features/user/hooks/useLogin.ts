@@ -6,9 +6,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useAxios } from '_app';
 import { login_schema } from '../model';
+import { useTranslation } from 'react-i18next';
 
 export const useLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -20,7 +22,7 @@ export const useLogin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(login_schema),
+    resolver: yupResolver(login_schema(t)),
     reValidateMode: 'onChange',
   });
 

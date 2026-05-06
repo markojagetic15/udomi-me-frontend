@@ -6,18 +6,20 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Category, Image, useCreateListing } from '_entities/listing';
+import { useTranslation } from 'react-i18next';
 import { DateValue } from '@nextui-org/react';
 import { DropResult } from '@hello-pangea/dnd';
 
 export const useCreateListingPage = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [dateOfBirth, setDateOfBirth] = useState<DateValue | null>();
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
   const { createListing, isPending } = useCreateListing({
     onSuccess: () => {
-      toast.success('Listing created successfully!');
+      toast.success(t('toast.listingCreated'));
       navigate('/browse');
     },
   });
@@ -31,7 +33,7 @@ export const useCreateListingPage = () => {
     trigger,
     watch,
   } = useForm({
-    resolver: yupResolver(create_listing_schema),
+    resolver: yupResolver(create_listing_schema(t)),
     mode: 'onSubmit',
     defaultValues: {
       images: [],
@@ -74,7 +76,7 @@ export const useCreateListingPage = () => {
     if (!files) return;
 
     if (files.length + images.length > 8) {
-      toast.error('You can only upload up to 8 images');
+      toast.error(t('toast.imagesLimit'));
       return;
     }
 
@@ -89,7 +91,7 @@ export const useCreateListingPage = () => {
       const uploadedImages = (
         await Promise.all(
           [...files].map(async (file) => {
-            if (file.size > 1024 * 1024 * 10) toast.error('Image size must be less than 10MB');
+            if (file.size > 1024 * 1024 * 10) toast.error(t('toast.imageTooLarge'));
             const response = await uploadFile(file);
             if (!response) return null;
             return { id: response.id, url: response.url };
@@ -104,7 +106,7 @@ export const useCreateListingPage = () => {
       setImages(updatedImages);
       setValue('images', [...(getValues('images') || []), ...updatedImages], { shouldValidate: true });
     } catch {
-      toast.error('Failed to upload images');
+      toast.error(t('toast.imageUploadFailed'));
     }
   };
 

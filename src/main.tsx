@@ -1,6 +1,7 @@
 import './_app/ui/reset.css';
 import './_app/ui/global.css';
 import './_app/ui/font.css';
+import './i18n';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 

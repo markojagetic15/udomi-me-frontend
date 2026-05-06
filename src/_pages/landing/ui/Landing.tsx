@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useGetListings, ListingItem } from '_entities/listing';
+import { useTranslation } from 'react-i18next';
 
 const floatingAnimals = [
   { emoji: '🐕', delay: '0s', duration: '6s', left: '8%', top: '15%' },
@@ -11,62 +12,6 @@ const floatingAnimals = [
   { emoji: '🐾', delay: '3s', duration: '7.5s', left: '40%', top: '80%' },
   { emoji: '🐕‍🦺', delay: '0.8s', duration: '9s', left: '92%', top: '40%' },
   { emoji: '🐈‍⬛', delay: '2.5s', duration: '6s', left: '4%', top: '50%' },
-];
-
-const categories = [
-  { label: 'Dogs', emoji: '🐕', value: 'dog', color: 'bg-amber-100 hover:bg-amber-200' },
-  { label: 'Cats', emoji: '🐈', value: 'cat', color: 'bg-orange-100 hover:bg-orange-200' },
-  { label: 'Rabbits', emoji: '🐇', value: 'rabbit', color: 'bg-pink-100 hover:bg-pink-200' },
-  { label: 'Birds', emoji: '🦜', value: 'bird', color: 'bg-green-100 hover:bg-green-200' },
-  { label: 'Reptiles', emoji: '🦎', value: 'reptile', color: 'bg-lime-100 hover:bg-lime-200' },
-  { label: 'Horses', emoji: '🐴', value: 'horse', color: 'bg-yellow-100 hover:bg-yellow-200' },
-  { label: 'Other', emoji: '🐾', value: 'other', color: 'bg-blue-100 hover:bg-blue-200' },
-];
-
-const steps = [
-  {
-    number: '01',
-    title: 'Browse Listings',
-    description: 'Scroll through adorable animals all searching for their forever home.',
-    emoji: '🔍',
-  },
-  {
-    number: '02',
-    title: 'Connect',
-    description: 'Reach out directly to the owner using the contact info on the listing.',
-    emoji: '💌',
-  },
-  {
-    number: '03',
-    title: 'Adopt!',
-    description: 'Welcome your new best friend home. Life gets better from here.',
-    emoji: '🏡',
-  },
-];
-
-const reasons = [
-  {
-    title: 'Save a Life',
-    description: 'Every adoption gives a deserving animal a second chance at happiness and love.',
-    emoji: '❤️',
-  },
-  {
-    title: 'Find Your Match',
-    description: 'Playful puppy, calm cat, or tiny hamster — your perfect companion is waiting.',
-    emoji: '✨',
-  },
-  {
-    title: 'Always Free',
-    description: 'Udomi Me is completely free to browse and list. No fees, no catches, ever.',
-    emoji: '🎁',
-  },
-];
-
-const stats = [
-  { value: '500+', label: 'Animals Listed' },
-  { value: '200+', label: 'Happy Adoptions' },
-  { value: '6', label: 'Animal Categories' },
-  { value: '100%', label: 'Free Forever' },
 ];
 
 const fadeUp = {
@@ -80,7 +25,64 @@ const fadeUp = {
 
 export const Landing = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { getAllListings } = useGetListings(1, 4, '', []);
+
+  const categories = [
+    { label: t('landing.categories.dogs'), emoji: '🐕', value: 'dog', color: 'bg-amber-100 hover:bg-amber-200' },
+    { label: t('landing.categories.cats'), emoji: '🐈', value: 'cat', color: 'bg-orange-100 hover:bg-orange-200' },
+    { label: t('landing.categories.rabbits'), emoji: '🐇', value: 'rabbit', color: 'bg-pink-100 hover:bg-pink-200' },
+    { label: t('landing.categories.birds'), emoji: '🦜', value: 'bird', color: 'bg-green-100 hover:bg-green-200' },
+    { label: t('landing.categories.reptiles'), emoji: '🦎', value: 'reptile', color: 'bg-lime-100 hover:bg-lime-200' },
+    { label: t('landing.categories.horses'), emoji: '🐴', value: 'horse', color: 'bg-yellow-100 hover:bg-yellow-200' },
+    { label: t('landing.categories.other'), emoji: '🐾', value: 'other', color: 'bg-blue-100 hover:bg-blue-200' },
+  ];
+
+  const steps = [
+    {
+      number: '01',
+      title: t('landing.howItWorks.step1Title'),
+      description: t('landing.howItWorks.step1Desc'),
+      emoji: '🔍',
+    },
+    {
+      number: '02',
+      title: t('landing.howItWorks.step2Title'),
+      description: t('landing.howItWorks.step2Desc'),
+      emoji: '💌',
+    },
+    {
+      number: '03',
+      title: t('landing.howItWorks.step3Title'),
+      description: t('landing.howItWorks.step3Desc'),
+      emoji: '🏡',
+    },
+  ];
+
+  const reasons = [
+    {
+      title: t('landing.whyAdopt.reason1Title'),
+      description: t('landing.whyAdopt.reason1Desc'),
+      emoji: '❤️',
+    },
+    {
+      title: t('landing.whyAdopt.reason2Title'),
+      description: t('landing.whyAdopt.reason2Desc'),
+      emoji: '✨',
+    },
+    {
+      title: t('landing.whyAdopt.reason3Title'),
+      description: t('landing.whyAdopt.reason3Desc'),
+      emoji: '🎁',
+    },
+  ];
+
+  const stats = [
+    { value: '500+', label: t('landing.stats.animalsListed') },
+    { value: '200+', label: t('landing.stats.happyAdoptions') },
+    { value: '6', label: t('landing.stats.animalCategories') },
+    { value: '100%', label: t('landing.stats.freeForeever') },
+  ];
 
   return (
     <div className='overflow-hidden'>
@@ -109,19 +111,19 @@ export const Landing = () => {
         >
           <div className='text-6xl mb-6'>🐾</div>
           <h1 className='text-5xl md:text-7xl font-extrabold text-primary-700 leading-tight mb-6'>
-            Every paw deserves
+            {t('landing.hero.title1')}
             <br />
-            <span className='text-primary'>a loving home.</span>
+            <span className='text-primary'>{t('landing.hero.title2')}</span>
           </h1>
           <p className='text-lg md:text-xl text-gray-600 mb-10 max-w-xl mx-auto leading-relaxed'>
-            Udomi Me connects animals in need with people who care. Find your new best friend today — completely free.
+            {t('landing.hero.subtitle')}
           </p>
           <div className='flex gap-4 justify-center flex-wrap'>
             <Link
               to='/browse'
               className='px-8 py-3 rounded-2xl bg-primary text-white font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg'
             >
-              Find a Friend
+              {t('landing.hero.findFriend')}
             </Link>
           </div>
         </motion.div>
@@ -156,7 +158,7 @@ export const Landing = () => {
           custom={0}
           className='text-4xl font-extrabold text-center text-primary-700 mb-4'
         >
-          Browse by Category
+          {t('landing.categories.title')}
         </motion.h2>
         <motion.p
           initial='hidden'
@@ -166,7 +168,7 @@ export const Landing = () => {
           custom={1}
           className='text-center text-gray-500 mb-12'
         >
-          Pick your favorite kind of companion and start browsing.
+          {t('landing.categories.subtitle')}
         </motion.p>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4'>
           {categories.map((cat, i) => (
@@ -198,7 +200,7 @@ export const Landing = () => {
             custom={0}
             className='text-4xl font-extrabold text-center text-primary-700 mb-4'
           >
-            How It Works
+            {t('landing.howItWorks.title')}
           </motion.h2>
           <motion.p
             initial='hidden'
@@ -208,7 +210,7 @@ export const Landing = () => {
             custom={1}
             className='text-center text-gray-500 mb-16'
           >
-            Adopting is easy — three simple steps to change two lives.
+            {t('landing.howItWorks.subtitle')}
           </motion.p>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             {steps.map((step, i) => (
@@ -243,7 +245,7 @@ export const Landing = () => {
           custom={0}
           className='text-4xl font-extrabold text-center text-primary-700 mb-4'
         >
-          Why Adopt?
+          {t('landing.whyAdopt.title')}
         </motion.h2>
         <motion.p
           initial='hidden'
@@ -253,7 +255,7 @@ export const Landing = () => {
           custom={1}
           className='text-center text-gray-500 mb-16'
         >
-          Because somewhere out there, a little animal is waiting just for you.
+          {t('landing.whyAdopt.subtitle')}
         </motion.p>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {reasons.map((r, i) => (
@@ -284,7 +286,7 @@ export const Landing = () => {
           custom={0}
           className='text-4xl font-extrabold text-center text-primary-700 mb-4'
         >
-          Recently Added
+          {t('landing.recentlyAdded.title')}
         </motion.h2>
         <motion.p
           initial='hidden'
@@ -294,7 +296,7 @@ export const Landing = () => {
           custom={1}
           className='text-center text-gray-500 mb-12'
         >
-          Fresh listings — someone is waiting for their forever home right now.
+          {t('landing.recentlyAdded.subtitle')}
         </motion.p>
         {getAllListings.isLoading ? (
           <div className='flex justify-center py-12'>
@@ -322,7 +324,7 @@ export const Landing = () => {
               to='/browse'
               className='px-8 py-3 rounded-2xl border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-colors'
             >
-              See All Animals
+              {t('landing.recentlyAdded.seeAll')}
             </Link>
           </div>
         )}
@@ -340,23 +342,23 @@ export const Landing = () => {
         >
           <div className='text-6xl mb-6'>🐾</div>
           <h2 className='text-4xl font-extrabold text-white mb-4'>
-            Ready to meet your match?
+            {t('landing.cta.title')}
           </h2>
           <p className='text-white/80 text-lg mb-10'>
-            Thousands of animals are waiting. Your new best friend could be just one click away.
+            {t('landing.cta.subtitle')}
           </p>
           <div className='flex gap-4 justify-center flex-wrap'>
             <Link
               to='/browse'
               className='px-8 py-3 rounded-2xl bg-white text-primary font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg'
             >
-              Start Browsing
+              {t('landing.cta.startBrowsing')}
             </Link>
             <Link
               to='/register'
               className='px-8 py-3 rounded-2xl border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-primary transition-colors'
             >
-              Create Account
+              {t('landing.cta.createAccount')}
             </Link>
           </div>
         </motion.div>

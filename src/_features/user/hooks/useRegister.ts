@@ -6,10 +6,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAxios } from '_app';
 import { register_schema } from '../model';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export const useRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -37,7 +39,7 @@ export const useRegister = () => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['me'] });
-      toast.success('Account created! Check your email to verify your account.');
+      toast.success(t('toast.accountCreated'));
       navigate('/browse');
     },
     onError: (error) => {
@@ -50,7 +52,7 @@ export const useRegister = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(register_schema),
+    resolver: yupResolver(register_schema(t)),
   });
 
   const onSubmit = (data: {

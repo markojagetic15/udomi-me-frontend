@@ -16,15 +16,10 @@ import { IoMdCloseCircle } from 'react-icons/io';
 import { FaPlus } from 'react-icons/fa';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
-
-const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
-  <div className='mb-4'>
-    <h2 className='text-base font-semibold text-gray-800'>{title}</h2>
-    {subtitle && <p className='text-xs text-gray-400 mt-0.5'>{subtitle}</p>}
-  </div>
-);
+import { useTranslation } from 'react-i18next';
 
 export const EditListing = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -61,53 +56,57 @@ export const EditListing = () => {
           <FaArrowLeftLong size={20} />
         </button>
         <div>
-          <h1 className='text-3xl font-extrabold text-primary-700'>Edit Listing</h1>
-          <p className='text-gray-500'>Update the details for your listing.</p>
+          <h1 className='text-3xl font-extrabold text-primary-700'>{t('editListing.title')}</h1>
+          <p className='text-gray-500'>{t('editListing.subtitle')}</p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6 px-4'>
         {/* Basic info */}
         <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
-          <SectionHeader title='Basic Information' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.basicInfo')}</h2>
+          </div>
           <Input
             register={register('title')}
             name='title'
             error={errors.title?.message}
-            label='Title'
+            label={t('createListing.fields.title')}
             isRequired
-            description='At least 3 characters'
+            description={t('editListing.atLeast3')}
           />
           <TextArea
             register={register('description')}
             error={errors.description?.message}
-            label='Description'
+            label={t('createListing.fields.description')}
             name='description'
             isRequired
-            description='At least 5 characters'
+            description={t('editListing.atLeast5')}
           />
         </div>
 
         {/* Animal details */}
         <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
-          <SectionHeader title='Animal Details' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.animalDetails')}</h2>
+          </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
             <Select
-              label='Category'
+              label={t('createListing.fields.category')}
               error={errors.category?.message}
               register={register('category')}
-              items={CategoryItems}
+              items={CategoryItems.map((item) => ({ ...item, label: t(`categories.${item.key}`) }))}
               isRequired
             />
             <Select
-              label='Gender'
+              label={t('createListing.fields.gender')}
               error={errors.gender?.message}
               register={register('gender')}
-              items={GenderItems}
+              items={GenderItems.map((item) => ({ ...item, label: t(`genders.${item.key}`) }))}
               isRequired
             />
             <DatePicker
-              label='Date of Birth'
+              label={t('createListing.fields.dateOfBirth')}
               error={errors.date_of_birth?.message}
               maxValue={today(getLocalTimeZone())}
               onChange={handleOnDateChange}
@@ -115,7 +114,7 @@ export const EditListing = () => {
               isRequired
             />
             <Input
-              label='Size'
+              label={t('createListing.fields.size')}
               error={errors.size?.message}
               register={register('size')}
               isRequired
@@ -126,26 +125,29 @@ export const EditListing = () => {
               register={register('breed')}
               name='breed'
               error={errors.breed?.message}
-              label='Breed'
+              label={t('createListing.fields.breed')}
             />
           </div>
 
           <div className='flex items-center gap-6 flex-wrap pt-1'>
-            <Switch register={register('is_vaccinated')} label='Vaccinated' />
+            <Switch register={register('is_vaccinated')} label={t('createListing.fields.vaccinated')} />
             <Switch
               register={register('is_urgent')}
-              label='Urgent adoption'
-              description='Animal needs immediate adoption'
+              label={t('createListing.fields.urgentAdoption')}
+              description={t('createListing.fields.urgentDesc')}
             />
           </div>
         </div>
 
         {/* Contact & Location */}
         <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
-          <SectionHeader title='Contact & Location' subtitle='Visible to potential adopters' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.contactLocation')}</h2>
+            <p className='text-xs text-gray-400 mt-0.5'>{t('createListing.sections.contactSubtitle')}</p>
+          </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
             <Autocomplete
-              label='Area code'
+              label={t('createListing.fields.areaCode')}
               items={AreaCodesItems}
               register={register('area_code')}
             />
@@ -153,21 +155,24 @@ export const EditListing = () => {
               register={register('phone_number')}
               name='phone_number'
               error={errors.phone_number?.message}
-              label='Phone Number'
+              label={t('createListing.fields.phoneNumber')}
             />
             <Input
               register={register('email')}
               name='email'
               error={errors.email?.message}
-              label='Email'
+              label={t('createListing.fields.email')}
             />
           </div>
-          <Input name='address' label='Address' register={register('address')} />
+          <Input name='address' label={t('createListing.fields.address')} register={register('address')} />
         </div>
 
         {/* Images */}
         <div className='bg-white rounded-3xl p-6 shadow-sm'>
-          <SectionHeader title='Photos' subtitle='Drag to reorder. At least one photo required.' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.photos')}</h2>
+            <p className='text-xs text-gray-400 mt-0.5'>{t('editListing.photosSubtitle')}</p>
+          </div>
           <div className='flex flex-wrap gap-2'>
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId='droppable' direction='horizontal'>
@@ -180,7 +185,7 @@ export const EditListing = () => {
                     {images.map((image, index) => (
                       <Draggable key={image.id} draggableId={image.id} index={index}>
                         {(provided) => (
-                          <Tooltip content='Drag to reorder'>
+                          <Tooltip content={t('createListing.dragToReorder')}>
                             <div
                               className='relative cursor-grab active:cursor-grabbing'
                               ref={provided.innerRef}
@@ -223,7 +228,7 @@ export const EditListing = () => {
           {errors.images?.message ? (
             <p className='text-red-500 text-xs mt-3'>{errors.images.message}</p>
           ) : (
-            <p className='text-gray-400 text-xs mt-3'>Upload up to 8 images</p>
+            <p className='text-gray-400 text-xs mt-3'>{t('editListing.uploadHint')}</p>
           )}
         </div>
 
@@ -240,7 +245,7 @@ export const EditListing = () => {
         />
 
         <Button type='submit' variant='solid' className='rounded-2xl h-12 text-base font-semibold'>
-          {isPending ? <Spinner /> : 'Save Changes'}
+          {isPending ? <Spinner /> : t('editListing.save')}
         </Button>
       </form>
     </div>

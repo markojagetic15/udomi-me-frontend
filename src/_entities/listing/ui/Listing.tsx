@@ -6,6 +6,7 @@ import { useGlobalContext } from '_app';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const categoryColors: Record<string, string> = {
   dog: 'bg-amber-100 text-amber-700',
@@ -17,10 +18,10 @@ const categoryColors: Record<string, string> = {
   other: 'bg-blue-100 text-blue-700',
 };
 
-function formatAge(dateOfBirth?: Date): string | null {
+function formatAge(dateOfBirth?: Date, t?: (key: string, opts?: any) => string): string | null {
   if (!dateOfBirth) return null;
   const months = dayjs().diff(dayjs(dateOfBirth), 'month');
-  if (months < 1) return 'Newborn';
+  if (months < 1) return t ? t('listing.newborn') : 'Newborn';
   if (months < 12) return `${months}mo`;
   const years = Math.floor(months / 12);
   return years === 1 ? '1 yr' : `${years} yrs`;
@@ -31,11 +32,12 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
   const { favoriteListing } = useFavoriteListing();
   const { user } = useGlobalContext();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!user) {
-      toast.info('You need to login to favourite a listing');
+      toast.info(t('listing.loginToFavourite'));
       navigate('/login');
       return;
     }
@@ -48,7 +50,7 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
     setIsFavorite(ids.includes(listing.id));
   }, [user]);
 
-  const age = formatAge(listing.date_of_birth);
+  const age = formatAge(listing.date_of_birth, t);
   const categoryColor = listing.category ? (categoryColors[listing.category] ?? 'bg-gray-100 text-gray-700') : null;
 
   return (
@@ -72,12 +74,12 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
         <div className='absolute top-2 left-2 flex flex-col gap-1'>
           {listing.category && categoryColor && (
             <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${categoryColor}`}>
-              {listing.category.toUpperCase()}
+              {t(`categories.${listing.category}`).toUpperCase()}
             </span>
           )}
           {listing.is_urgent && (
             <span className='text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600'>
-              URGENT
+              {t('animalInfo.urgent').toUpperCase()}
             </span>
           )}
         </div>
@@ -86,7 +88,7 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
         <button
           className='absolute top-2 right-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:bg-white hover:scale-110 transition-all'
           onClick={handleFavorite}
-          aria-label={isFavorite ? 'Remove from favourites' : 'Add to favourites'}
+          aria-label={isFavorite ? t('listing.removeFromFavourites') : t('animalInfo.addToFavourites')}
         >
           {isFavorite ? (
             <MdFavorite className='text-primary w-4 h-4' />
@@ -100,7 +102,7 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
       <div className='p-4'>
         <h3 className='font-semibold text-gray-900 truncate mb-1 text-base'>{listing.title}</h3>
         <div className='flex items-center flex-wrap gap-x-2 gap-y-0.5 text-xs text-gray-500'>
-          {listing.gender && <span className='capitalize'>{listing.gender}</span>}
+          {listing.gender && <span className='capitalize'>{t(`genders.${listing.gender}`)}</span>}
           {age && (
             <>
               <span className='text-gray-300'>·</span>
@@ -121,7 +123,7 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
           )}
         </div>
         <div className='mt-2 text-[11px] text-gray-400'>
-          Listed {dayjs(listing.created_at).format('DD MMM YYYY')}
+          {t('listing.listed')} {dayjs(listing.created_at).format('DD MMM YYYY')}
         </div>
       </div>
     </div>

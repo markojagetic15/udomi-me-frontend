@@ -14,8 +14,10 @@ import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { MdReportGmailerrorred } from 'react-icons/md';
 import { BsHandThumbsUp, BsHandThumbsUpFill } from 'react-icons/bs';
 import { ErrorPage } from '_pages/error';
+import { useTranslation } from 'react-i18next';
 
 export const AnimalInfo = () => {
+  const { t } = useTranslation();
   const {
     listing,
     isError,
@@ -73,17 +75,17 @@ export const AnimalInfo = () => {
           <div className='flex items-center gap-2 flex-wrap mb-2'>
             {listing.category && (
               <span className='text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary uppercase tracking-wide'>
-                {listing.category}
+                {t(`categories.${listing.category}`)}
               </span>
             )}
             {listing.is_adopted && (
               <span className='text-xs font-bold px-3 py-1 rounded-full bg-green-100 text-green-700 uppercase tracking-wide'>
-                Adopted
+                {t('animalInfo.adopted')}
               </span>
             )}
             {listing.is_urgent && (
               <span className='text-xs font-bold px-3 py-1 rounded-full bg-red-100 text-red-600 uppercase tracking-wide'>
-                Urgent
+                {t('animalInfo.urgent')}
               </span>
             )}
           </div>
@@ -91,13 +93,13 @@ export const AnimalInfo = () => {
         </div>
 
         <div className='flex items-center gap-2 flex-shrink-0'>
-          <Tooltip content='Add to favourites'>
+          <Tooltip content={t('animalInfo.addToFavourites')}>
             <button
               className={`w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm hover:shadow-md transition-all hover:scale-110 ${
                 isFavoritePending ? 'opacity-50 pointer-events-none' : ''
               }`}
               onClick={handleFavorite}
-              aria-label='Favourite'
+              aria-label={t('animalInfo.addToFavourites')}
             >
               {isFavorited ? (
                 <MdFavorite className='text-primary w-5 h-5' />
@@ -106,10 +108,10 @@ export const AnimalInfo = () => {
               )}
             </button>
           </Tooltip>
-          <Tooltip content='Report this listing'>
+          <Tooltip content={t('animalInfo.reportListing')}>
             <button
               className='w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm hover:shadow-md transition-all hover:scale-110'
-              aria-label='Report'
+              aria-label={t('animalInfo.reportListing')}
             >
               <MdReportGmailerrorred className='text-gray-400 w-5 h-5' />
             </button>
@@ -123,11 +125,14 @@ export const AnimalInfo = () => {
           <div className='flex-1'>
             <p className='font-semibold text-gray-800'>
               {interestCount > 0
-                ? `${interestCount} ${interestCount === 1 ? 'person is' : 'people are'} interested`
-                : 'Be the first to show interest'}
+                ? t('animalInfo.interestedCount_other', { count: interestCount }).replace(
+                    /\d+ /,
+                    `${interestCount} `
+                  )
+                : t('animalInfo.beFirst')}
             </p>
             <p className='text-sm text-gray-500 mt-0.5'>
-              Let the owner know you'd love to adopt this animal.
+              {t('animalInfo.letOwnerKnow')}
             </p>
           </div>
           <button
@@ -142,12 +147,12 @@ export const AnimalInfo = () => {
             {isInterested ? (
               <>
                 <BsHandThumbsUpFill className='w-4 h-4' />
-                Interested!
+                {t('animalInfo.interested')}
               </>
             ) : (
               <>
                 <BsHandThumbsUp className='w-4 h-4' />
-                I'm Interested
+                {t('animalInfo.imInterested')}
               </>
             )}
           </button>
@@ -158,8 +163,8 @@ export const AnimalInfo = () => {
         <div className='mb-8 bg-green-50 border border-green-200 rounded-2xl p-5 flex items-center gap-3'>
           <CiCircleCheck className='text-green-500 w-7 h-7 flex-shrink-0 stroke-1' />
           <div>
-            <p className='font-semibold text-green-800'>This animal has found a home!</p>
-            <p className='text-sm text-green-600 mt-0.5'>This listing is no longer available for adoption.</p>
+            <p className='font-semibold text-green-800'>{t('animalInfo.foundHome')}</p>
+            <p className='text-sm text-green-600 mt-0.5'>{t('animalInfo.noLongerAvailable')}</p>
           </div>
         </div>
       )}
@@ -168,7 +173,7 @@ export const AnimalInfo = () => {
 
       {listing.description && (
         <>
-          <h2 className='text-lg font-bold mt-8 mb-3 text-gray-800'>Description</h2>
+          <h2 className='text-lg font-bold mt-8 mb-3 text-gray-800'>{t('animalInfo.description')}</h2>
           <p className='text-gray-600 leading-relaxed mb-8'>{listing.description}</p>
           <Divider className='bg-primary/30' />
         </>
@@ -176,19 +181,19 @@ export const AnimalInfo = () => {
 
       <div className='mt-8 flex flex-wrap gap-4 mb-8'>
         {listing.category && (
-          <InfoItem value={listing.category.toUpperCase()} label='Category' />
+          <InfoItem value={t(`categories.${listing.category}`).toUpperCase()} label={t('animalInfo.category')} />
         )}
         {listing.gender && (
-          <InfoItem value={listing.gender.toUpperCase()} label='Gender' />
+          <InfoItem value={t(`genders.${listing.gender}`).toUpperCase()} label={t('animalInfo.gender')} />
         )}
-        <InfoItem value={`${listing.size} kg`} label='Size' />
+        <InfoItem value={`${listing.size} kg`} label={t('animalInfo.size')} />
         {listing.breed && (
-          <InfoItem value={listing.breed.toUpperCase()} label='Breed' />
+          <InfoItem value={listing.breed.toUpperCase()} label={t('animalInfo.breed')} />
         )}
         {listing.date_of_birth && (
           <InfoItem
             value={dayjs(listing.date_of_birth).format('DD MMM YYYY').toUpperCase()}
-            label='Date of Birth'
+            label={t('animalInfo.dateOfBirth')}
           />
         )}
         <InfoItem
@@ -199,7 +204,7 @@ export const AnimalInfo = () => {
               <IoIosCloseCircleOutline className='text-red-400 w-6 h-6' />
             )
           }
-          label='Vaccinated'
+          label={t('animalInfo.vaccinated')}
         />
         <InfoItem
           value={
@@ -209,10 +214,10 @@ export const AnimalInfo = () => {
               <IoIosCloseCircleOutline className='text-red-400 w-6 h-6' />
             )
           }
-          label='Urgent'
+          label={t('animalInfo.urgent')}
         />
         {interestCount > 0 && (
-          <InfoItem value={interestCount.toString()} label='Interested' />
+          <InfoItem value={interestCount.toString()} label={t('animalInfo.interested_label')} />
         )}
       </div>
 
@@ -220,7 +225,7 @@ export const AnimalInfo = () => {
         <>
           <Divider className='bg-primary/30' />
           <div className='mt-8 mb-8'>
-            <h2 className='text-lg font-bold mb-3 text-gray-800'>Location</h2>
+            <h2 className='text-lg font-bold mb-3 text-gray-800'>{t('animalInfo.location')}</h2>
             {listing.address && (
               <p className='text-gray-600 mb-4'>{listing.address}</p>
             )}
@@ -256,16 +261,16 @@ export const AnimalInfo = () => {
       {(listing.phone_number || listing.email || listing.area_code) && (
         <>
           <Divider className='bg-primary/30' />
-          <h2 className='text-lg font-bold mt-8 mb-4 text-gray-800'>Contact info</h2>
+          <h2 className='text-lg font-bold mt-8 mb-4 text-gray-800'>{t('animalInfo.contactInfo')}</h2>
           <div className='flex gap-4 flex-wrap items-center mb-8'>
             {listing.area_code && (
-              <InfoItem value={listing.area_code} label='Area code' />
+              <InfoItem value={listing.area_code} label={t('animalInfo.areaCode')} />
             )}
             {listing.phone_number && (
-              <InfoItem value={listing.phone_number} label='Phone number' />
+              <InfoItem value={listing.phone_number} label={t('animalInfo.phoneNumber')} />
             )}
             {listing.email && (
-              <InfoItem value={listing.email} label='Email' />
+              <InfoItem value={listing.email} label={t('animalInfo.email')} />
             )}
           </div>
         </>

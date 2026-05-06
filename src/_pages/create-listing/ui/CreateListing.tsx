@@ -15,13 +15,7 @@ import { getLocalTimeZone, today } from '@internationalized/date';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { FaPlus } from 'react-icons/fa';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
-
-const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
-  <div className='mb-4'>
-    <h2 className='text-base font-semibold text-gray-800'>{title}</h2>
-    {subtitle && <p className='text-xs text-gray-400 mt-0.5'>{subtitle}</p>}
-  </div>
-);
+import { useTranslation } from 'react-i18next';
 
 const CharCount = ({ value, max }: { value: string; max: number }) => (
   <span className={`text-xs tabular-nums ${value.length >= max ? 'text-red-400' : 'text-gray-400'}`}>
@@ -30,6 +24,7 @@ const CharCount = ({ value, max }: { value: string; max: number }) => (
 );
 
 export const CreateListing = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -50,20 +45,22 @@ export const CreateListing = () => {
   return (
     <div className='w-full lg:max-w-4xl m-auto mt-24 pb-24'>
       <div className='px-4'>
-        <h1 className='text-3xl font-extrabold text-primary-700 mb-2'>Create a Listing</h1>
-        <p className='text-gray-500 mb-8'>Help an animal find their forever home.</p>
+        <h1 className='text-3xl font-extrabold text-primary-700 mb-2'>{t('createListing.title')}</h1>
+        <p className='text-gray-500 mb-8'>{t('createListing.subtitle')}</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6 px-4'>
         {/* Basic info */}
         <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
-          <SectionHeader title='Basic Information' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.basicInfo')}</h2>
+          </div>
           <div className='flex flex-col gap-1'>
             <Input
               register={register('title')}
               name='title'
               error={errors.title?.message}
-              label='Title'
+              label={t('createListing.fields.title')}
               isRequired
               maxLength={50}
             />
@@ -75,7 +72,7 @@ export const CreateListing = () => {
             <TextArea
               register={register('description')}
               error={errors.description?.message}
-              label='Description'
+              label={t('createListing.fields.description')}
               name='description'
               isRequired
               maxLength={500}
@@ -88,31 +85,33 @@ export const CreateListing = () => {
 
         {/* Animal details */}
         <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
-          <SectionHeader title='Animal Details' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.animalDetails')}</h2>
+          </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
             <Select
-              label='Category'
+              label={t('createListing.fields.category')}
               error={errors.category?.message}
               register={register('category')}
-              items={CategoryItems}
+              items={CategoryItems.map((item) => ({ ...item, label: t(`categories.${item.key}`) }))}
               isRequired
             />
             <Select
-              label='Gender'
+              label={t('createListing.fields.gender')}
               error={errors.gender?.message}
               register={register('gender')}
-              items={GenderItems}
+              items={GenderItems.map((item) => ({ ...item, label: t(`genders.${item.key}`) }))}
               isRequired
             />
             <DatePicker
-              label='Date of Birth'
+              label={t('createListing.fields.dateOfBirth')}
               error={errors.date_of_birth?.message}
               maxValue={today(getLocalTimeZone())}
               onChange={handleOnDateChange}
               isRequired
             />
             <Input
-              label='Size'
+              label={t('createListing.fields.size')}
               error={errors.size?.message}
               register={register('size')}
               isRequired
@@ -123,40 +122,44 @@ export const CreateListing = () => {
               register={register('breed')}
               name='breed'
               error={errors.breed?.message}
-              label='Breed'
+              label={t('createListing.fields.breed')}
             />
           </div>
 
           <div className='flex items-center gap-6 flex-wrap pt-1'>
-            <Switch register={register('is_vaccinated')} label='Vaccinated' />
+            <Switch register={register('is_vaccinated')} label={t('createListing.fields.vaccinated')} />
             <Switch
               register={register('is_urgent')}
-              label='Urgent adoption'
-              description='Animal needs immediate adoption'
+              label={t('createListing.fields.urgentAdoption')}
+              description={t('createListing.fields.urgentDesc')}
             />
           </div>
         </div>
 
         {/* Contact & Location */}
         <div className='bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-5'>
-          <SectionHeader title='Contact & Location' subtitle='Visible to potential adopters' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.contactLocation')}</h2>
+            <p className='text-xs text-gray-400 mt-0.5'>{t('createListing.sections.contactSubtitle')}</p>
+          </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             <Input
               register={register('phone_number')}
               name='phone_number'
               error={errors.phone_number?.message}
-              label='Phone Number'
+              label={t('createListing.fields.phoneNumber')}
             />
             <Input
               register={register('email')}
               name='email'
               error={errors.email?.message}
-              label='Email'
+              label={t('createListing.fields.email')}
             />
           </div>
           <div>
             <label className='text-sm font-medium text-gray-700 mb-2 block'>
-              Address <span className='text-gray-400 font-normal text-xs'>(search or click the map)</span>
+              {t('createListing.fields.address')}{' '}
+              <span className='text-gray-400 font-normal text-xs'>{t('createListing.fields.addressHint')}</span>
             </label>
             <LocationPicker
               value={locationValue.lat ? locationValue : undefined}
@@ -167,7 +170,10 @@ export const CreateListing = () => {
 
         {/* Images */}
         <div className='bg-white rounded-3xl p-6 shadow-sm'>
-          <SectionHeader title='Photos' subtitle='Optional. Drag to reorder. Up to 8 images.' />
+          <div className='mb-4'>
+            <h2 className='text-base font-semibold text-gray-800'>{t('createListing.sections.photos')}</h2>
+            <p className='text-xs text-gray-400 mt-0.5'>{t('createListing.sections.photosSubtitle')}</p>
+          </div>
           <div className='flex flex-wrap gap-2'>
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId='droppable' direction='horizontal'>
@@ -180,7 +186,7 @@ export const CreateListing = () => {
                     {images.map((image, index) => (
                       <Draggable key={image.id} draggableId={image.id} index={index}>
                         {(provided) => (
-                          <Tooltip content='Drag to reorder'>
+                          <Tooltip content={t('createListing.dragToReorder')}>
                             <div
                               className='relative cursor-grab active:cursor-grabbing'
                               ref={provided.innerRef}
@@ -217,7 +223,7 @@ export const CreateListing = () => {
               </div>
             )}
           </div>
-          <p className='text-gray-400 text-xs mt-3'>Upload up to 8 images</p>
+          <p className='text-gray-400 text-xs mt-3'>{t('createListing.sections.uploadHint')}</p>
         </div>
 
         <Input
@@ -231,7 +237,7 @@ export const CreateListing = () => {
         />
 
         <Button type='submit' variant='solid' className='rounded-2xl h-12 text-base font-semibold'>
-          {isPending ? <Spinner /> : 'Publish Listing'}
+          {isPending ? <Spinner /> : t('createListing.publish')}
         </Button>
       </form>
     </div>

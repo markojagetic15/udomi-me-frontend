@@ -3,9 +3,11 @@ import { Button, Input } from '_shared';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FaArrowLeftLong, FaGoogle } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './styles.css';
 
 export const Login = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -30,13 +32,13 @@ export const Login = () => {
 
       <div className='w-full max-w-md bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden'>
         <div className='bg-primary px-8 py-8 text-center'>
-          <h1 className='text-4xl font-extrabold text-white tracking-tight'>Welcome back</h1>
-          <p className='text-white/80 mt-2 text-sm'>Sign in to continue to Udomi Me</p>
+          <h1 className='text-4xl font-extrabold text-white tracking-tight'>{t('login.title')}</h1>
+          <p className='text-white/80 mt-2 text-sm'>{t('login.subtitle')}</p>
         </div>
 
         <form className='px-8 py-8 flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
           <Input
-            label='Email'
+            label={t('login.email')}
             name='email'
             register={register('email')}
             error={errors.email?.message}
@@ -44,7 +46,7 @@ export const Login = () => {
 
           <Input
             type={showPassword ? 'text' : 'password'}
-            label='Password'
+            label={t('login.password')}
             name='password'
             register={register('password')}
             error={errors.password?.message}
@@ -62,29 +64,29 @@ export const Login = () => {
 
           <div className='flex justify-end -mt-1'>
             <Link to='/forgot-password' className='text-sm text-primary hover:underline'>
-              Forgot password?
+              {t('login.forgotPassword')}
             </Link>
           </div>
 
           <Button type='submit' variant='solid' isLoading={isLoading}>
-            Sign In
+            {t('login.signIn')}
           </Button>
 
           <div className='relative flex items-center gap-3'>
             <div className='flex-1 h-px bg-gray-200' />
-            <span className='text-xs text-gray-400'>or</span>
+            <span className='text-xs text-gray-400'>{t('login.or')}</span>
             <div className='flex-1 h-px bg-gray-200' />
           </div>
 
           <Button variant='bordered' onClick={handleGoogleLogin} color='default'>
             <FaGoogle />
-            Continue with Google
+            {t('login.continueWithGoogle')}
           </Button>
 
           <p className='text-center text-sm text-gray-500 pb-2'>
-            Don't have an account?{' '}
+            {t('login.noAccount')}{' '}
             <Link to='/register' className='text-primary font-medium hover:underline'>
-              Register
+              {t('login.register')}
             </Link>
           </p>
         </form>

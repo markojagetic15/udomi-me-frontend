@@ -5,9 +5,11 @@ import { toast } from 'react-toastify';
 import { useAxios } from '_app';
 import { forgot_password_schema } from '../model';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useTranslation } from 'react-i18next';
 
 export const useForgotPassword = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { axios } = useAxios();
 
@@ -16,7 +18,7 @@ export const useForgotPassword = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(forgot_password_schema),
+    resolver: yupResolver(forgot_password_schema(t)),
   });
 
   const mutation = useMutation({
@@ -26,7 +28,7 @@ export const useForgotPassword = () => {
       });
     },
     onSuccess: () => {
-      toast.success('Password reset email sent. Check your inbox!');
+      toast.success(t('toast.passwordResetSent'));
     },
     onError: (error) => {
       toast.error(error.message);

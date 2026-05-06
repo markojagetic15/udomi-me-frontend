@@ -10,8 +10,10 @@ import { useAxios } from '_app';
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Input as NextInput } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 
 const OwnerListingCard = ({ listing }: { listing: Listing }) => {
+  const { t } = useTranslation();
   const { markAsAdopted, isPending: isAdopting } = useMarkAsAdopted();
   const { deleteListing, isPending: isDeleting } = useDeleteListing();
 
@@ -20,7 +22,7 @@ const OwnerListingCard = ({ listing }: { listing: Listing }) => {
       {listing.is_adopted && (
         <div className='absolute inset-0 bg-green-50/80 backdrop-blur-[1px] rounded-2xl z-10 flex flex-col items-center justify-center gap-2'>
           <MdCheckCircle className='text-green-500 w-10 h-10' />
-          <span className='font-bold text-green-700 text-sm'>Adopted</span>
+          <span className='font-bold text-green-700 text-sm'>{t('animalInfo.adopted')}</span>
         </div>
       )}
       <ListingItem listing={listing} />
@@ -32,7 +34,7 @@ const OwnerListingCard = ({ listing }: { listing: Listing }) => {
             className='flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-primary text-white text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
           >
             <MdCheckCircle className='w-4 h-4' />
-            {isAdopting ? 'Saving...' : 'Mark Adopted'}
+            {isAdopting ? t('profile.saving') : t('profile.markAdopted')}
           </button>
           <button
             onClick={() => deleteListing({ id: listing.id })}
@@ -50,6 +52,7 @@ const OwnerListingCard = ({ listing }: { listing: Listing }) => {
 
 const ChangePasswordSection = () => {
   const { axios } = useAxios();
+  const { t } = useTranslation();
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -62,23 +65,23 @@ const ChangePasswordSection = () => {
     mutationFn: () =>
       axios.post('/change-password', { currentPassword, newPassword }),
     onSuccess: () => {
-      toast.success('Password changed successfully!');
+      toast.success(t('profile.changePassword.success'));
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
       setErrors({});
     },
     onError: (error: any) => {
-      toast.error(error?.message || 'Failed to change password.');
+      toast.error(error?.message || t('profile.changePassword.error'));
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Record<string, string> = {};
-    if (!currentPassword) newErrors.currentPassword = 'Current password is required';
-    if (newPassword.length < 8) newErrors.newPassword = 'Password must be at least 8 characters';
-    if (newPassword !== confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!currentPassword) newErrors.currentPassword = t('profile.changePassword.currentRequired');
+    if (newPassword.length < 8) newErrors.newPassword = t('profile.changePassword.newTooShort');
+    if (newPassword !== confirmPassword) newErrors.confirmPassword = t('profile.changePassword.passwordsMismatch');
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -89,11 +92,11 @@ const ChangePasswordSection = () => {
 
   return (
     <div className='bg-white rounded-3xl p-8 shadow-sm'>
-      <h2 className='text-xl font-bold text-gray-800 mb-6'>Change Password</h2>
+      <h2 className='text-xl font-bold text-gray-800 mb-6'>{t('profile.changePassword.title')}</h2>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-sm'>
         <NextInput
           type={showCurrent ? 'text' : 'password'}
-          label='Current Password'
+          label={t('profile.changePassword.currentPassword')}
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
           isInvalid={!!errors.currentPassword}
@@ -107,7 +110,7 @@ const ChangePasswordSection = () => {
         />
         <NextInput
           type={showNew ? 'text' : 'password'}
-          label='New Password'
+          label={t('profile.changePassword.newPassword')}
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           isInvalid={!!errors.newPassword}
@@ -121,7 +124,7 @@ const ChangePasswordSection = () => {
         />
         <NextInput
           type={showConfirm ? 'text' : 'password'}
-          label='Confirm New Password'
+          label={t('profile.changePassword.confirmNewPassword')}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           isInvalid={!!errors.confirmPassword}
@@ -138,7 +141,7 @@ const ChangePasswordSection = () => {
           disabled={mutation.isPending}
           className='py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50'
         >
-          {mutation.isPending ? 'Saving...' : 'Update Password'}
+          {mutation.isPending ? t('profile.changePassword.saving') : t('profile.changePassword.updatePassword')}
         </button>
       </form>
     </div>
@@ -186,6 +189,7 @@ const ListingsGrid = ({
 
 export const Profile = () => {
   const { myListings, favoriteListings, isLoading, user } = useProfile();
+  const { t } = useTranslation();
 
   const adoptedCount = (myListings ?? []).filter((l) => l.is_adopted).length;
   const activeCount = (myListings ?? []).filter((l) => !l.is_adopted).length;
@@ -202,7 +206,7 @@ export const Profile = () => {
           <p className='text-gray-500 mt-1'>{user?.email}</p>
           {user?.created_at && (
             <p className='text-sm text-gray-400 mt-1'>
-              Member since {dayjs(user.created_at).format('MMMM YYYY')}
+              {t('profile.memberSince')} {dayjs(user.created_at).format('MMMM YYYY')}
             </p>
           )}
         </div>
@@ -210,11 +214,11 @@ export const Profile = () => {
           <div className='flex gap-6 text-center'>
             <div>
               <p className='text-2xl font-extrabold text-primary'>{activeCount}</p>
-              <p className='text-xs text-gray-400 mt-0.5'>Active</p>
+              <p className='text-xs text-gray-400 mt-0.5'>{t('profile.active')}</p>
             </div>
             <div>
               <p className='text-2xl font-extrabold text-green-500'>{adoptedCount}</p>
-              <p className='text-xs text-gray-400 mt-0.5'>Adopted</p>
+              <p className='text-xs text-gray-400 mt-0.5'>{t('profile.adopted')}</p>
             </div>
           </div>
         )}
@@ -223,15 +227,15 @@ export const Profile = () => {
       {/* My listings */}
       <div className='mb-12'>
         <div className='flex items-center justify-between mb-5'>
-          <h2 className='text-xl font-bold text-gray-800'>My Listings</h2>
+          <h2 className='text-xl font-bold text-gray-800'>{t('profile.myListings')}</h2>
           {myListings && myListings.length > 0 && (
-            <span className='text-sm text-gray-400'>{myListings.length} total</span>
+            <span className='text-sm text-gray-400'>{myListings.length} {t('profile.total')}</span>
           )}
         </div>
         <ListingsGrid
           listings={myListings}
           isLoading={isLoading}
-          emptyMessage="You haven't posted any listings yet."
+          emptyMessage={t('profile.noListings')}
           isOwner
         />
       </div>
@@ -239,15 +243,15 @@ export const Profile = () => {
       {/* Favourited animals */}
       <div className='mb-12'>
         <div className='flex items-center justify-between mb-5'>
-          <h2 className='text-xl font-bold text-gray-800'>Favourited Animals</h2>
+          <h2 className='text-xl font-bold text-gray-800'>{t('profile.favouritedAnimals')}</h2>
           {favoriteListings && favoriteListings.length > 0 && (
-            <span className='text-sm text-gray-400'>{favoriteListings.length} saved</span>
+            <span className='text-sm text-gray-400'>{favoriteListings.length} {t('profile.saved')}</span>
           )}
         </div>
         <ListingsGrid
           listings={favoriteListings}
           isLoading={isLoading}
-          emptyMessage="You haven't favourited any animals yet."
+          emptyMessage={t('profile.noFavourites')}
         />
       </div>
 

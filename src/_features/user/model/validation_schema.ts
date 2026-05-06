@@ -1,36 +1,37 @@
 import { boolean, object, string } from 'yup';
 import * as Yup from 'yup';
+import type { TFunction } from 'i18next';
 
-export const login_schema = object({
+export const login_schema = (t: TFunction) => object({
   email: string()
-    .email('Email must be a valid email address')
-    .required('Email is required'),
-  password: string().required('Password is required'),
+    .email(t('validation.emailInvalid'))
+    .required(t('validation.emailRequired')),
+  password: string().required(t('validation.passwordRequired')),
 });
 
-export const register_schema = object({
-  first_name: string().required('First name is required'),
-  last_name: string().required('Last name is required'),
+export const register_schema = (t: TFunction) => object({
+  first_name: string().required(t('validation.firstNameRequired')),
+  last_name: string().required(t('validation.lastNameRequired')),
   email: string()
-    .email('Email must be a valid email address')
-    .required('Email is required'),
+    .email(t('validation.emailInvalid'))
+    .required(t('validation.emailRequired')),
   password: string()
     .min(8)
     .max(20)
     .matches(
       /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
-      'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number or special character'
+      t('validation.passwordComplexity')
     )
-    .required('Password is required'),
+    .required(t('validation.passwordRequired')),
   confirm_password: string()
-    .required('Confirm password is required')
-    .oneOf([Yup.ref('password')], 'Your passwords do not match.'),
+    .required(t('validation.confirmPasswordRequired'))
+    .oneOf([Yup.ref('password')], t('validation.passwordsMismatch')),
   term_and_conditions: boolean().oneOf(
     [true],
-    'You must accept the terms and conditions'
+    t('validation.termsRequired')
   ),
 });
 
-export const forgot_password_schema = object({
-  email: string().email().required('Email is required'),
+export const forgot_password_schema = (t: TFunction) => object({
+  email: string().email().required(t('validation.emailRequired')),
 });

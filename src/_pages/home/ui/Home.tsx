@@ -5,8 +5,10 @@ import { Input } from '_shared';
 import { IoIosSearch } from 'react-icons/io';
 import { IoMdClose } from 'react-icons/io';
 import SadDog from '_assets/sad_dog_outline_transparent.png';
+import { useTranslation } from 'react-i18next';
 
 export const Home = () => {
+  const { t } = useTranslation();
   const {
     listings,
     isLoading,
@@ -26,7 +28,7 @@ export const Home = () => {
       {/* Search + Filters */}
       <div className='flex flex-col gap-3 mb-8'>
         <Input
-          placeholder='Search for an animal...'
+          placeholder={t('home.searchPlaceholder')}
           onChange={handleOnSearch}
           startIcon={<IoIosSearch className='text-gray-400' />}
         />
@@ -45,7 +47,7 @@ export const Home = () => {
                 }`}
               >
                 <span>{cat.icon}</span>
-                {cat.label}
+                {t(`categories.${cat.key}`)}
               </button>
             );
           })}
@@ -56,7 +58,7 @@ export const Home = () => {
               className='flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-red-500 border border-red-200 bg-red-50 hover:bg-red-100 transition-all'
             >
               <IoMdClose />
-              Clear
+              {t('home.clear')}
             </button>
           )}
         </div>
@@ -65,13 +67,13 @@ export const Home = () => {
       {isError ? (
         <div className='mt-24 flex flex-col items-center gap-3'>
           <p className='text-gray-700 font-medium'>
-            {(error as any)?.message || 'Failed to load listings. Please try again.'}
+            {(error as any)?.message || t('home.failedToLoad')}
           </p>
           <button
             onClick={() => window.location.reload()}
             className='px-4 py-2 rounded-xl bg-primary text-white text-sm hover:opacity-90 transition-opacity'
           >
-            Retry
+            {t('home.retry')}
           </button>
         </div>
       ) : (
@@ -84,7 +86,7 @@ export const Home = () => {
             <div>
               {listings?.length === 0 ? (
                 <div className='mt-24 flex flex-col items-center'>
-                  <p className='text-gray-600 mb-4'>No animals found for adoption</p>
+                  <p className='text-gray-600 mb-4'>{t('home.noAnimals')}</p>
                   <img src={SadDog} className='h-auto w-96 translate-x-8' />
                 </div>
               ) : (

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Category, Image, useGetListing, useUpdateListing } from '_entities/listing';
+import { useTranslation } from 'react-i18next';
 import { DateValue } from '@nextui-org/react';
 import { parseDate } from '@internationalized/date';
 import { DropResult } from '@hello-pangea/dnd';
@@ -16,12 +17,13 @@ export const useEditListingPage = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [dateOfBirth, setDateOfBirth] = useState<DateValue | null>(null);
   const [initialDate, setInitialDate] = useState<DateValue | undefined>(undefined);
+  const { t } = useTranslation();
 
   const { getListing } = useGetListing(id ?? '');
 
   const { updateListing, isPending } = useUpdateListing({
     onSuccess: () => {
-      toast.success('Listing updated successfully!');
+      toast.success(t('toast.listingCreated'));
       navigate(`/animal/${id}`);
     },
   });
@@ -35,7 +37,7 @@ export const useEditListingPage = () => {
     trigger,
     reset,
   } = useForm({
-    resolver: yupResolver(create_listing_schema),
+    resolver: yupResolver(create_listing_schema(t)),
     mode: 'onSubmit',
     defaultValues: {
       images: [],
@@ -106,7 +108,7 @@ export const useEditListingPage = () => {
     if (!files) return;
 
     if (files.length + images.length > 8) {
-      toast.error('You can only upload up to 8 images');
+      toast.error(t('toast.imagesLimit'));
       return;
     }
 
@@ -121,7 +123,7 @@ export const useEditListingPage = () => {
 
       const uploadPromises = [...files].map(async (file) => {
         if (file.size > 1024 * 1024 * 10) {
-          toast.error('Image size must be less than 10MB');
+          toast.error(t('toast.imageTooLarge'));
         }
         const response = await uploadFile(file);
         if (!response) return null;
@@ -137,7 +139,7 @@ export const useEditListingPage = () => {
       setImages(updatedImages);
       setValue('images', [...(getValues('images') || []), ...updatedImages], { shouldValidate: true });
     } catch {
-      toast.error('Failed to upload images');
+      toast.error(t('toast.imageUploadFailed'));
     }
   };
 
