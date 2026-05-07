@@ -4,42 +4,39 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import {
-  CreateListing,
-  ForgotPassword,
-  Home,
-  Landing,
-  Login,
-  Register,
-  AnimalInfo,
-  GoogleCallback,
-  Profile,
-} from '_pages';
-import { ErrorPage } from '_pages/error';
+import { lazy, Suspense } from 'react';
+import { PageLoader } from '_shared';
 import { AppDrawer } from '_widgets';
 import { Footer } from '_shared';
 import { GuestRoute, ProtectedRoute } from './api/AuthGuard';
+import { useGlobalContext } from './api/useGlobalContext';
 
-// Lazy-loaded pages
-import { lazy, Suspense } from 'react';
-const EditListing = lazy(() =>
-  import('_pages/edit-listing').then((m) => ({ default: m.EditListing })),
-);
-const VerifyEmail = lazy(() =>
-  import('_pages/verify-email').then((m) => ({ default: m.VerifyEmail })),
-);
+const Landing = lazy(() => import('_pages/landing').then((m) => ({ default: m.Landing })));
+const Home = lazy(() => import('_pages/home').then((m) => ({ default: m.Home })));
+const Login = lazy(() => import('_pages/login').then((m) => ({ default: m.Login })));
+const Register = lazy(() => import('_pages/register').then((m) => ({ default: m.Register })));
+const ForgotPassword = lazy(() => import('_pages/forgot-password').then((m) => ({ default: m.ForgotPassword })));
+const VerifyEmail = lazy(() => import('_pages/verify-email').then((m) => ({ default: m.VerifyEmail })));
+const Profile = lazy(() => import('_pages/profile').then((m) => ({ default: m.Profile })));
+const CreateListing = lazy(() => import('_pages/create-listing').then((m) => ({ default: m.CreateListing })));
+const EditListing = lazy(() => import('_pages/edit-listing').then((m) => ({ default: m.EditListing })));
+const AnimalInfo = lazy(() => import('_pages/single-listing').then((m) => ({ default: m.AnimalInfo })));
+const GoogleCallback = lazy(() => import('_pages/google-callback').then((m) => ({ default: m.GoogleCallback })));
+const ErrorPage = lazy(() => import('_pages/error').then((m) => ({ default: m.ErrorPage })));
 
 const AppLayout = () => {
   const location = useLocation();
-  const isLanding = location.pathname === '/';
+  const { isAuthLoading } = useGlobalContext();
 
   const hideAppDrawerRoutes = ['/login', '/register', '/forgot-password'];
   const hideFooterRoutes = ['/login', '/register', '/forgot-password', '/'];
 
+  if (isAuthLoading) return <PageLoader />;
+
   return (
     <div>
       {!hideAppDrawerRoutes.includes(location.pathname) && <AppDrawer />}
-      <Suspense fallback={null}>
+      <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/browse' element={<Home />} />

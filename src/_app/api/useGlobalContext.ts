@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { GlobalContext } from './GlobalProvider';
 
 export const useGlobalContext = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, isAuthLoading } = useContext(GlobalContext);
 
-  return { user };
+  return { user, isAuthLoading };
 };
