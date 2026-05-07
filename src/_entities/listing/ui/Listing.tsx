@@ -55,11 +55,11 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
 
   return (
     <div
-      className='group relative cursor-pointer rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300'
+      className='group relative cursor-pointer rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100/80'
       onClick={() => navigate(`/animal/${listing.id}`)}
     >
       {/* Image */}
-      <div className='relative h-52 overflow-hidden bg-gray-100'>
+      <div className='relative h-52 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100'>
         {listing.images?.[0]?.url ? (
           <img
             src={listing.images[0].url}
@@ -67,18 +67,25 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
             className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
           />
         ) : (
-          <div className='w-full h-full flex items-center justify-center text-5xl'>🐾</div>
+          <div className='w-full h-full flex items-center justify-center'>
+            <span className='text-5xl opacity-30'>🐾</span>
+          </div>
+        )}
+
+        {/* Gradient overlay at bottom for readability */}
+        {listing.images?.[0]?.url && (
+          <div className='absolute inset-0 bg-gradient-to-t from-black/10 to-transparent' />
         )}
 
         {/* Badges */}
-        <div className='absolute top-2 left-2 flex flex-col gap-1'>
+        <div className='absolute top-2.5 left-2.5 flex flex-col gap-1'>
           {listing.category && categoryColor && (
-            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${categoryColor}`}>
+            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm ${categoryColor} shadow-sm`}>
               {t(`categories.${listing.category}`).toUpperCase()}
             </span>
           )}
           {listing.is_urgent && (
-            <span className='text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600'>
+            <span className='text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600 shadow-sm'>
               {t('animalInfo.urgent').toUpperCase()}
             </span>
           )}
@@ -86,7 +93,9 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
 
         {/* Favourite button */}
         <button
-          className='absolute top-2 right-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:bg-white hover:scale-110 transition-all'
+          className={`absolute top-2.5 right-2.5 w-8 h-8 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm transition-all hover:scale-110 ${
+            isFavorite ? 'bg-white' : 'bg-white/80 hover:bg-white'
+          }`}
           onClick={handleFavorite}
           aria-label={isFavorite ? t('listing.removeFromFavourites') : t('animalInfo.addToFavourites')}
         >
@@ -100,7 +109,7 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
 
       {/* Content */}
       <div className='p-4'>
-        <h3 className='font-semibold text-gray-900 truncate mb-1 text-base'>{listing.title}</h3>
+        <h3 className='font-semibold text-gray-900 truncate mb-1.5 text-base leading-snug'>{listing.title}</h3>
         <div className='flex items-center flex-wrap gap-x-2 gap-y-0.5 text-xs text-gray-500'>
           {listing.gender && <span className='capitalize'>{t(`genders.${listing.gender}`)}</span>}
           {age && (
@@ -122,8 +131,13 @@ export const ListingItem = ({ listing }: { listing: Listing }) => {
             </>
           )}
         </div>
-        <div className='mt-2 text-[11px] text-gray-400'>
-          {t('listing.listed')} {dayjs(listing.created_at).format('DD MMM YYYY')}
+        <div className='mt-2.5 pt-2.5 border-t border-gray-50 text-[11px] text-gray-400 flex items-center justify-between'>
+          <span>{t('listing.listed')} {dayjs(listing.created_at).format('DD MMM YYYY')}</span>
+          {listing.is_adopted && (
+            <span className='text-[10px] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full'>
+              {t('animalInfo.adopted')}
+            </span>
+          )}
         </div>
       </div>
     </div>

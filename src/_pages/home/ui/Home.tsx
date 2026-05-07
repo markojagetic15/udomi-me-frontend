@@ -24,54 +24,57 @@ export const Home = () => {
   } = useHome();
 
   return (
-    <div className='w-full lg:max-w-6xl m-auto mt-24 pb-24 h-full px-4'>
-      {/* Search + Filters */}
-      <div className='flex flex-col gap-3 mb-8'>
-        <Input
-          placeholder={t('home.searchPlaceholder')}
-          onChange={handleOnSearch}
-          startIcon={<IoIosSearch className='text-gray-400' />}
-        />
+    <div className='w-full lg:max-w-6xl m-auto pb-24 h-full px-4'>
+      {/* Sticky search + filter bar */}
+      <div className='sticky top-16 z-30 pt-6 pb-4 -mx-4 px-4 bg-white/70 backdrop-blur-md border-b border-white/60 mb-6'>
+        <div className='max-w-6xl mx-auto flex flex-col gap-3'>
+          <Input
+            placeholder={t('home.searchPlaceholder')}
+            onChange={handleOnSearch}
+            startIcon={<IoIosSearch className='text-gray-400' />}
+          />
 
-        <div className='flex flex-wrap gap-2 items-center'>
-          {CategoryItems.map((cat) => {
-            const isActive = categories.includes(cat.key);
-            return (
+          <div className='flex flex-wrap gap-2 items-center'>
+            {CategoryItems.map((cat) => {
+              const isActive = categories.includes(cat.key);
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => handleSetCategory(cat.key)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all border ${
+                    isActive
+                      ? 'bg-primary text-white border-primary shadow-sm'
+                      : 'bg-white/70 text-gray-600 border-gray-200 hover:border-primary hover:text-primary'
+                  }`}
+                >
+                  <span>{cat.icon}</span>
+                  {t(`categories.${cat.key}`)}
+                </button>
+              );
+            })}
+
+            {categories.length > 0 && (
               <button
-                key={cat.key}
-                onClick={() => handleSetCategory(cat.key)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all border ${
-                  isActive
-                    ? 'bg-primary text-white border-primary shadow-sm'
-                    : 'bg-white/70 text-gray-600 border-gray-200 hover:border-primary hover:text-primary'
-                }`}
+                onClick={clearCategories}
+                className='flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-red-500 border border-red-200 bg-red-50 hover:bg-red-100 transition-all'
               >
-                <span>{cat.icon}</span>
-                {t(`categories.${cat.key}`)}
+                <IoMdClose />
+                {t('home.clear')}
               </button>
-            );
-          })}
-
-          {categories.length > 0 && (
-            <button
-              onClick={clearCategories}
-              className='flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-red-500 border border-red-200 bg-red-50 hover:bg-red-100 transition-all'
-            >
-              <IoMdClose />
-              {t('home.clear')}
-            </button>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
       {isError ? (
-        <div className='mt-24 flex flex-col items-center gap-3'>
+        <div className='mt-24 flex flex-col items-center gap-4 text-center'>
+          <div className='text-5xl'>😕</div>
           <p className='text-gray-700 font-medium'>
             {(error as any)?.message || t('home.failedToLoad')}
           </p>
           <button
             onClick={() => window.location.reload()}
-            className='px-4 py-2 rounded-xl bg-primary text-white text-sm hover:opacity-90 transition-opacity'
+            className='px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:opacity-90 transition-opacity shadow-sm'
           >
             {t('home.retry')}
           </button>
@@ -85,12 +88,12 @@ export const Home = () => {
           ) : (
             <div>
               {listings?.length === 0 ? (
-                <div className='mt-24 flex flex-col items-center'>
-                  <p className='text-gray-600 mb-4'>{t('home.noAnimals')}</p>
-                  <img src={SadDog} className='h-auto w-96 translate-x-8' />
+                <div className='mt-16 flex flex-col items-center gap-2'>
+                  <p className='text-gray-500 text-lg font-medium'>{t('home.noAnimals')}</p>
+                  <img src={SadDog} alt='No animals found' className='h-auto w-80 translate-x-6 mt-4 opacity-80' />
                 </div>
               ) : (
-                <div className='grid 2xl:grid-cols-4 gap-5 md:grid-cols-4 grid-cols-2'>
+                <div className='grid 2xl:grid-cols-4 gap-5 md:grid-cols-4 sm:grid-cols-2 grid-cols-2'>
                   {listings?.map((listing) => (
                     <ListingItem listing={listing} key={listing.id} />
                   ))}

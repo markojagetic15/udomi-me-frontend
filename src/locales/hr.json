@@ -224,7 +224,7 @@
     "breed": "Pasmina",
     "dateOfBirth": "Datum rođenja",
     "vaccinated": "Cijepljeno",
-    "urgent": "Hitno",
+    "urgent_info": "Hitno",
     "interested_label": "Zainteresirani",
     "location": "Lokacija",
     "contactInfo": "Kontakt podaci",

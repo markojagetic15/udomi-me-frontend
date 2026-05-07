@@ -91,59 +91,63 @@ const ChangePasswordSection = () => {
   };
 
   return (
-    <div className='bg-white rounded-3xl p-8 shadow-sm'>
-      <h2 className='text-xl font-bold text-gray-800 mb-6'>{t('profile.changePassword.title')}</h2>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-sm'>
-        <NextInput
-          type={showCurrent ? 'text' : 'password'}
-          label={t('profile.changePassword.currentPassword')}
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          isInvalid={!!errors.currentPassword}
-          errorMessage={errors.currentPassword}
-          autoComplete='current-password'
-          endContent={
-            <button type='button' onClick={() => setShowCurrent(!showCurrent)} className='flex items-center justify-center text-gray-400 hover:text-gray-600' tabIndex={-1}>
-              {showCurrent ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-            </button>
-          }
-        />
-        <NextInput
-          type={showNew ? 'text' : 'password'}
-          label={t('profile.changePassword.newPassword')}
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          isInvalid={!!errors.newPassword}
-          errorMessage={errors.newPassword}
-          autoComplete='new-password'
-          endContent={
-            <button type='button' onClick={() => setShowNew(!showNew)} className='flex items-center justify-center text-gray-400 hover:text-gray-600' tabIndex={-1}>
-              {showNew ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-            </button>
-          }
-        />
-        <NextInput
-          type={showConfirm ? 'text' : 'password'}
-          label={t('profile.changePassword.confirmNewPassword')}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          isInvalid={!!errors.confirmPassword}
-          errorMessage={errors.confirmPassword}
-          autoComplete='new-password'
-          endContent={
-            <button type='button' onClick={() => setShowConfirm(!showConfirm)} className='flex items-center justify-center text-gray-400 hover:text-gray-600' tabIndex={-1}>
-              {showConfirm ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-            </button>
-          }
-        />
-        <button
-          type='submit'
-          disabled={mutation.isPending}
-          className='py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50'
-        >
-          {mutation.isPending ? t('profile.changePassword.saving') : t('profile.changePassword.updatePassword')}
-        </button>
-      </form>
+    <div className='bg-white rounded-3xl shadow-sm border border-gray-100/60 overflow-hidden'>
+      <div className='px-8 py-5 border-b border-gray-100 bg-gray-50/50'>
+        <h2 className='text-base font-bold text-gray-800'>{t('profile.changePassword.title')}</h2>
+      </div>
+      <div className='p-8'>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-sm'>
+          <NextInput
+            type={showCurrent ? 'text' : 'password'}
+            label={t('profile.changePassword.currentPassword')}
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            isInvalid={!!errors.currentPassword}
+            errorMessage={errors.currentPassword}
+            autoComplete='current-password'
+            endContent={
+              <button type='button' onClick={() => setShowCurrent(!showCurrent)} className='flex items-center justify-center text-gray-400 hover:text-gray-600' tabIndex={-1}>
+                {showCurrent ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </button>
+            }
+          />
+          <NextInput
+            type={showNew ? 'text' : 'password'}
+            label={t('profile.changePassword.newPassword')}
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            isInvalid={!!errors.newPassword}
+            errorMessage={errors.newPassword}
+            autoComplete='new-password'
+            endContent={
+              <button type='button' onClick={() => setShowNew(!showNew)} className='flex items-center justify-center text-gray-400 hover:text-gray-600' tabIndex={-1}>
+                {showNew ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </button>
+            }
+          />
+          <NextInput
+            type={showConfirm ? 'text' : 'password'}
+            label={t('profile.changePassword.confirmNewPassword')}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            isInvalid={!!errors.confirmPassword}
+            errorMessage={errors.confirmPassword}
+            autoComplete='new-password'
+            endContent={
+              <button type='button' onClick={() => setShowConfirm(!showConfirm)} className='flex items-center justify-center text-gray-400 hover:text-gray-600' tabIndex={-1}>
+                {showConfirm ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </button>
+            }
+          />
+          <button
+            type='submit'
+            disabled={mutation.isPending}
+            className='py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50'
+          >
+            {mutation.isPending ? t('profile.changePassword.saving') : t('profile.changePassword.updatePassword')}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
@@ -168,9 +172,9 @@ const ListingsGrid = ({
   }
   if (!listings || listings.length === 0) {
     return (
-      <div className='flex flex-col items-center justify-center py-16 text-gray-400 bg-white/50 rounded-2xl'>
+      <div className='flex flex-col items-center justify-center py-16 text-gray-400 bg-white/50 rounded-2xl border border-white/60'>
         <span className='text-4xl mb-3'>🐾</span>
-        <p>{emptyMessage}</p>
+        <p className='text-sm'>{emptyMessage}</p>
       </div>
     );
   }
@@ -195,33 +199,40 @@ export const Profile = () => {
   const activeCount = (myListings ?? []).filter((l) => !l.is_adopted).length;
 
   return (
-    <div className='w-full lg:max-w-6xl m-auto mt-24 pb-24 h-full px-4'>
+    <div className='w-full lg:max-w-6xl m-auto mt-20 pb-24 h-full px-4'>
       {/* User card */}
-      <div className='bg-white rounded-3xl p-8 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10'>
-        <Avatar user={user} src={user?.avatar} size='lg' />
-        <div className='text-center sm:text-left flex-1'>
-          <h1 className='text-2xl font-bold text-gray-900'>
-            {user?.first_name} {user?.last_name}
-          </h1>
-          <p className='text-gray-500 mt-1'>{user?.email}</p>
-          {user?.created_at && (
-            <p className='text-sm text-gray-400 mt-1'>
-              {t('profile.memberSince')} {dayjs(user.created_at).format('MMMM YYYY')}
-            </p>
+      <div className='bg-white rounded-3xl shadow-sm border border-gray-100/60 overflow-hidden mb-8'>
+        {/* Gradient banner */}
+        <div className='h-24 bg-gradient-to-r from-primary/60 via-primary/40 to-secondary/50' />
+        <div className='px-8 pb-8 -mt-12 flex flex-col sm:flex-row items-start gap-6'>
+          <div className='ring-4 ring-white rounded-full shadow-md'>
+            <Avatar user={user} src={user?.avatar} size='lg' />
+          </div>
+          <div className='pt-12 sm:pt-14 flex-1 min-w-0'>
+            <h1 className='text-2xl font-bold text-gray-900 truncate'>
+              {user?.first_name} {user?.last_name}
+            </h1>
+            <p className='text-gray-500 mt-0.5 text-sm'>{user?.email}</p>
+            {user?.created_at && (
+              <p className='text-xs text-gray-400 mt-1'>
+                {t('profile.memberSince')} {dayjs(user.created_at).format('MMMM YYYY')}
+              </p>
+            )}
+          </div>
+          {myListings && myListings.length > 0 && (
+            <div className='flex gap-6 text-center pt-0 sm:pt-14 pb-2'>
+              <div className='flex flex-col items-center'>
+                <p className='text-3xl font-extrabold text-primary leading-none'>{activeCount}</p>
+                <p className='text-xs text-gray-400 mt-1'>{t('profile.active')}</p>
+              </div>
+              <div className='w-px bg-gray-100' />
+              <div className='flex flex-col items-center'>
+                <p className='text-3xl font-extrabold text-green-500 leading-none'>{adoptedCount}</p>
+                <p className='text-xs text-gray-400 mt-1'>{t('profile.adopted')}</p>
+              </div>
+            </div>
           )}
         </div>
-        {myListings && myListings.length > 0 && (
-          <div className='flex gap-6 text-center'>
-            <div>
-              <p className='text-2xl font-extrabold text-primary'>{activeCount}</p>
-              <p className='text-xs text-gray-400 mt-0.5'>{t('profile.active')}</p>
-            </div>
-            <div>
-              <p className='text-2xl font-extrabold text-green-500'>{adoptedCount}</p>
-              <p className='text-xs text-gray-400 mt-0.5'>{t('profile.adopted')}</p>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* My listings */}
@@ -229,7 +240,9 @@ export const Profile = () => {
         <div className='flex items-center justify-between mb-5'>
           <h2 className='text-xl font-bold text-gray-800'>{t('profile.myListings')}</h2>
           {myListings && myListings.length > 0 && (
-            <span className='text-sm text-gray-400'>{myListings.length} {t('profile.total')}</span>
+            <span className='text-sm text-gray-400 bg-white/60 px-3 py-1 rounded-full border border-gray-100'>
+              {myListings.length} {t('profile.total')}
+            </span>
           )}
         </div>
         <ListingsGrid
@@ -245,7 +258,9 @@ export const Profile = () => {
         <div className='flex items-center justify-between mb-5'>
           <h2 className='text-xl font-bold text-gray-800'>{t('profile.favouritedAnimals')}</h2>
           {favoriteListings && favoriteListings.length > 0 && (
-            <span className='text-sm text-gray-400'>{favoriteListings.length} {t('profile.saved')}</span>
+            <span className='text-sm text-gray-400 bg-white/60 px-3 py-1 rounded-full border border-gray-100'>
+              {favoriteListings.length} {t('profile.saved')}
+            </span>
           )}
         </div>
         <ListingsGrid

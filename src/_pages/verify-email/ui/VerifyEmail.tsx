@@ -24,7 +24,7 @@ export const VerifyEmail = () => {
   }, []);
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-50 px-4'>
+    <div className='min-h-screen flex items-center justify-center px-4'>
       <div className='bg-white rounded-3xl shadow-xl p-10 max-w-md w-full text-center'>
         {status === 'loading' && (
           <>

@@ -60,7 +60,7 @@ export const useCreateListingPage = () => {
   }) => {
     const date =
       dateOfBirth?.day && dateOfBirth?.month && dateOfBirth?.year
-        ? new Date(dateOfBirth.year, dateOfBirth.month, dateOfBirth.day)
+        ? new Date(dateOfBirth.year, dateOfBirth.month - 1, dateOfBirth.day)
         : undefined;
 
     if (!date) {

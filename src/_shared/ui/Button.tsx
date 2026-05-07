@@ -49,7 +49,7 @@ export const Button = ({
       color={color || 'primary'}
       {...props}
       variant={props.variant}
-      className={`w-${width} ${className}`}
+      className={[width ? `w-${width}` : 'w-full', className].filter(Boolean).join(' ')}
     >
       {children}
     </ButtonComponent>

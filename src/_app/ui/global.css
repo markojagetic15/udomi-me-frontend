@@ -16,8 +16,10 @@
 }
 
 body {
-    background: var(--complement);
+    background: linear-gradient(135deg, #c8dce8 0%, #b9cdda 40%, #c5d9e4 100%);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 div::-webkit-scrollbar, body::-webkit-scrollbar  {

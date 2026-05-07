@@ -71,8 +71,8 @@ export const AnimalInfo = () => {
       <ImageCarousel images={listing.images} />
 
       <div className='mt-10 mb-8 flex justify-between items-start gap-4'>
-        <div>
-          <div className='flex items-center gap-2 flex-wrap mb-2'>
+        <div className='flex-1 min-w-0'>
+          <div className='flex items-center gap-2 flex-wrap mb-3'>
             {listing.category && (
               <span className='text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary uppercase tracking-wide'>
                 {t(`categories.${listing.category}`)}
@@ -93,9 +93,9 @@ export const AnimalInfo = () => {
         </div>
 
         <div className='flex items-center gap-2 flex-shrink-0'>
-          <Tooltip content={t('animalInfo.addToFavourites')}>
+          <Tooltip content={isFavorited ? t('listing.removeFromFavourites') : t('animalInfo.addToFavourites')}>
             <button
-              className={`w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm hover:shadow-md transition-all hover:scale-110 ${
+              className={`w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm hover:shadow-md transition-all hover:scale-110 border border-gray-100 ${
                 isFavoritePending ? 'opacity-50 pointer-events-none' : ''
               }`}
               onClick={handleFavorite}
@@ -110,7 +110,7 @@ export const AnimalInfo = () => {
           </Tooltip>
           <Tooltip content={t('animalInfo.reportListing')}>
             <button
-              className='w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm hover:shadow-md transition-all hover:scale-110'
+              className='w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm hover:shadow-md transition-all hover:scale-110 border border-gray-100'
               aria-label={t('animalInfo.reportListing')}
             >
               <MdReportGmailerrorred className='text-gray-400 w-5 h-5' />
@@ -121,8 +121,8 @@ export const AnimalInfo = () => {
 
       {/* Interest CTA — hidden from the listing owner and for adopted listings */}
       {!isOwner && !listing.is_adopted && (
-        <div className='mb-8 flex items-center gap-4 bg-white rounded-2xl p-5 shadow-sm'>
-          <div className='flex-1'>
+        <div className='mb-8 flex items-center gap-4 bg-white rounded-2xl p-5 shadow-sm border border-gray-100/60'>
+          <div className='flex-1 min-w-0'>
             <p className='font-semibold text-gray-800'>
               {interestCount > 0
                 ? t('animalInfo.interestedCount_other', { count: interestCount }).replace(
@@ -138,9 +138,9 @@ export const AnimalInfo = () => {
           <button
             onClick={handleShowInterest}
             disabled={isInterestPending}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all disabled:opacity-50 ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all disabled:opacity-50 flex-shrink-0 ${
               isInterested
-                ? 'bg-primary text-white hover:opacity-90'
+                ? 'bg-primary text-white hover:opacity-90 shadow-sm'
                 : 'bg-primary/10 text-primary hover:bg-primary/20'
             }`}
           >
@@ -169,17 +169,17 @@ export const AnimalInfo = () => {
         </div>
       )}
 
-      <Divider className='bg-primary/30' />
+      <Divider className='bg-primary/20' />
 
       {listing.description && (
         <>
           <h2 className='text-lg font-bold mt-8 mb-3 text-gray-800'>{t('animalInfo.description')}</h2>
           <p className='text-gray-600 leading-relaxed mb-8'>{listing.description}</p>
-          <Divider className='bg-primary/30' />
+          <Divider className='bg-primary/20' />
         </>
       )}
 
-      <div className='mt-8 flex flex-wrap gap-4 mb-8'>
+      <div className='mt-8 flex flex-wrap gap-3 mb-8'>
         {listing.category && (
           <InfoItem value={t(`categories.${listing.category}`).toUpperCase()} label={t('animalInfo.category')} />
         )}
@@ -214,7 +214,7 @@ export const AnimalInfo = () => {
               <IoIosCloseCircleOutline className='text-red-400 w-6 h-6' />
             )
           }
-          label={t('animalInfo.urgent')}
+          label={t('animalInfo.urgent_info')}
         />
         {interestCount > 0 && (
           <InfoItem value={interestCount.toString()} label={t('animalInfo.interested_label')} />
@@ -223,14 +223,14 @@ export const AnimalInfo = () => {
 
       {(listing.address || mapCoords) && (
         <>
-          <Divider className='bg-primary/30' />
+          <Divider className='bg-primary/20' />
           <div className='mt-8 mb-8'>
             <h2 className='text-lg font-bold mb-3 text-gray-800'>{t('animalInfo.location')}</h2>
             {listing.address && (
-              <p className='text-gray-600 mb-4'>{listing.address}</p>
+              <p className='text-gray-600 mb-4 text-sm'>{listing.address}</p>
             )}
             {mapCoords ? (
-              <div className='w-full h-56 rounded-2xl overflow-hidden border border-gray-200'>
+              <div className='w-full h-64 rounded-2xl overflow-hidden border border-gray-200 shadow-sm'>
                 <MapContainer
                   center={[mapCoords.lat, mapCoords.lng]}
                   zoom={13}
@@ -250,7 +250,7 @@ export const AnimalInfo = () => {
                 </MapContainer>
               </div>
             ) : listing.address && (
-              <div className='w-full h-56 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center'>
+              <div className='w-full h-64 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center'>
                 <div className='w-5 h-5 rounded-full border-2 border-primary border-t-transparent animate-spin' />
               </div>
             )}
@@ -260,9 +260,9 @@ export const AnimalInfo = () => {
 
       {(listing.phone_number || listing.email || listing.area_code) && (
         <>
-          <Divider className='bg-primary/30' />
+          <Divider className='bg-primary/20' />
           <h2 className='text-lg font-bold mt-8 mb-4 text-gray-800'>{t('animalInfo.contactInfo')}</h2>
-          <div className='flex gap-4 flex-wrap items-center mb-8'>
+          <div className='flex gap-3 flex-wrap items-center mb-8'>
             {listing.area_code && (
               <InfoItem value={listing.area_code} label={t('animalInfo.areaCode')} />
             )}

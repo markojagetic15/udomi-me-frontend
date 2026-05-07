@@ -29,13 +29,13 @@ export const Landing = () => {
   const { getAllListings } = useGetListings(1, 4, '', []);
 
   const categories = [
-    { label: t('landing.categories.dogs'), emoji: '🐕', value: 'dog', color: 'bg-amber-100 hover:bg-amber-200' },
-    { label: t('landing.categories.cats'), emoji: '🐈', value: 'cat', color: 'bg-orange-100 hover:bg-orange-200' },
-    { label: t('landing.categories.rabbits'), emoji: '🐇', value: 'rabbit', color: 'bg-pink-100 hover:bg-pink-200' },
-    { label: t('landing.categories.birds'), emoji: '🦜', value: 'bird', color: 'bg-green-100 hover:bg-green-200' },
-    { label: t('landing.categories.reptiles'), emoji: '🦎', value: 'reptile', color: 'bg-lime-100 hover:bg-lime-200' },
-    { label: t('landing.categories.horses'), emoji: '🐴', value: 'horse', color: 'bg-yellow-100 hover:bg-yellow-200' },
-    { label: t('landing.categories.other'), emoji: '🐾', value: 'other', color: 'bg-blue-100 hover:bg-blue-200' },
+    { label: t('landing.categories.dogs'), emoji: '🐕', value: 'dog', color: 'bg-amber-100 hover:bg-amber-200 border border-amber-200/60' },
+    { label: t('landing.categories.cats'), emoji: '🐈', value: 'cat', color: 'bg-orange-100 hover:bg-orange-200 border border-orange-200/60' },
+    { label: t('landing.categories.rabbits'), emoji: '🐇', value: 'rabbit', color: 'bg-pink-100 hover:bg-pink-200 border border-pink-200/60' },
+    { label: t('landing.categories.birds'), emoji: '🦜', value: 'bird', color: 'bg-green-100 hover:bg-green-200 border border-green-200/60' },
+    { label: t('landing.categories.reptiles'), emoji: '🦎', value: 'reptile', color: 'bg-lime-100 hover:bg-lime-200 border border-lime-200/60' },
+    { label: t('landing.categories.horses'), emoji: '🐴', value: 'horse', color: 'bg-yellow-100 hover:bg-yellow-200 border border-yellow-200/60' },
+    { label: t('landing.categories.other'), emoji: '🐾', value: 'other', color: 'bg-blue-100 hover:bg-blue-200 border border-blue-200/60' },
   ];
 
   const steps = [
@@ -44,18 +44,21 @@ export const Landing = () => {
       title: t('landing.howItWorks.step1Title'),
       description: t('landing.howItWorks.step1Desc'),
       emoji: '🔍',
+      accent: 'bg-blue-50',
     },
     {
       number: '02',
       title: t('landing.howItWorks.step2Title'),
       description: t('landing.howItWorks.step2Desc'),
       emoji: '💌',
+      accent: 'bg-pink-50',
     },
     {
       number: '03',
       title: t('landing.howItWorks.step3Title'),
       description: t('landing.howItWorks.step3Desc'),
       emoji: '🏡',
+      accent: 'bg-green-50',
     },
   ];
 
@@ -64,30 +67,42 @@ export const Landing = () => {
       title: t('landing.whyAdopt.reason1Title'),
       description: t('landing.whyAdopt.reason1Desc'),
       emoji: '❤️',
+      accent: 'from-red-50 to-pink-50',
     },
     {
       title: t('landing.whyAdopt.reason2Title'),
       description: t('landing.whyAdopt.reason2Desc'),
       emoji: '✨',
+      accent: 'from-yellow-50 to-amber-50',
     },
     {
       title: t('landing.whyAdopt.reason3Title'),
       description: t('landing.whyAdopt.reason3Desc'),
       emoji: '🎁',
+      accent: 'from-green-50 to-teal-50',
     },
   ];
 
   const stats = [
-    { value: '500+', label: t('landing.stats.animalsListed') },
-    { value: '200+', label: t('landing.stats.happyAdoptions') },
-    { value: '6', label: t('landing.stats.animalCategories') },
-    { value: '100%', label: t('landing.stats.freeForeever') },
+    { value: '500+', label: t('landing.stats.animalsListed'), emoji: '🐾' },
+    { value: '200+', label: t('landing.stats.happyAdoptions'), emoji: '🏡' },
+    { value: '6', label: t('landing.stats.animalCategories'), emoji: '🌿' },
+    { value: '100%', label: t('landing.stats.freeForeever'), emoji: '💚' },
   ];
 
   return (
     <div className='overflow-hidden'>
       {/* Hero */}
-      <section className='relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden'>
+      <section
+        className='relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden'
+        style={{
+          background: 'linear-gradient(160deg, #e8f4f0 0%, #d4eae4 30%, #b9cdda 70%, #a8c4d4 100%)',
+        }}
+      >
+        {/* Soft decorative blobs */}
+        <div className='absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none' />
+        <div className='absolute bottom-20 right-10 w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none' />
+
         {floatingAnimals.map((a, i) => (
           <span
             key={i}
@@ -109,7 +124,14 @@ export const Landing = () => {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className='relative z-10 max-w-3xl'
         >
-          <div className='text-6xl mb-6'>🐾</div>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className='inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-primary border border-white/80 shadow-sm'
+          >
+            <span>🐾</span> Free animal adoption platform
+          </motion.div>
           <h1 className='text-5xl md:text-7xl font-extrabold text-primary-700 leading-tight mb-6'>
             {t('landing.hero.title1')}
             <br />
@@ -121,17 +143,31 @@ export const Landing = () => {
           <div className='flex gap-4 justify-center flex-wrap'>
             <Link
               to='/browse'
-              className='px-8 py-3 rounded-2xl bg-primary text-white font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg'
+              className='px-8 py-3.5 rounded-2xl bg-primary text-white font-semibold text-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5'
             >
               {t('landing.hero.findFriend')}
             </Link>
+            <Link
+              to='/register'
+              className='px-8 py-3.5 rounded-2xl bg-white/80 backdrop-blur-sm text-primary font-semibold text-lg hover:bg-white transition-all shadow-sm border border-white/60'
+            >
+              {t('landing.cta.createAccount')}
+            </Link>
           </div>
         </motion.div>
+
+        {/* Wave divider */}
+        <div className='absolute bottom-0 left-0 right-0 overflow-hidden leading-none pointer-events-none'>
+          <svg viewBox='0 0 1440 60' fill='none' xmlns='http://www.w3.org/2000/svg' className='w-full'>
+            <path d='M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z' fill='#8EAF9D' fillOpacity='0.15' />
+            <path d='M0,40 C480,10 960,60 1440,40 L1440,60 L0,60 Z' fill='#8EAF9D' fillOpacity='0.1' />
+          </svg>
+        </div>
       </section>
 
       {/* Stats strip */}
-      <section className='bg-primary py-12'>
-        <div className='max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center'>
+      <section className='bg-primary py-14'>
+        <div className='max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center'>
           {stats.map((s, i) => (
             <motion.div
               key={i}
@@ -140,9 +176,11 @@ export const Landing = () => {
               whileInView='visible'
               viewport={{ once: true }}
               variants={fadeUp}
+              className='flex flex-col items-center gap-1'
             >
+              <div className='text-2xl mb-1'>{s.emoji}</div>
               <div className='text-4xl font-extrabold text-white'>{s.value}</div>
-              <div className='text-white/80 mt-1 font-medium'>{s.label}</div>
+              <div className='text-white/75 text-sm font-medium'>{s.label}</div>
             </motion.div>
           ))}
         </div>
@@ -180,17 +218,17 @@ export const Landing = () => {
               viewport={{ once: true }}
               variants={fadeUp}
               onClick={() => navigate(`/browse?category=${cat.value}`)}
-              className={`${cat.color} rounded-2xl p-5 flex flex-col items-center gap-2 cursor-pointer transition-colors shadow-sm`}
+              className={`${cat.color} rounded-2xl p-5 flex flex-col items-center gap-2 cursor-pointer transition-all shadow-sm hover:shadow-md hover:-translate-y-1`}
             >
               <span className='text-4xl'>{cat.emoji}</span>
-              <span className='font-semibold text-gray-700'>{cat.label}</span>
+              <span className='font-semibold text-gray-700 text-sm'>{cat.label}</span>
             </motion.button>
           ))}
         </div>
       </section>
 
       {/* How It Works */}
-      <section className='py-24 px-4 bg-white/40'>
+      <section className='py-24 px-4' style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 100%)' }}>
         <div className='max-w-5xl mx-auto'>
           <motion.h2
             initial='hidden'
@@ -221,9 +259,9 @@ export const Landing = () => {
                 whileInView='visible'
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className='bg-white rounded-3xl p-8 shadow-sm text-center relative'
+                className={`${step.accent} rounded-3xl p-8 shadow-sm border border-white/80 text-center relative overflow-hidden`}
               >
-                <span className='absolute -top-4 left-6 text-5xl font-extrabold text-primary/20 select-none'>
+                <span className='absolute -top-3 left-5 text-6xl font-extrabold text-primary/10 select-none leading-none'>
                   {step.number}
                 </span>
                 <div className='text-5xl mb-4 mt-2'>{step.emoji}</div>
@@ -266,9 +304,11 @@ export const Landing = () => {
               whileInView='visible'
               viewport={{ once: true }}
               variants={fadeUp}
-              className='bg-white rounded-3xl p-8 shadow-sm text-center'
+              className={`bg-gradient-to-br ${r.accent} rounded-3xl p-8 shadow-sm border border-white/60 text-center`}
             >
-              <div className='text-5xl mb-4'>{r.emoji}</div>
+              <div className='w-16 h-16 rounded-2xl bg-white/80 flex items-center justify-center text-4xl mx-auto mb-5 shadow-sm'>
+                {r.emoji}
+              </div>
               <h3 className='text-xl font-bold text-gray-800 mb-3'>{r.title}</h3>
               <p className='text-gray-500 leading-relaxed'>{r.description}</p>
             </motion.div>
@@ -322,7 +362,7 @@ export const Landing = () => {
           <div className='flex justify-center mt-10'>
             <Link
               to='/browse'
-              className='px-8 py-3 rounded-2xl border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-colors'
+              className='px-8 py-3 rounded-2xl border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all hover:-translate-y-0.5'
             >
               {t('landing.recentlyAdded.seeAll')}
             </Link>
@@ -331,14 +371,18 @@ export const Landing = () => {
       </section>
 
       {/* CTA */}
-      <section className='py-24 px-4 bg-primary'>
+      <section className='py-24 px-4 bg-primary relative overflow-hidden'>
+        <div className='absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none'>
+          <div className='absolute top-10 left-20 w-64 h-64 rounded-full bg-white blur-3xl' />
+          <div className='absolute bottom-10 right-20 w-80 h-80 rounded-full bg-white blur-3xl' />
+        </div>
         <motion.div
           initial='hidden'
           whileInView='visible'
           viewport={{ once: true }}
           variants={fadeUp}
           custom={0}
-          className='max-w-2xl mx-auto text-center'
+          className='max-w-2xl mx-auto text-center relative z-10'
         >
           <div className='text-6xl mb-6'>🐾</div>
           <h2 className='text-4xl font-extrabold text-white mb-4'>
@@ -350,13 +394,13 @@ export const Landing = () => {
           <div className='flex gap-4 justify-center flex-wrap'>
             <Link
               to='/browse'
-              className='px-8 py-3 rounded-2xl bg-white text-primary font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg'
+              className='px-8 py-3.5 rounded-2xl bg-white text-primary font-semibold text-lg hover:opacity-95 transition-all shadow-lg hover:-translate-y-0.5'
             >
               {t('landing.cta.startBrowsing')}
             </Link>
             <Link
               to='/register'
-              className='px-8 py-3 rounded-2xl border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-primary transition-colors'
+              className='px-8 py-3.5 rounded-2xl border-2 border-white/70 text-white font-semibold text-lg hover:bg-white/10 transition-all'
             >
               {t('landing.cta.createAccount')}
             </Link>

@@ -224,7 +224,7 @@
     "breed": "Breed",
     "dateOfBirth": "Date of Birth",
     "vaccinated": "Vaccinated",
-    "urgent": "Urgent",
+    "urgent_info": "Urgent",
     "interested_label": "Interested",
     "location": "Location",
     "contactInfo": "Contact info",
