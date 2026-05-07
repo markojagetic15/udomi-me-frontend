@@ -24,45 +24,43 @@ export const Home = () => {
   } = useHome();
 
   return (
-    <div className='w-full lg:max-w-6xl m-auto pb-24 h-full px-4'>
-      {/* Sticky search + filter bar */}
-      <div className='sticky top-16 z-30 pt-6 pb-4 -mx-4 px-4 bg-white/70 backdrop-blur-md border-b border-white/60 mb-6'>
-        <div className='max-w-6xl mx-auto flex flex-col gap-3'>
-          <Input
-            placeholder={t('home.searchPlaceholder')}
-            onChange={handleOnSearch}
-            startIcon={<IoIosSearch className='text-gray-400' />}
-          />
+    <div className='w-full lg:max-w-6xl m-auto mt-8 pb-24 px-4'>
+      {/* Search + Filters */}
+      <div className='mb-8 flex flex-col gap-3'>
+        <Input
+          placeholder={t('home.searchPlaceholder')}
+          onChange={handleOnSearch}
+          startIcon={<IoIosSearch className='text-gray-400' />}
+        />
 
-          <div className='flex flex-wrap gap-2 items-center'>
-            {CategoryItems.map((cat) => {
-              const isActive = categories.includes(cat.key);
-              return (
-                <button
-                  key={cat.key}
-                  onClick={() => handleSetCategory(cat.key)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all border ${
-                    isActive
-                      ? 'bg-primary text-white border-primary shadow-sm'
-                      : 'bg-white/70 text-gray-600 border-gray-200 hover:border-primary hover:text-primary'
-                  }`}
-                >
-                  <span>{cat.icon}</span>
-                  {t(`categories.${cat.key}`)}
-                </button>
-              );
-            })}
-
-            {categories.length > 0 && (
+        <div className='flex flex-wrap gap-2 items-center'>
+          {CategoryItems.map((cat) => {
+            const isActive = categories.includes(cat.key);
+            return (
               <button
-                onClick={clearCategories}
-                className='flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-red-500 border border-red-200 bg-red-50 hover:bg-red-100 transition-all'
+                key={cat.key}
+                onClick={() => handleSetCategory(cat.key)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all border ${
+                  isActive
+                    ? 'bg-primary text-white border-primary shadow-sm'
+                    : 'bg-white/70 text-gray-600 border-gray-200 hover:border-primary hover:text-primary'
+                }`}
               >
-                <IoMdClose />
-                {t('home.clear')}
+                <span>{cat.icon}</span>
+                {t(`categories.${cat.key}`)}
               </button>
-            )}
-          </div>
+            );
+          })}
+
+          {categories.length > 0 && (
+            <button
+              onClick={clearCategories}
+              className='flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-red-500 border border-red-200 bg-red-50 hover:bg-red-100 transition-all'
+            >
+              <IoMdClose />
+              {t('home.clear')}
+            </button>
+          )}
         </div>
       </div>
 

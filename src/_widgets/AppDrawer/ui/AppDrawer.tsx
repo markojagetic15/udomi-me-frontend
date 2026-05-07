@@ -119,7 +119,7 @@ export const AppDrawer = () => {
     return (
       <>
         {mobileOpen && <MobileMenu />}
-        <Navbar isBordered isBlurred>
+        <Navbar isBordered isBlurred shouldHideOnScroll>
           <NavbarBrand>
             <div className='flex items-center gap-1.5 cursor-pointer' onClick={() => navigate('/')}>
               <span className='text-primary'>🐾</span>
@@ -174,7 +174,7 @@ export const AppDrawer = () => {
   return (
     <>
       {mobileOpen && <MobileMenu />}
-      <Navbar isBordered isBlurred>
+      <Navbar isBordered isBlurred shouldHideOnScroll>
         <NavbarBrand>
           <div className='flex items-center gap-1.5 cursor-pointer' onClick={() => navigate('/')}>
             <span className='text-primary'>🐾</span>
