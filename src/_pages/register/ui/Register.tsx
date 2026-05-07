@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input } from '_shared';
+import { Button, Input } from '_shared';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FaArrowLeftLong, FaGoogle } from 'react-icons/fa6';
 import { useRegister } from '_features/user';
@@ -146,25 +146,25 @@ export const Register = () => {
             />
 
             <div className='flex flex-col gap-1'>
-              <div className='flex items-start gap-3'>
-                <Checkbox
-                  label=''
-                  register={register('term_and_conditions')}
-                  error={undefined}
+              <label className='flex items-center gap-2.5 cursor-pointer'>
+                <input
+                  type='checkbox'
+                  {...register('term_and_conditions')}
+                  className='w-4 h-4 rounded accent-primary cursor-pointer flex-shrink-0'
                 />
-                <span className='text-sm text-gray-600 mt-0.5'>
+                <span className='text-sm text-gray-600'>
                   {t('register.agreeToTerms')}{' '}
                   <button
                     type='button'
                     className='text-primary font-medium underline'
-                    onClick={() => setShowTerms(true)}
+                    onClick={(e) => { e.preventDefault(); setShowTerms(true); }}
                   >
                     {t('register.termsAndConditions')}
                   </button>
                 </span>
-              </div>
+              </label>
               {errors.term_and_conditions?.message && (
-                <p className='text-red-500 text-xs ml-8'>{errors.term_and_conditions.message}</p>
+                <p className='text-red-500 text-xs ml-6'>{errors.term_and_conditions.message}</p>
               )}
             </div>
 
