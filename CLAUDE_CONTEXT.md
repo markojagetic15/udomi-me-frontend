@@ -264,20 +264,25 @@ Non-retried status codes: 401, 403, 404. All others retry up to 2 times.
 ### `GlobalProvider` (`src/_app/api/GlobalProvider.tsx`)
 
 ```ts
-type GlobalContextType = { user: User | null }
+type GlobalContextType = { user: User | null; isAuthLoading: boolean }
 ```
 
 - Runs `useGetMe()` (GET `/me`) on mount
-- Provides `user` throughout the app via `useGlobalContext()` hook
+- Provides `user` and `isAuthLoading` throughout the app via `useGlobalContext()` hook
 - `user` is `null` until the request resolves
+- `isAuthLoading` is `true` until the initial `/me` request settles; `AppLayout` (`src/_app/Routing.tsx`) renders `<PageLoader />` instead of routes while this is `true`, so routes never flash the logged-out state before auth resolves
 
-### `useGlobalContext()`
+### `useGlobalContext()` (`src/_app/api/useGlobalContext.ts`)
 
 ```ts
-const { user } = useGlobalContext();
+const { user, isAuthLoading } = useGlobalContext();
 ```
 
 Use this everywhere you need to read the current user. Never import GlobalProvider directly.
+
+### Route Guards (`src/_app/api/AuthGuard.tsx`)
+
+`ProtectedRoute` and `GuestRoute` (used in the route table below) live here, not inline in `Routing.tsx`. There is also a deprecated no-op `AuthGuard` component kept for backward compat — do not use it in new code.
 
 ### Authentication Mechanism
 
