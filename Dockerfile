@@ -14,6 +14,8 @@ COPY . .
 # and this ENV mapping must exist or the build bakes in `undefined`.
 ARG VITE_API_URL
 ENV VITE_APP_BACKEND_URL=$VITE_API_URL
+ARG VITE_SENTRY_DSN
+ENV VITE_SENTRY_DSN=$VITE_SENTRY_DSN
 
 # Ako koristiš Vite ili CRA za production build:
 RUN npm run build
@@ -24,6 +26,7 @@ FROM nginx:alpine
 # Kopiramo buildane statičke datoteke u Nginx folder
 # Za Vite obično ide dist, a za Create React App ide build (promijeni 'dist' u 'build' ako je CRA)
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

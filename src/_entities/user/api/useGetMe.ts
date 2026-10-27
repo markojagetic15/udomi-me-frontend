@@ -1,21 +1,15 @@
 import { useAxios } from '_app';
 import { useQuery } from '@tanstack/react-query';
-import { User } from '../model';
+import { Me } from '../model';
 
 export const useGetMe = () => {
   const { axios } = useAxios();
-
-  const { data, isError, isLoading } = useQuery({
+  const getMe = useQuery({
     queryKey: ['me'],
-    queryFn: async () => {
-      return (await axios.get('/me')) as User;
-    },
+    queryFn: async (): Promise<Me> => axios.get('/me'),
+    // 401 just means "logged out" — don't retry or refetch noisily.
     retry: false,
+    staleTime: 60_000,
   });
-
-  return {
-    user: data,
-    isError,
-    isLoading,
-  };
+  return { getMe };
 };

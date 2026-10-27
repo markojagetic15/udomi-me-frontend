@@ -1,52 +1,47 @@
 # Udomi Me Frontend
 
-Free animal adoption platform — React 18 + TypeScript + Vite SPA, consumed by browsers, talking only to the sibling `udomi-backend` repo over REST.
-
-**Full reference: see `CLAUDE_CONTEXT.md` in this directory — read it before making any non-trivial change.** It has the complete route table, every API hook, every page hook, every shared component's props, validation schemas, and i18n key structure. This file is just the fast-load summary.
+Free animal adoption platform (Croatia) — React 18 + TypeScript + Vite SPA, talking only to the sibling `udomi-backend` over REST (same origin, `/api`). Rebuilt 2026-10-27 on shadcn/ui.
 
 ## Commands
 
 ```bash
 npm install
-npm run dev       # Vite dev server on port 3000
-npm run build      # tsc -b && vite build
+npm run dev        # Vite dev server on :3000 (set VITE_APP_BACKEND_URL)
+npm run build      # tsc -b && vite build — run before calling anything done
 npm run lint
-npm run preview
+npx prettier --write "src/**/*.{ts,tsx}"
 ```
 
 ## Stack
 
-React 18 + TypeScript 5.6 + Vite 5 · React Router 6 · TanStack Query 5 · React Hook Form + Yup · Axios · NextUI + Tailwind · i18next (en/hr) · React Leaflet (maps) · Cloudinary (direct REST image upload, no backend proxy).
+React 18 · Vite 5 · React Router 6 · TanStack Query 5 · React Hook Form + Yup · Axios · **shadcn/ui** (Radix primitives + Tailwind 3, components live in `src/_shared/ui/` — edit them freely) · lucide-react icons · sonner toasts · react-day-picker · i18next (hr default, en) · React Leaflet · Photon (komoot) for geocoding — **not Nominatim** (its policy forbids autocomplete). Fonts self-hosted via @fontsource (Google Fonts would be a GDPR issue). Sentry is opt-in and lazy-loaded (`VITE_SENTRY_DSN`).
 
-## Architecture rule (Feature-Sliced Design-ish)
-
-```
-_app       bootstrap only: providers, routing, global CSS
-_entities  pure data: models, API hooks, basic UI atoms — no page logic
-_features  use-case logic (form hooks, validation) — depends on _entities
-_pages     full pages, each with ui/ + hooks/ — ALL logic lives in the hook, component only renders
-_shared    generic domain-agnostic UI components
-_widgets   complex stateful cross-page components (e.g. AppDrawer navbar)
-```
-
-Dependency direction: `_app → _widgets/_pages → _features → _entities → _shared`. Never import a higher layer from a lower one. Always use path aliases (`_entities`, `_shared`, etc.) — never relative `../../` imports.
-
-## Auth
-
-Session is a backend-set **HTTP-only cookie** (`withCredentials: true` on the shared axios instance). There is no JWT in localStorage or React state. Logged-in state is derived purely from whether `GET /me` (`useGetMe`, query key `['me']`) returns a user — exposed via `useGlobalContext()` → `{ user, isAuthLoading }`. `ProtectedRoute` / `GuestRoute` (`src/_app/api/AuthGuard.tsx`) gate routes on `user?.id`.
-
-## Env vars (`.env` at root)
+## Architecture (Feature-Sliced-ish)
 
 ```
-VITE_APP_BACKEND_URL=http://localhost:8080/api
-VITE_CLOUDINARY_CLOUD_NAME=
-VITE_CLOUDINARY_UPLOAD_PRESET=
+_app       providers, Routing.tsx (lazy pages + layout), AuthGuard (Protected/Guest/AdminRoute)
+_entities  data + API hooks + small UI per domain: listing, user, messaging, notification, admin, resource(upload)
+_features  use cases: auth (schemas, AuthLayout), listing-filters (URL state), listing-form (create/edit shared),
+           listing-actions (report/adopt/contact/share/owner menu), shelter (application form)
+_widgets   header (nav, bell, language), footer, notices (cookie, verify-email), listing-browser
+_pages     one dir per page: hooks/useX.ts (all logic) + ui/X.tsx (render)
+_shared    ui/ (shadcn + app primitives), lib/ (cn, format, errors, photon, monitoring)
 ```
 
-## Gotchas
+Dependency direction `_app → _pages/_widgets → _features → _entities → _shared`. Use path aliases, never `../../`.
 
-- `package.json` carries dead dependencies (`aws-sdk`, `@aws-sdk/client-s3`, `@react-oauth/google`) that are not used anywhere in `src/` — Google login is a plain redirect to `${VITE_APP_BACKEND_URL}/google`, not the `@react-oauth/google` SDK. Don't assume these packages are wired up.
-- Both `tailwind` and `tailwindcss` packages are present; only `tailwindcss` (v3) is actually configured (`tailwind.config.js`).
-- **Docker build fixed 2026-10-27.** `Dockerfile` now declares `ARG VITE_API_URL` + `ENV VITE_APP_BACKEND_URL=$VITE_API_URL` before `RUN npm run build`, so the `--build-arg VITE_API_URL=...` already passed by root `docker-compose.yml` actually reaches Vite at build time instead of baking in `undefined`.
-- **Port mismatch fixed 2026-10-27.** Root `nginx/conf.d/apps.conf` now proxies to `udomi-frontend:80` (the nginx:alpine default the Dockerfile's final stage actually listens on), not `:3000`.
-- A `vercel.json` also exists, suggesting Vercel may be (or may have been) an alternate/actual deployment target where env vars are set via dashboard instead of Docker build args — check which deployment path is actually live before debugging "it works locally but not in prod."
+## Conventions that matter
+
+- **Dates are DD.MM.YYYY everywhere** — `formatDate` in `_shared/lib/format.ts`, `DateInput` for entry.
+- **Translations:** every user-facing string in both `src/locales/hr.json` and `en.json`. Croatian plurals need `_one/_few/_other`. Backend error codes (UPPER_SNAKE) map to `errors.<CODE>` via `errorMessage()`.
+- **Browse filters live in the URL** (`_features/listing-filters/model/filters.ts`): friendly URL keys ↔ API params (`toApiParams`), same shape saved searches store.
+- **FormField** wires label/aria to its child; when the real input is nested (Controller, Radix Select trigger) pass a render function `{(ctl) => <SelectTrigger {...ctl} />}`.
+- Auth = httpOnly cookie; `useGlobalContext()` → `{ user, isLoggedIn, isAdmin }` from the `['me']` query. `user.verification_required` says whether the server enforces email verification (only when email sending is configured).
+- Listing photos upload to the backend (`POST /api/upload`) before the listing is saved; the backend sweeps orphans daily.
+- Lazy page chunks auto-reload once if a deploy removed them (`Routing.tsx`).
+- **Effects always use a block body** — `useEffect(() => { doThing(); }, [])`, never `useEffect(() => doThing(), [])`. The return value is treated as cleanup; Chrome 155+ returns a Promise from `window.scrollTo`, and returning it crashed every navigation (2026-10-27).
+- Crashes caught by the ErrorBoundary are POSTed to `/api/client-errors` and land in the backend log: `docker compose logs udomi-backend | grep client-error`. Check there first when a user reports "Ups, nešto je puklo".
+
+## Testing
+
+No unit tests. A Playwright UI run against the live site (41 checks: register, create listing, filters, messaging, report, settings, language, mobile) lived in the deploy session's scratchpad; recreate it for big changes rather than trusting tsc alone.

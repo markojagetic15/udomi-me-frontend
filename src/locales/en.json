@@ -1,289 +1,40 @@
 {
-  "nav": {
-    "createListing": "Create listing",
-    "profile": "Profile",
-    "logout": "Logout",
-    "signIn": "Sign In",
-    "register": "Register",
-    "login": "Login",
-    "brandName": "UDOMI ME"
-  },
-  "landing": {
-    "hero": {
-      "title1": "Every paw deserves",
-      "title2": "a loving home.",
-      "subtitle": "Udomi Me connects animals in need with people who care. Find your new best friend today — completely free.",
-      "findFriend": "Find a Friend"
-    },
-    "stats": {
-      "animalsListed": "Animals Listed",
-      "happyAdoptions": "Happy Adoptions",
-      "animalCategories": "Animal Categories",
-      "freeForeever": "Free Forever"
-    },
-    "categories": {
-      "title": "Browse by Category",
-      "subtitle": "Pick your favorite kind of companion and start browsing.",
-      "dogs": "Dogs",
-      "cats": "Cats",
-      "rabbits": "Rabbits",
-      "birds": "Birds",
-      "reptiles": "Reptiles",
-      "horses": "Horses",
-      "other": "Other"
-    },
-    "howItWorks": {
-      "title": "How It Works",
-      "subtitle": "Adopting is easy — three simple steps to change two lives.",
-      "step1Title": "Browse Listings",
-      "step1Desc": "Scroll through adorable animals all searching for their forever home.",
-      "step2Title": "Connect",
-      "step2Desc": "Reach out directly to the owner using the contact info on the listing.",
-      "step3Title": "Adopt!",
-      "step3Desc": "Welcome your new best friend home. Life gets better from here."
-    },
-    "whyAdopt": {
-      "title": "Why Adopt?",
-      "subtitle": "Because somewhere out there, a little animal is waiting just for you.",
-      "reason1Title": "Save a Life",
-      "reason1Desc": "Every adoption gives a deserving animal a second chance at happiness and love.",
-      "reason2Title": "Find Your Match",
-      "reason2Desc": "Playful puppy, calm cat, or tiny hamster — your perfect companion is waiting.",
-      "reason3Title": "Always Free",
-      "reason3Desc": "Udomi Me is completely free to browse and list. No fees, no catches, ever."
-    },
-    "recentlyAdded": {
-      "title": "Recently Added",
-      "subtitle": "Fresh listings — someone is waiting for their forever home right now.",
-      "seeAll": "See All Animals"
-    },
-    "cta": {
-      "title": "Ready to meet your match?",
-      "subtitle": "Thousands of animals are waiting. Your new best friend could be just one click away.",
-      "startBrowsing": "Start Browsing",
-      "createAccount": "Create Account"
-    }
-  },
-  "home": {
-    "searchPlaceholder": "Search for an animal...",
+  "common": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "choose": "Choose…",
     "clear": "Clear",
-    "noAnimals": "No animals found for adoption",
-    "failedToLoad": "Failed to load listings. Please try again.",
-    "retry": "Retry"
+    "close": "Close",
+    "delete": "Delete",
+    "more": "More",
+    "next": "Next",
+    "optional": "optional",
+    "pagination": "Pages",
+    "previous": "Previous",
+    "remove": "Remove",
+    "retry": "Try again",
+    "save": "Save"
   },
-  "login": {
-    "title": "Welcome back",
-    "subtitle": "Sign in to continue to Udomi Me",
-    "email": "Email",
-    "password": "Password",
-    "forgotPassword": "Forgot password?",
-    "signIn": "Sign In",
-    "or": "or",
-    "continueWithGoogle": "Continue with Google",
-    "noAccount": "Don't have an account?",
-    "register": "Register"
+  "nav": {
+    "account": "My account",
+    "admin": "Admin",
+    "adopt": "Adopt",
+    "createListing": "Add a pet",
+    "favorites": "Favourites",
+    "login": "Log in",
+    "logout": "Log out",
+    "lostFound": "Lost & found",
+    "main": "Main navigation",
+    "menu": "Menu",
+    "messages": "Messages",
+    "myListings": "My pets",
+    "notifications": "Notifications",
+    "publicProfile": "Public profile",
+    "register": "Sign up",
+    "settings": "Settings",
+    "stories": "Happy tails"
   },
-  "register": {
-    "title": "Create account",
-    "subtitle": "Join Udomi Me and help animals find homes",
-    "firstName": "First name",
-    "lastName": "Last name",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "agreeToTerms": "I agree to the",
-    "termsAndConditions": "Terms & Conditions",
-    "createAccount": "Create Account",
-    "or": "or",
-    "continueWithGoogle": "Continue with Google",
-    "alreadyHaveAccount": "Already have an account?",
-    "signIn": "Sign in",
-    "terms": {
-      "title": "Terms & Conditions",
-      "lastUpdated": "Last updated:",
-      "intro": "By using Udomi Me, you agree to the following terms. Please read them carefully.",
-      "section1Title": "1. Use of Service",
-      "section1Text": "Udomi Me is a free platform to connect animals in need with loving adopters. You agree to use the platform only for lawful purposes and in a manner consistent with animal welfare.",
-      "section2Title": "2. Listings",
-      "section2Text": "You are responsible for the accuracy of all listings you post. Misleading, fraudulent, or abusive listings are strictly prohibited and will result in account removal.",
-      "section3Title": "3. Privacy",
-      "section3Text": "We collect your name, email, and listing data to operate the service. We do not sell your personal data to third parties. Contact information shared on listings is your responsibility.",
-      "section4Title": "4. Animal Welfare",
-      "section4Text": "All users must ensure the welfare of animals listed or adopted through this platform. Udomi Me does not accept responsibility for the condition or care of animals after adoption.",
-      "section5Title": "5. Account Termination",
-      "section5Text": "We reserve the right to terminate accounts that violate these terms, without prior notice.",
-      "section6Title": "6. Changes",
-      "section6Text": "We may update these terms from time to time. Continued use of the service constitutes acceptance of any changes.",
-      "iUnderstand": "I Understand"
-    }
-  },
-  "forgotPassword": {
-    "title": "Forgot Password",
-    "subtitle": "Enter your email and we'll send you a reset link",
-    "emailAddress": "Email address",
-    "sendResetLink": "Send Reset Link",
-    "checkInbox": "Check your inbox!",
-    "checkInboxDesc": "If this email exists in our system, you'll receive a password reset link shortly.",
-    "backToSignIn": "Back to Sign In",
-    "rememberedPassword": "Remembered your password?",
-    "signIn": "Sign in"
-  },
-  "verifyEmail": {
-    "verifying": "Verifying your email…",
-    "verified": "Email Verified!",
-    "verifiedDesc": "Your account is now active. You can sign in and start adopting.",
-    "signIn": "Sign In",
-    "failed": "Verification Failed",
-    "failedDesc": "The link may have expired or is invalid. Try registering again.",
-    "registerAgain": "Register Again"
-  },
-  "profile": {
-    "memberSince": "Member since",
-    "active": "Active",
-    "adopted": "Adopted",
-    "myListings": "My Listings",
-    "total": "total",
-    "noListings": "You haven't posted any listings yet.",
-    "favouritedAnimals": "Favourited Animals",
-    "saved": "saved",
-    "noFavourites": "You haven't favourited any animals yet.",
-    "markAdopted": "Mark Adopted",
-    "saving": "Saving...",
-    "changePassword": {
-      "title": "Change Password",
-      "currentPassword": "Current Password",
-      "newPassword": "New Password",
-      "confirmNewPassword": "Confirm New Password",
-      "updatePassword": "Update Password",
-      "saving": "Saving...",
-      "success": "Password changed successfully!",
-      "error": "Failed to change password.",
-      "currentRequired": "Current password is required",
-      "newTooShort": "Password must be at least 8 characters",
-      "passwordsMismatch": "Passwords do not match"
-    }
-  },
-  "createListing": {
-    "title": "Create a Listing",
-    "subtitle": "Help an animal find their forever home.",
-    "publish": "Publish Listing",
-    "sections": {
-      "basicInfo": "Basic Information",
-      "animalDetails": "Animal Details",
-      "contactLocation": "Contact & Location",
-      "contactSubtitle": "Visible to potential adopters",
-      "photos": "Photos",
-      "photosSubtitle": "Optional. Drag to reorder. Up to 8 images.",
-      "uploadHint": "Upload up to 8 images"
-    },
-    "fields": {
-      "title": "Title",
-      "description": "Description",
-      "category": "Category",
-      "gender": "Gender",
-      "dateOfBirth": "Date of Birth",
-      "size": "Size",
-      "breed": "Breed",
-      "vaccinated": "Vaccinated",
-      "urgentAdoption": "Urgent adoption",
-      "urgentDesc": "Animal needs immediate adoption",
-      "areaCode": "Area code",
-      "phoneNumber": "Phone Number",
-      "email": "Email",
-      "address": "Address",
-      "addressHint": "(search or click the map)"
-    },
-    "dragToReorder": "Drag to reorder"
-  },
-  "editListing": {
-    "title": "Edit Listing",
-    "subtitle": "Update the details for your listing.",
-    "save": "Save Changes",
-    "photosSubtitle": "Drag to reorder. At least one photo required.",
-    "atLeast3": "At least 3 characters",
-    "atLeast5": "At least 5 characters",
-    "uploadHint": "Upload up to 8 images"
-  },
-  "animalInfo": {
-    "adopted": "Adopted",
-    "urgent": "Urgent",
-    "addToFavourites": "Add to favourites",
-    "reportListing": "Report this listing",
-    "interestedCount_one": "{{count}} person is interested",
-    "interestedCount_other": "{{count}} people are interested",
-    "beFirst": "Be the first to show interest",
-    "letOwnerKnow": "Let the owner know you'd love to adopt this animal.",
-    "imInterested": "I'm Interested",
-    "interested": "Interested!",
-    "foundHome": "This animal has found a home!",
-    "noLongerAvailable": "This listing is no longer available for adoption.",
-    "description": "Description",
-    "category": "Category",
-    "gender": "Gender",
-    "size": "Size",
-    "breed": "Breed",
-    "dateOfBirth": "Date of Birth",
-    "vaccinated": "Vaccinated",
-    "urgent_info": "Urgent",
-    "interested_label": "Interested",
-    "location": "Location",
-    "contactInfo": "Contact info",
-    "areaCode": "Area code",
-    "phoneNumber": "Phone number",
-    "email": "Email"
-  },
-  "errors": {
-    "400": {
-      "title": "Bad Request",
-      "description": "The request was invalid or could not be understood."
-    },
-    "401": {
-      "title": "Unauthorized",
-      "description": "You need to be logged in to view this page."
-    },
-    "403": {
-      "title": "Forbidden",
-      "description": "You don't have permission to access this resource."
-    },
-    "404": {
-      "title": "Page Not Found",
-      "description": "The page you're looking for doesn't exist or has been moved."
-    },
-    "408": {
-      "title": "Request Timeout",
-      "description": "The request took too long to complete. Please try again."
-    },
-    "429": {
-      "title": "Too Many Requests",
-      "description": "You've made too many requests. Please slow down and try again later."
-    },
-    "500": {
-      "title": "Internal Server Error",
-      "description": "Something went wrong on our end. Please try again later."
-    },
-    "502": {
-      "title": "Bad Gateway",
-      "description": "We received an invalid response from the server. Please try again."
-    },
-    "503": {
-      "title": "Service Unavailable",
-      "description": "The service is temporarily offline for maintenance. Please try again soon."
-    },
-    "default": {
-      "title": "Something Went Wrong",
-      "description": "An unexpected error occurred. Please try again."
-    },
-    "goBack": "Go Back",
-    "goHome": "Go Home"
-  },
-  "footer": {
-    "allRightsReserved": "All rights reserved.",
-    "browseAnimals": "Browse Animals",
-    "listAnAnimal": "List an Animal",
-    "login": "Login",
-    "register": "Register"
-  },
-  "categories": {
+  "category": {
     "dog": "Dog",
     "cat": "Cat",
     "rabbit": "Rabbit",
@@ -292,51 +43,761 @@
     "horse": "Horse",
     "other": "Other"
   },
-  "genders": {
+  "gender": {
     "male": "Male",
-    "female": "Female"
+    "female": "Female",
+    "unknown": "Unknown"
   },
-  "validation": {
-    "emailInvalid": "Email must be a valid email address",
-    "emailRequired": "Email is required",
-    "passwordRequired": "Password is required",
-    "firstNameRequired": "First name is required",
-    "lastNameRequired": "Last name is required",
-    "passwordComplexity": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number or special character",
-    "confirmPasswordRequired": "Confirm password is required",
-    "passwordsMismatch": "Your passwords do not match.",
-    "termsRequired": "You must accept the terms and conditions",
-    "titleRequired": "Title is required",
-    "titleMin": "Title must be at least 3 characters",
-    "titleMax": "Title must be at most 50 characters",
-    "descriptionRequired": "Description is required",
-    "descriptionMin": "Description must be at least 5 characters",
-    "descriptionMax": "Description must be at most 500 characters",
-    "imagesMax": "You can upload at most 8 images",
-    "phoneInvalid": "Phone number is not valid",
-    "categoryRequired": "Category is required",
-    "dateOfBirthRequired": "Date of birth is required",
-    "sizeNumber": "Size must be a number",
-    "sizeRequired": "Size is required",
-    "genderRequired": "Gender is required"
+  "listingType": {
+    "adoption": "Adoption",
+    "lost": "Lost",
+    "found": "Found"
   },
-  "toast": {
-    "accountCreated": "Account created! Check your email to verify your account.",
-    "listingCreated": "Listing created successfully!",
-    "passwordChanged": "Password changed successfully!",
-    "passwordResetSent": "Password reset email sent. Check your inbox!",
-    "imagesLimit": "You can only upload up to 8 images",
-    "imageTooLarge": "Image size must be less than 10MB",
-    "imageUploadFailed": "Failed to upload images"
+  "age": {
+    "weeks_one": "{{count}} week",
+    "weeks_other": "{{count}} weeks",
+    "months_one": "{{count}} month",
+    "months_other": "{{count}} months",
+    "years_one": "{{count}} year",
+    "years_other": "{{count}} years"
+  },
+  "traits": {
+    "vaccinated": "Vaccinated",
+    "sterilized": "Spayed / neutered",
+    "microchipped": "Microchipped",
+    "goodWithKids": "Good with kids",
+    "goodWithDogs": "Good with dogs",
+    "goodWithCats": "Good with cats"
   },
   "listing": {
-    "newborn": "Newborn",
-    "listed": "Listed",
-    "loginToFavourite": "You need to login to favourite a listing",
-    "removeFromFavourites": "Remove from favourites"
+    "addFavourite": "Add to favourites",
+    "removeFavourite": "Remove from favourites",
+    "adopted": "Adopted",
+    "reunited": "Reunited",
+    "delete": "Remove pet",
+    "deleteConfirmTitle": "Remove this pet?",
+    "deleteConfirmText": "This pet's page, photos and conversations will be permanently deleted. This can't be undone.",
+    "edit": "Edit",
+    "free": "Free",
+    "hiddenByAdmin": "Removed",
+    "interestSent": "The owner has been told you're interested 🐾",
+    "loginToFavourite": "Log in to save favourites",
+    "pause": "Hide for now",
+    "paused": "Hidden",
+    "photo": "Photo",
+    "resume": "Show again",
+    "urgent": "Urgent"
   },
-  "language": {
-    "switchTo": "HR",
-    "current": "EN"
+  "landing": {
+    "badge": "Free pet adoption in Croatia",
+    "title1": "Find a friend",
+    "title2": "for life.",
+    "subtitle": "Dogs, cats, rabbits and more are looking for a warm home. Meet pets from shelters and people near you - no fees, no middlemen.",
+    "ctaBrowse": "Browse animals",
+    "ctaRegister": "Create a free account",
+    "statAvailable": "animals looking for a home",
+    "statAdopted": "happy adoptions",
+    "statFree": "to add a pet",
+    "recentTitle": "Recently posted",
+    "recentSubtitle": "Meet the newest friends waiting for a home.",
+    "seeAll": "See all",
+    "emptyTitle": "No pets yet - be the first!",
+    "emptyCta": "Add a pet",
+    "howTitle": "How does it work?",
+    "howSubtitle": "From first look to new home in three steps.",
+    "step1Title": "Find a pet",
+    "step1Text": "Filter by species, age, size and location. Save a search and we'll tell you when a new pet arrives.",
+    "step2Title": "Message the owner",
+    "step2Text": "Write directly on the site - no need to publish your phone or email.",
+    "step3Title": "Meet and adopt",
+    "step3Text": "Arrange a visit, meet the animal in person and bring them home.",
+    "lostTitle": "Lost your pet?",
+    "lostText": "Post a lost or found animal. Neighbours watching your area will see it right away.",
+    "lostCount_one": "{{count}} animal is being searched for",
+    "lostCount_other": "{{count}} animals are being searched for",
+    "lostCta": "Lost & found",
+    "lostReport": "Report a lost pet",
+    "shelterTitle": "A shelter or rescue?",
+    "shelterText": "Verify your organisation to get a trust badge on all your pets and a public profile.",
+    "shelterCta": "Request verification",
+    "storiesTitle": "Happy tails",
+    "finalTitle": "Every animal deserves a home.",
+    "finalText": "Adopt, add a pet or share a story - every step helps."
+  },
+  "browse": {
+    "title": "Adopt a pet",
+    "subtitle": "Dogs, cats and other pets looking for a new home.",
+    "searchPlaceholder": "Search by name, breed, description…",
+    "sort": "Sort",
+    "sortBy": {
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "nearest": "Nearest",
+      "urgent": "Urgent first"
+    },
+    "results_one": "{{count}} pet",
+    "results_other": "{{count}} pets",
+    "emptyTitle": "No results",
+    "emptyText": "Try removing a filter - or save this search and we'll let you know when a matching pet arrives.",
+    "errorTitle": "Couldn't load pets",
+    "errorText": "Check your connection and try again."
+  },
+  "filters": {
+    "title": "Filters",
+    "species": "Species",
+    "location": "Location",
+    "cityPlaceholder": "City or town…",
+    "radius": "Distance",
+    "onlyThisCity": "This place only",
+    "withinKm": "Within {{km}} km",
+    "useMyLocation": "Use my location",
+    "nearMe": "Near me",
+    "geoUnavailable": "Your browser doesn't support location.",
+    "geoDenied": "Location access was denied.",
+    "gender": "Gender",
+    "age": "Age",
+    "agePreset": {
+      "baby": "Baby (< 1 yr)",
+      "young": "Young (1-3 yrs)",
+      "adult": "Adult (3-8 yrs)",
+      "senior": "Senior (8+ yrs)"
+    },
+    "size": "Size",
+    "sizePreset": {
+      "small": "Small (< 10 kg)",
+      "medium": "Medium (10-25 kg)",
+      "large": "Large (25+ kg)"
+    },
+    "health": "Health",
+    "temperament": "Temperament",
+    "other": "Other",
+    "urgentOnly": "Urgent only",
+    "sheltersOnly": "Verified shelters only",
+    "freeOnly": "No adoption fee",
+    "reset": "Reset filters",
+    "showResults_one": "Show {{count}} result",
+    "showResults_other": "Show {{count}} results"
+  },
+  "savedSearch": {
+    "save": "Notify me",
+    "title": "Save this search",
+    "description": "We'll let you know (in the app and by email) as soon as a new pet matches these filters.",
+    "name": "Search name",
+    "defaultName": "My search",
+    "confirm": "Save and notify me",
+    "created": "Search saved - we'll keep you posted!",
+    "deleted": "Search deleted",
+    "loginFirst": "Log in to save a search",
+    "open": "Open",
+    "since": "Saved {{date}}",
+    "emptyTitle": "No saved searches",
+    "emptyText": "Set filters on the pets page and click \"Notify me\"."
+  },
+  "lostFound": {
+    "title": "Lost & found",
+    "subtitle": "Help pets find their way home. Post a lost or found animal.",
+    "tabLost": "Lost",
+    "tabFound": "Found",
+    "report": {
+      "lost": "Report a lost pet",
+      "found": "Report a found animal"
+    }
+  },
+  "stories": {
+    "title": "Happy tails",
+    "subtitle_one": "{{count}} animal has found a home.",
+    "subtitle_other": "{{count}} animals have found a home.",
+    "emptyTitle": "The first stories are on their way",
+    "emptyText": "When an owner marks a pet as adopted, its story appears here.",
+    "noStory": "Found a new home. 🏡"
+  },
+  "detail": {
+    "about": "About {{name}}",
+    "details": "Details",
+    "species": "Species",
+    "gender": "Gender",
+    "age": "Age",
+    "weight": "Weight",
+    "breed": "Breed",
+    "fee": "Fee",
+    "eventDate": {
+      "lost": "Lost on",
+      "found": "Found on"
+    },
+    "medicalNotes": "Medical notes",
+    "story": "Adoption story",
+    "location": "Location",
+    "approximate": "approximate area",
+    "posted": "Posted {{date}}",
+    "memberSince": "Member since {{date}}",
+    "imInterested": "I'm interested",
+    "interested": "You're interested",
+    "interestCount_one": "{{count}} person is interested",
+    "interestCount_other": "{{count}} people are interested",
+    "yourListing_one": "This is your pet · {{count}} person interested",
+    "yourListing_other": "This is your pet · {{count}} people interested",
+    "showPhone": "Show phone number",
+    "safetyTip": "Tip: meet the animal in person before agreeing anything and never pay strangers in advance.",
+    "similar": "You might also like…",
+    "hiddenBanner": "This pet was removed after a report and isn't publicly visible.",
+    "adoptedBanner": "This pet has found a home! 🎉",
+    "reunitedBanner": "This animal is back with its owner! 🎉",
+    "pausedBanner": "This pet is hidden for now and isn't publicly visible."
+  },
+  "contact": {
+    "button": "Message {{name}}",
+    "title": "Message to {{name}}",
+    "description": "Your email stays hidden - you talk through Udomi me.",
+    "send": "Send message",
+    "loginFirst": "Log in to send a message",
+    "template": {
+      "adoption": "Hi! I'm interested in {{title}}. Are they still available for adoption? I'd love to meet.",
+      "lost": "Hi! I think I've seen \"{{title}}\".",
+      "found": "Hi! I think \"{{title}}\" is my pet."
+    }
+  },
+  "report": {
+    "title": "Report a problem",
+    "description": "Reports are anonymous - the owner won't know who sent it.",
+    "details": "More details",
+    "submit": "Send report",
+    "sent": "Thanks! We'll review the report.",
+    "reason": {
+      "scam": "Scam or asking for money up front",
+      "animal_welfare": "Animal abuse or neglect",
+      "selling": "Selling animals for profit",
+      "inappropriate": "Inappropriate content",
+      "duplicate": "Duplicate post",
+      "other": "Other"
+    }
+  },
+  "adopt": {
+    "title": {
+      "adopted": "Mark as adopted",
+      "reunited": "Mark as reunited"
+    },
+    "description": {
+      "adopted": "Congratulations! The pet leaves search results and appears among the happy tails.",
+      "reunited": "Wonderful! The pet leaves search results and appears among the happy tails."
+    },
+    "confirm": {
+      "adopted": "Adopted! 🎉",
+      "reunited": "Reunited! 🎉"
+    },
+    "menu": {
+      "adopted": "Mark as adopted",
+      "reunited": "Mark as reunited"
+    },
+    "editStory": "Edit story",
+    "story": "A short story",
+    "storyHint": "Shown on the Happy tails page.",
+    "storyPlaceholder": "How are they settling in?"
+  },
+  "listingForm": {
+    "createTitle": {
+      "adoption": "Add a pet for adoption",
+      "lost": "Report a lost animal",
+      "found": "Report a found animal"
+    },
+    "createSubtitle": "It's free. The more detail you add, the faster they find the right home.",
+    "editTitle": "Edit pet",
+    "typeTitle": "What are you posting?",
+    "type": {
+      "adoption": "Adoption",
+      "lost": "Lost",
+      "found": "Found"
+    },
+    "typeHint": {
+      "adoption": "I'm looking for a new home for an animal",
+      "lost": "My pet is missing",
+      "found": "I found an animal"
+    },
+    "photos": "Photos",
+    "photosHint": "The first photo is the cover. Drag to reorder.",
+    "basics": "Basics",
+    "title": "Title / name",
+    "titleHint": {
+      "adoption": "E.g. the pet's name and a key trait.",
+      "lost": "Your pet's name and where they went missing.",
+      "found": "Briefly describe the animal and the place."
+    },
+    "titlePlaceholder": {
+      "adoption": "Luna - a sweet girl",
+      "lost": "Missing Rex, Trnje",
+      "found": "Found black cat, Split"
+    },
+    "category": "Species",
+    "gender": "Gender",
+    "dateOfBirth": "Date of birth",
+    "dateOfBirthHint": "An approximate date is fine.",
+    "eventDate": {
+      "lost": "Date lost",
+      "found": "Date found"
+    },
+    "breed": "Breed",
+    "breedPlaceholder": "Mixed, labrador…",
+    "size": "Weight",
+    "description": "Description",
+    "descriptionHint": {
+      "adoption": "Temperament, habits, what they love, what kind of home suits them.",
+      "lost": "Looks, markings, collar, where and when they were last seen.",
+      "found": "Looks, condition, where they were found and where they are now."
+    },
+    "descriptionPlaceholder": {
+      "adoption": "Luna is playful and loves cuddles…",
+      "lost": "Rex wears a red collar and has a white patch on his chest…",
+      "found": "Found near the park, calm and well fed…"
+    },
+    "health": "Health & temperament",
+    "temperament": "Temperament",
+    "medicalNotes": "Medical notes",
+    "medicalNotesPlaceholder": "Medication, allergies, special diet…",
+    "fee": "Adoption fee",
+    "feeHint": "Only to cover costs (vaccination, microchip, spaying). Selling for profit isn't allowed.",
+    "feeMode": {
+      "free": "Free",
+      "fee": "With a fee",
+      "unspecified": "To be agreed"
+    },
+    "feeAmount": "Amount",
+    "location": "Location",
+    "locationHint": {
+      "adoption": "Where the animal is. The map only shows an approximate area.",
+      "lost": "Where your pet went missing.",
+      "found": "Where the animal was found."
+    },
+    "contact": "Contact (optional)",
+    "contactHint": "People can always message you through Udomi me. A phone or email here will be public.",
+    "phone": "Phone",
+    "email": "Email",
+    "urgent": "Urgent adoption",
+    "urgentHint": "Turn on if the animal needs a home as soon as possible.",
+    "publish": "Publish",
+    "save": "Save changes"
+  },
+  "location": {
+    "country": "Country",
+    "city": "City / town",
+    "cityPlaceholder": "Start typing…",
+    "area": "Area",
+    "areaPlaceholder": "E.g. Trnje"
+  },
+  "upload": {
+    "add": "Add",
+    "cover": "Cover",
+    "remove": "Remove photo",
+    "hint": "Up to {{max}} photos, JPG/PNG/HEIC up to 15 MB.",
+    "limit": "At most {{max}} photos.",
+    "tooLarge": "{{name}} is too large (max 15 MB).",
+    "failed": "Uploading {{name}} failed."
+  },
+  "messages": {
+    "title": "Messages",
+    "empty": "No conversations yet. Message the owner of any pet!",
+    "pickTitle": "Pick a conversation",
+    "pickText": "Your conversations with owners and interested people show up here.",
+    "notFound": "This conversation doesn't exist.",
+    "placeholder": "Write a message…",
+    "send": "Send",
+    "viewListing": "View pet",
+    "listingRemoved": "Pet is no longer posted",
+    "userUnavailable": "This user is no longer available.",
+    "team": "Udomi me team",
+    "official": "Official",
+    "officialThread": "Official message",
+    "officialHint": "A message from the site's admins. You can reply.",
+    "teamBadge": "Team"
+  },
+  "notifications": {
+    "markAllRead": "Mark all read",
+    "empty": "No notifications",
+    "emptyText": "Messages, interest in your pets and new matches for saved searches arrive here.",
+    "viewAll": "All notifications",
+    "message": "{{name}} sent you a message",
+    "interest": "{{name}} is interested in {{title}}",
+    "savedSearch": "New pet for \"{{search}}\": {{title}}",
+    "listingHidden": "\"{{title}}\" was removed after a report",
+    "shelterVerified": "{{name}} is now a verified shelter ✅",
+    "shelterRejected": "Verification request for {{name}} wasn't approved",
+    "shelterApplication": "New shelter request: {{name}}",
+    "generic": "New notification",
+    "listingRemoved": "An admin deleted your post \"{{title}}\""
+  },
+  "profile": {
+    "viewPublic": "View public profile",
+    "tabListings": "My pets",
+    "tabFavorites": "Favourites",
+    "tabSearches": "Saved searches",
+    "tabSettings": "Settings",
+    "listingsCount_one": "{{count}} pet",
+    "listingsCount_other": "{{count}} pets",
+    "noListings": "You haven't added a pet yet",
+    "noListingsText": "It's free and takes a couple of minutes.",
+    "noFavorites": "No favourites",
+    "noFavoritesText": "Tap the heart on a pet to save it.",
+    "statActive": "active",
+    "statAdopted": "adopted",
+    "listingsOf": "{{name}}'s pets",
+    "noPublicListings": "No pets right now."
+  },
+  "settings": {
+    "profile": "Profile",
+    "profileHint": "Other users see your first name and last initial.",
+    "changePhoto": "Change photo",
+    "emailHint": "Your email address isn't public.",
+    "notifications": "Notifications",
+    "emailNotifications": "Email notifications",
+    "emailNotificationsHint": "New messages, interest in your pets and new matches for saved searches.",
+    "password": "Password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "changePassword": "Change password",
+    "passwordChanged": "Password changed",
+    "privacy": "Privacy & data",
+    "privacyHint": "Your rights under the GDPR.",
+    "export": "Download your data",
+    "exportHint": "Everything we store about you, as a JSON file.",
+    "exportButton": "Download",
+    "delete": "Delete account",
+    "deleteHint": "Permanently deletes your account, pets, photos and messages.",
+    "deleteButton": "Delete account",
+    "deleteConfirmTitle": "Permanently delete your account?",
+    "deleteConfirmText": "The account {{email}} and all your pets, photos and messages will be permanently deleted. Type \"{{word}}\" to confirm.",
+    "deleteWord": "delete"
+  },
+  "shelter": {
+    "title": "Shelter or rescue",
+    "hint": "Verified organisations get a badge on all their pets and a public profile.",
+    "name": "Organisation name",
+    "city": "City",
+    "website": "Website",
+    "phone": "Phone",
+    "description": "Description",
+    "descriptionHint": "Who you are, how long you've been active, your registration number if you have one - it helps us verify.",
+    "descriptionMin": "The description needs at least 20 characters",
+    "apply": "Request verification",
+    "update": "Save details",
+    "withdraw": "Stop being a shelter account",
+    "submitted": "Request sent. We'll let you know after review.",
+    "statusVerified": "Your organisation is verified.",
+    "statusPending": "Your request is waiting for an admin to review it.",
+    "statusRejected": "Your request wasn't approved. Add more details and submit again.",
+    "verified": "Verified shelter",
+    "verifiedHint": "Admins have checked this organisation."
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Log in to continue.",
+    "registerTitle": "Create an account",
+    "registerSubtitle": "Free, in a few seconds.",
+    "continueWithGoogle": "Continue with Google",
+    "registerWithGoogle": "Sign up with Google",
+    "or": "or",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Repeat password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "forgot": "Forgot your password?",
+    "login": "Log in",
+    "register": "Sign up",
+    "createAccount": "Create account",
+    "noAccount": "No account yet?",
+    "haveAccount": "Already have an account?",
+    "acceptTerms": "I accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>.",
+    "passwordRules": "At least 8 characters, upper- and lower-case letters and a number or symbol.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "strength": {
+      "0": "Weak",
+      "1": "Fair",
+      "2": "Good",
+      "3": "Strong"
+    },
+    "forgotTitle": "Forgot password",
+    "forgotSubtitle": "Enter your email and we'll send you a link to set a new password.",
+    "forgotSent": "If an account exists for that address, we've sent a link. Check your spam folder too.",
+    "sendLink": "Send link",
+    "backToLogin": "Back to log in",
+    "resetTitle": "New password",
+    "resetSubmit": "Save password",
+    "resetDone": "Your password was changed. You can log in now.",
+    "requestNewLink": "Request a new link",
+    "quote": "\"Until one has loved an animal, a part of one's soul remains unawakened.\"",
+    "quoteSub": "- Anatole France"
+  },
+  "verify": {
+    "banner": "Confirm your email address ({{email}}) to add pets and send messages.",
+    "resend": "Send again",
+    "resent": "We've sent a new confirmation link.",
+    "resentShort": "Sent ✓",
+    "requiredTitle": "Confirm your email address",
+    "requiredText": "We sent a link to {{email}}. Once you confirm, you can add a pet.",
+    "successTitle": "Email confirmed!",
+    "successText": "All set - you can now add pets and send messages.",
+    "failTitle": "Confirmation failed"
+  },
+  "cookies": {
+    "title": "Cookies",
+    "text": "We only use strictly necessary cookies (login and language) - no tracking or ads.",
+    "more": "Learn more",
+    "ok": "OK"
+  },
+  "share": {
+    "title": "Share",
+    "copyLink": "Copy link",
+    "copied": "Link copied",
+    "copyFailed": "Couldn't copy"
+  },
+  "admin": {
+    "title": "Admin",
+    "subtitle": "Moderate pets, shelters and users.",
+    "tabOverview": "Overview",
+    "tabReports": "Reports",
+    "tabShelters": "Shelters",
+    "tabUsers": "Users",
+    "statUsers": "users",
+    "statListings": "pets posted",
+    "statAdopted": "adopted",
+    "statReports": "open reports",
+    "statPending": "shelters awaiting review",
+    "statShelters": "verified shelters",
+    "reportStatus": {
+      "open": "Open",
+      "resolved": "Resolved",
+      "dismissed": "Dismissed"
+    },
+    "noReports": "No reports 🎉",
+    "owner": "Owner",
+    "reporter": "Reported by",
+    "deletedUser": "deleted user",
+    "dismiss": "Dismiss",
+    "hideListing": "Hide pet",
+    "unhideListing": "Restore pet",
+    "banOwner": "Ban owner",
+    "action": {
+      "hide_listing": "Pet hidden",
+      "ban_user": "Owner banned"
+    },
+    "noShelters": "No pending requests",
+    "approve": "Approve",
+    "reject": "Reject",
+    "searchUsers": "Search by name or email…",
+    "roleAdmin": "Admin",
+    "unverified": "Unverified",
+    "banned": "Banned",
+    "ban": "Ban",
+    "unban": "Unban",
+    "done": "Done",
+    "activityHint": "Every admin action is recorded here: who did what, and when.",
+    "allTypes": "All post types",
+    "deleteListing": "Delete post",
+    "deleteListingTitle": "Permanently delete this post?",
+    "deleteListingText": "The post \"{{title}}\", its photos and conversations about it will be permanently deleted. The owner will be notified.",
+    "deleteUser": "Delete user",
+    "deleteUserTitle": "Permanently delete this user?",
+    "deleteUserText": "The account {{email}} and all their pets, photos and messages will be permanently deleted. This can't be undone. Type the user's email to confirm.",
+    "history": "History",
+    "joined": "Joined",
+    "language": "Language",
+    "noHistory": "No actions recorded yet",
+    "noPets": "No posts",
+    "noPhotos": "No photos",
+    "noUsers": "No users",
+    "protectedAccount": "Admin accounts (and your own) can't be banned or deleted from the panel.",
+    "reportsAgainst": "Reports against",
+    "reportsFiled": "Reports filed",
+    "searchPets": "Search by title, description, city or owner email...",
+    "shelterPending": "Shelter pending",
+    "statBanned": "banned users",
+    "statHidden": "hidden posts",
+    "statusActive": "Active",
+    "tabActivity": "Activity",
+    "tabPets": "Pets",
+    "typeEmail": "Email to confirm",
+    "userPets": "Pets",
+    "usersCount_one": "{{count}} user",
+    "usersCount_other": "{{count}} users",
+    "viewPublic": "Open public page",
+    "userFilter": {
+      "all": "All",
+      "reported": "Reported",
+      "banned": "Banned",
+      "unverified": "Unverified",
+      "shelters": "Shelters",
+      "admins": "Admins"
+    },
+    "petStatus": {
+      "all": "All",
+      "reported": "Reported",
+      "active": "Active",
+      "paused": "Hidden by owner",
+      "adopted": "Adopted",
+      "hidden": "Removed by admin"
+    },
+    "actionLog": {
+      "ban_user": "banned user",
+      "unban_user": "unbanned user",
+      "delete_user": "deleted user",
+      "hide_listing": "hid post",
+      "unhide_listing": "restored post",
+      "delete_listing": "deleted post",
+      "dismiss_report": "dismissed a report on",
+      "approve_shelter": "approved shelter",
+      "reject_shelter": "rejected shelter",
+      "message_user": "messaged user",
+      "broadcast_message": "messaged users:"
+    },
+    "tabMessages": "Messages",
+    "sendMessage": "Send message",
+    "messageTitle": "Message to {{name}}",
+    "messageHint": "Arrives in the user's Messages as a message from the \"Udomi me team\". They can reply, and replies come to your Messages.",
+    "messageSent": "Message sent",
+    "openConversation": "Open conversation",
+    "broadcastTitle": "Message users",
+    "broadcastHint": "Every user gets it in their Messages, from the \"Udomi me team\", and can reply.",
+    "broadcastMessage": "Message",
+    "broadcastPlaceholder": "E.g. Hi! We've added saved searches...",
+    "broadcastSend": "Send",
+    "recipients_one": "{{count}} recipient",
+    "recipients_other": "{{count}} recipients",
+    "broadcastConfirmTitle_one": "Send this message to {{count}} user?",
+    "broadcastConfirmTitle_other": "Send this message to {{count}} users?",
+    "broadcastSent_one": "Message sent to {{count}} user",
+    "broadcastSent_other": "Message sent to {{count}} users",
+    "broadcastInfo1": "Messages arrive in the app only (Messages + a notification), not by email.",
+    "broadcastInfo2": "Banned users and you don't receive it.",
+    "broadcastInfo3": "If someone replies, it arrives in your Messages as a separate conversation.",
+    "audience": {
+      "all": "All users",
+      "posters": "Users with pets",
+      "shelters": "Verified shelters"
+    },
+    "audienceHint": {
+      "all": "Everyone except banned",
+      "posters": "Posted at least one pet",
+      "shelters": "Approved shelters only"
+    }
+  },
+  "toast": {
+    "saved": "Saved",
+    "listingCreated": "Your pet is live! 🐾",
+    "listingUpdated": "Changes saved",
+    "listingDeleted": "Pet removed",
+    "listingActivated": "Pet is visible again",
+    "listingPaused": "Pet hidden for now",
+    "markedAdopted": "Congratulations! 🎉"
+  },
+  "validation": {
+    "required": "Required",
+    "titleRequired": "Enter a title",
+    "titleMin": "The title needs at least 3 characters",
+    "titleMax": "The title can have at most 60 characters",
+    "descriptionRequired": "Enter a description",
+    "descriptionMin": "The description needs at least 5 characters",
+    "descriptionMax": "The description can have at most 2000 characters",
+    "imagesRequired": "Add at least one photo",
+    "imagesMax": "At most 8 photos",
+    "categoryRequired": "Choose a species",
+    "genderRequired": "Choose a gender",
+    "dateOfBirthRequired": "Enter a date of birth (DD.MM.YYYY)",
+    "eventDateRequired": "Enter a date (DD.MM.YYYY)",
+    "dateFuture": "The date can't be in the future",
+    "sizeInvalid": "Enter a weight between 0 and 200 kg",
+    "feeRequired": "Enter an amount",
+    "feeInvalid": "The amount must be between 1 and 10,000 €",
+    "cityRequired": "Choose a city or town",
+    "phoneInvalid": "Invalid phone number",
+    "emailInvalid": "Invalid email address",
+    "emailRequired": "Enter your email",
+    "passwordRequired": "Enter your password",
+    "passwordMin": "The password needs at least 8 characters",
+    "passwordMax": "The password can have at most 72 characters",
+    "passwordWeak": "Use upper- and lower-case letters and a number or symbol",
+    "passwordsMatch": "Passwords don't match",
+    "confirmRequired": "Repeat the password",
+    "firstNameRequired": "Enter your first name",
+    "lastNameRequired": "Enter your last name",
+    "acceptTerms": "You need to accept the terms to sign up",
+    "urlInvalid": "Enter an address starting with https://"
+  },
+  "errors": {
+    "generic": "Something's not right. Check the details and try again.",
+    "server": "The server isn't available right now. Try again in a bit.",
+    "rateLimited": "Too many attempts. Wait a minute and try again.",
+    "unauthorized": "Log in to continue.",
+    "forbidden": "You're not allowed to do that.",
+    "notFound": "That doesn't exist.",
+    "INVALID_CREDENTIALS": "Wrong email or password.",
+    "GOOGLE_ACCOUNT": "This account uses Google sign-in.",
+    "EMAIL_TAKEN": "An account with this email already exists.",
+    "EMAIL_NOT_VERIFIED": "Please confirm your email address first.",
+    "ALREADY_REPORTED": "You've already reported this - we're reviewing it.",
+    "WRONG_PASSWORD": "Your current password isn't correct.",
+    "INVALID_RESET_LINK": "This password reset link is invalid or has expired.",
+    "INVALID_VERIFICATION_LINK": "This confirmation link is invalid or has already been used.",
+    "ACCOUNT_BANNED": "This account has been blocked for breaking the rules.",
+    "EMAIL_NOT_CONFIGURED": "Sending email isn't available right now."
+  },
+  "errorPage": {
+    "home": "Home",
+    "400": {
+      "title": "Bad request",
+      "text": "Something's wrong with the request."
+    },
+    "401": {
+      "title": "Login required",
+      "text": "Log in to see this page."
+    },
+    "403": {
+      "title": "Access denied",
+      "text": "You don't have access to this page."
+    },
+    "404": {
+      "title": "Page not found",
+      "text": "Looks like this pet wandered off. It may have been removed or the link is wrong."
+    },
+    "408": {
+      "title": "Timed out",
+      "text": "The request took too long. Try again."
+    },
+    "429": {
+      "title": "Slow down 🐢",
+      "text": "Too many requests. Wait a moment."
+    },
+    "500": {
+      "title": "Server error",
+      "text": "Something went wrong on our side. Try again in a bit."
+    },
+    "502": {
+      "title": "Server unavailable",
+      "text": "Try again in a minute."
+    },
+    "503": {
+      "title": "Maintenance",
+      "text": "The site is being updated. Back soon."
+    }
+  },
+  "crash": {
+    "title": "Oops, something broke",
+    "description": "An unexpected error happened. Refresh the page or go back home.",
+    "home": "Go home",
+    "details": "Technical details"
+  },
+  "footer": {
+    "tagline": "A free pet adoption platform for Croatia. Every animal deserves a home.",
+    "explore": "Explore",
+    "account": "Account",
+    "legal": "Legal",
+    "shelters": "Shelters",
+    "privacy": "Privacy",
+    "terms": "Terms of use",
+    "rights": "All rights reserved.",
+    "madeWith": "Made with 🐾 in Croatia"
+  },
+  "legal": {
+    "effective": "Effective from {{date}}",
+    "privacyTitle": "Privacy policy",
+    "termsTitle": "Terms of use"
   }
 }

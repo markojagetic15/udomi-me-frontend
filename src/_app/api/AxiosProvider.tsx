@@ -9,12 +9,10 @@ export const AxiosContext = createContext<AxiosContextType>({
   axios: Axios,
 });
 
-const AUTH_ENDPOINTS = ['/login', '/signup', '/forgot-password', '/reset-password', '/change-password'];
-
-const extractMessage = (data: any, fallback: string): string => {
-  const raw = data?.message;
+const extractMessage = (data: unknown, fallback: string): string => {
+  const raw = (data as { message?: unknown })?.message;
   if (!raw) return fallback;
-  if (Array.isArray(raw)) return raw[0] ?? fallback;
+  if (Array.isArray(raw)) return String(raw[0] ?? fallback);
   return String(raw);
 };
 
@@ -28,19 +26,19 @@ export const AxiosProvider = ({
     });
 
     instance.interceptors.response.use(
+      // Hooks receive the payload directly, not the Axios response.
       (response) => response.data,
       (error) => {
-        const status: number = error.response?.status ?? 0;
-        const url: string = error.config?.url ?? '';
-        const isAuthEndpoint = AUTH_ENDPOINTS.some((e) => url.includes(e));
-
         error.message = extractMessage(error.response?.data, error.message);
-
-        if (status === 401 && !isAuthEndpoint && !url.includes('/me')) {
-          window.location.href = '/login';
-          return Promise.reject(error);
+        // A banned account is logged out everywhere it's used.
+        if (
+          error.response?.status === 403 &&
+          error.message === 'ACCOUNT_BANNED'
+        ) {
+          if (!window.location.pathname.startsWith('/login')) {
+            window.location.href = '/login?error=banned';
+          }
         }
-
         return Promise.reject(error);
       }
     );

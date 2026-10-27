@@ -1,55 +1,37 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Button } from '_shared';
 
-const errorEmojis: Record<number, string> = {
-  400: '🚫',
-  401: '🔐',
-  403: '⛔',
-  404: '🐾',
-  408: '⏱️',
-  429: '🐢',
-  500: '💥',
-  502: '🌐',
-  503: '🔧',
+const KNOWN = ['400', '401', '403', '404', '408', '429', '500', '502', '503'];
+const EMOJI: Record<string, string> = {
+  '403': '🙅',
+  '404': '🐾',
+  '429': '🐢',
+  '500': '🙀',
 };
 
-export const ErrorPage = ({ code }: { code?: number }) => {
-  const navigate = useNavigate();
+export const ErrorPage = ({ code: codeProp }: { code?: number }) => {
   const { t } = useTranslation();
-
-  const emoji = (code && errorEmojis[code]) || '❓';
-  const titleKey = code && t(`errors.${code}.title`, { defaultValue: '' })
-    ? `errors.${code}.title`
-    : 'errors.default.title';
-  const descKey = code && t(`errors.${code}.description`, { defaultValue: '' })
-    ? `errors.${code}.description`
-    : 'errors.default.description';
-
+  const params = useParams<{ code: string }>();
+  const raw = String(codeProp ?? params.code ?? 404);
+  const code = KNOWN.includes(raw) ? raw : '404';
   return (
-    <div className='min-h-screen flex items-center justify-center px-4'>
-      <div className='text-center max-w-md'>
-        <div className='w-28 h-28 rounded-3xl bg-white/70 backdrop-blur-sm shadow-sm border border-white/80 flex items-center justify-center text-6xl mx-auto mb-6 select-none'>
-          {emoji}
-        </div>
-        {code && (
-          <p className='text-7xl font-extrabold text-primary/20 mb-2 leading-none'>{code}</p>
-        )}
-        <h1 className='text-2xl font-bold text-gray-800 mb-3'>{t(titleKey)}</h1>
-        <p className='text-gray-500 mb-8 leading-relaxed'>{t(descKey)}</p>
-        <div className='flex gap-3 justify-center'>
-          <button
-            onClick={() => navigate(-1)}
-            className='px-6 py-2.5 rounded-xl border border-primary text-primary font-medium hover:bg-primary hover:text-white transition-all'
-          >
-            {t('errors.goBack')}
-          </button>
-          <button
-            onClick={() => navigate('/')}
-            className='px-6 py-2.5 rounded-xl bg-primary text-white font-medium hover:opacity-90 transition-opacity shadow-sm'
-          >
-            {t('errors.goHome')}
-          </button>
-        </div>
+    <div className='container flex min-h-[60vh] flex-col items-center justify-center py-16 text-center'>
+      <div className='mb-4 select-none text-7xl'>{EMOJI[code] ?? '😿'}</div>
+      <p className='font-display text-6xl font-black text-primary'>{code}</p>
+      <h1 className='mt-3 text-2xl font-extrabold'>
+        {t(`errorPage.${code}.title`)}
+      </h1>
+      <p className='mt-2 max-w-md text-muted-foreground'>
+        {t(`errorPage.${code}.text`)}
+      </p>
+      <div className='mt-8 flex gap-3'>
+        <Button asChild>
+          <Link to='/browse'>{t('landing.ctaBrowse')}</Link>
+        </Button>
+        <Button variant='outline' asChild>
+          <Link to='/'>{t('errorPage.home')}</Link>
+        </Button>
       </div>
     </div>
   );

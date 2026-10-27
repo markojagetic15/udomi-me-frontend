@@ -1,27 +1,27 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
-import tailwindcss from 'tailwindcss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-
-  css: {
-    postcss: {
-      plugins: [tailwindcss()],
-    },
-  },
 
   server: {
     port: 3000,
   },
 
   build: {
-    target: 'esnext',
+    target: 'es2020',
+    rollupOptions: {
+      output: {
+        // Framework code changes rarely — its own chunk stays cached across deploys.
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          data: ['@tanstack/react-query', 'axios', 'i18next', 'react-i18next'],
+        },
+      },
+    },
   },
-
-  define: { global: 'window' },
 
   resolve: {
     alias: {

@@ -1,342 +1,817 @@
 {
+  "common": {
+    "back": "Natrag",
+    "cancel": "Odustani",
+    "choose": "Odaberi…",
+    "clear": "Očisti",
+    "close": "Zatvori",
+    "delete": "Obriši",
+    "more": "Više",
+    "next": "Sljedeće",
+    "optional": "neobavezno",
+    "pagination": "Stranice",
+    "previous": "Prethodno",
+    "remove": "Ukloni",
+    "retry": "Pokušaj ponovno",
+    "save": "Spremi"
+  },
   "nav": {
-    "createListing": "Dodaj oglas",
-    "profile": "Profil",
+    "account": "Moj račun",
+    "admin": "Administracija",
+    "adopt": "Udomi",
+    "createListing": "Dodaj ljubimca",
+    "favorites": "Favoriti",
+    "login": "Prijava",
     "logout": "Odjava",
-    "signIn": "Prijava",
+    "lostFound": "Izgubljeni i nađeni",
+    "main": "Glavna navigacija",
+    "menu": "Izbornik",
+    "messages": "Poruke",
+    "myListings": "Moji ljubimci",
+    "notifications": "Obavijesti",
+    "publicProfile": "Javni profil",
     "register": "Registracija",
-    "login": "Prijava",
-    "brandName": "UDOMI ME"
+    "settings": "Postavke",
+    "stories": "Sretne priče"
   },
-  "landing": {
-    "hero": {
-      "title1": "Svaka šapa zaslužuje",
-      "title2": "topli dom.",
-      "subtitle": "Udomi Me povezuje životinje kojima je potrebna pomoć s ljudima koji brinu. Pronađi svog novog prijatelja danas — potpuno besplatno.",
-      "findFriend": "Pronađi prijatelja"
-    },
-    "stats": {
-      "animalsListed": "Oglasa životinja",
-      "happyAdoptions": "Sretnih udomljavanja",
-      "animalCategories": "Kategorija životinja",
-      "freeForeever": "Uvijek besplatno"
-    },
-    "categories": {
-      "title": "Pretraži po kategoriji",
-      "subtitle": "Odaberi svoju omiljenu vrstu suputnika i počni pregledavati.",
-      "dogs": "Psi",
-      "cats": "Mačke",
-      "rabbits": "Kunići",
-      "birds": "Ptice",
-      "reptiles": "Reptili",
-      "horses": "Konji",
-      "other": "Ostalo"
-    },
-    "howItWorks": {
-      "title": "Kako funkcionira",
-      "subtitle": "Udomljavanje je jednostavno — tri koraka koja mijenjaju dva života.",
-      "step1Title": "Pregledaj oglase",
-      "step1Desc": "Listaj kroz slatke životinje koje traže svog vlasnika.",
-      "step2Title": "Povežite se",
-      "step2Desc": "Kontaktirajte vlasnika izravno putem kontakt podataka na oglasu.",
-      "step3Title": "Udomi!",
-      "step3Desc": "Dobrodošao novi prijatelj! Život postaje ljepši od ovog trenutka."
-    },
-    "whyAdopt": {
-      "title": "Zašto udomiti?",
-      "subtitle": "Jer negdje vani, neka mala životinja čeka upravo tebe.",
-      "reason1Title": "Spasi život",
-      "reason1Desc": "Svako udomljavanje daje zaslužnoj životinji drugu šansu za sreću i ljubav.",
-      "reason2Title": "Pronađi svog prijatelja",
-      "reason2Desc": "Nestašni štenci, mirne mačke ili mali hrčci — tvoj savršeni suputnik čeka.",
-      "reason3Title": "Uvijek besplatno",
-      "reason3Desc": "Udomi Me je potpuno besplatan za pregledavanje i oglašavanje. Bez naknada, bez skrivenih troškova."
-    },
-    "recentlyAdded": {
-      "title": "Nedavno dodano",
-      "subtitle": "Novi oglasi — netko čeka svog vlasnika upravo sada.",
-      "seeAll": "Pogledaj sve životinje"
-    },
-    "cta": {
-      "title": "Spreman za pronalazak svog prijatelja?",
-      "subtitle": "Tisuće životinja čekaju. Tvoj novi prijatelj možda je samo jedan klik dalje.",
-      "startBrowsing": "Počni pregledavati",
-      "createAccount": "Stvori račun"
-    }
-  },
-  "home": {
-    "searchPlaceholder": "Traži životinju...",
-    "clear": "Poništi",
-    "noAnimals": "Nema životinja za udomljavanje",
-    "failedToLoad": "Učitavanje oglasa nije uspjelo. Pokušaj ponovo.",
-    "retry": "Pokušaj ponovo"
-  },
-  "login": {
-    "title": "Dobrodošao natrag",
-    "subtitle": "Prijavi se za nastavak na Udomi Me",
-    "email": "E-pošta",
-    "password": "Lozinka",
-    "forgotPassword": "Zaboravljena lozinka?",
-    "signIn": "Prijava",
-    "or": "ili",
-    "continueWithGoogle": "Nastavi s Googleom",
-    "noAccount": "Nemaš račun?",
-    "register": "Registriraj se"
-  },
-  "register": {
-    "title": "Stvori račun",
-    "subtitle": "Pridruži se Udomi Me i pomozi životinjama da pronađu dom",
-    "firstName": "Ime",
-    "lastName": "Prezime",
-    "email": "E-pošta",
-    "password": "Lozinka",
-    "confirmPassword": "Potvrdi lozinku",
-    "agreeToTerms": "Prihvaćam",
-    "termsAndConditions": "Uvjete korištenja",
-    "createAccount": "Stvori račun",
-    "or": "ili",
-    "continueWithGoogle": "Nastavi s Googleom",
-    "alreadyHaveAccount": "Već imaš račun?",
-    "signIn": "Prijavi se",
-    "terms": {
-      "title": "Uvjeti korištenja",
-      "lastUpdated": "Zadnje ažuriranje:",
-      "intro": "Korištenjem Udomi Me, prihvaćaš sljedeće uvjete. Pažljivo ih pročitaj.",
-      "section1Title": "1. Korištenje usluge",
-      "section1Text": "Udomi Me je besplatna platforma za povezivanje životinja kojima je potrebna pomoć s ljubaznim udomiteljima. Suglasan si da ćeš koristiti platformu samo u zakonite svrhe i na način koji je u skladu s dobrobiti životinja.",
-      "section2Title": "2. Oglasi",
-      "section2Text": "Odgovoran si za točnost svih oglasa koje objavljuješ. Obmanjujući, lažni ili uvredljivi oglasi strogo su zabranjeni i rezultirat će uklanjanjem računa.",
-      "section3Title": "3. Privatnost",
-      "section3Text": "Prikupljamo tvoje ime, e-poštu i podatke o oglasima kako bismo upravljali uslugom. Ne prodajemo tvoje osobne podatke trećim stranama. Kontaktni podaci koje dijeliš na oglasima tvoja su odgovornost.",
-      "section4Title": "4. Dobrobit životinja",
-      "section4Text": "Svi korisnici moraju osigurati dobrobit životinja navedenih ili udomljenih putem ove platforme. Udomi Me ne prihvaća odgovornost za stanje ili brigu o životinjama nakon udomljavanja.",
-      "section5Title": "5. Ukidanje računa",
-      "section5Text": "Zadržavamo pravo ukidanja računa koji krše ove uvjete, bez prethodne obavijesti.",
-      "section6Title": "6. Promjene",
-      "section6Text": "S vremena na vrijeme možemo ažurirati ove uvjete. Nastavak korištenja usluge podrazumijeva prihvaćanje svih promjena.",
-      "iUnderstand": "Razumijem"
-    }
-  },
-  "forgotPassword": {
-    "title": "Zaboravljena lozinka",
-    "subtitle": "Unesite svoju e-poštu i poslat ćemo vam link za poništavanje",
-    "emailAddress": "Adresa e-pošte",
-    "sendResetLink": "Pošalji link za poništavanje",
-    "checkInbox": "Provjeri svoju poštu!",
-    "checkInboxDesc": "Ako ova e-pošta postoji u našem sustavu, uskoro ćeš primiti link za poništavanje lozinke.",
-    "backToSignIn": "Natrag na prijavu",
-    "rememberedPassword": "Sjetio si se lozinke?",
-    "signIn": "Prijavi se"
-  },
-  "verifyEmail": {
-    "verifying": "Provjera e-pošte u tijeku…",
-    "verified": "E-pošta potvrđena!",
-    "verifiedDesc": "Tvoj račun je sada aktivan. Možeš se prijaviti i početi udomljavati.",
-    "signIn": "Prijava",
-    "failed": "Provjera nije uspjela",
-    "failedDesc": "Link je možda istekao ili je nevažeći. Pokušaj se ponovo registrirati.",
-    "registerAgain": "Registriraj se ponovo"
-  },
-  "profile": {
-    "memberSince": "Član od",
-    "active": "Aktivni",
-    "adopted": "Udomljeni",
-    "myListings": "Moji oglasi",
-    "total": "ukupno",
-    "noListings": "Još nisi objavio nijedan oglas.",
-    "favouritedAnimals": "Omiljene životinje",
-    "saved": "spremljeno",
-    "noFavourites": "Još nisi dodao nijednu životinju u omiljene.",
-    "markAdopted": "Označi kao udomljeno",
-    "saving": "Sprema se...",
-    "changePassword": {
-      "title": "Promjena lozinke",
-      "currentPassword": "Trenutna lozinka",
-      "newPassword": "Nova lozinka",
-      "confirmNewPassword": "Potvrdi novu lozinku",
-      "updatePassword": "Ažuriraj lozinku",
-      "saving": "Sprema se...",
-      "success": "Lozinka je uspješno promijenjena!",
-      "error": "Promjena lozinke nije uspjela.",
-      "currentRequired": "Trenutna lozinka je obavezna",
-      "newTooShort": "Lozinka mora imati najmanje 8 znakova",
-      "passwordsMismatch": "Lozinke se ne podudaraju"
-    }
-  },
-  "createListing": {
-    "title": "Dodaj oglas",
-    "subtitle": "Pomozi životinji da pronađe vječni dom.",
-    "publish": "Objavi oglas",
-    "sections": {
-      "basicInfo": "Osnovne informacije",
-      "animalDetails": "Detalji o životinji",
-      "contactLocation": "Kontakt i lokacija",
-      "contactSubtitle": "Vidljivo potencijalnim udomiteljima",
-      "photos": "Fotografije",
-      "photosSubtitle": "Nije obavezno. Povuci za promjenu redosljeda. Do 8 slika.",
-      "uploadHint": "Prenesi do 8 slika"
-    },
-    "fields": {
-      "title": "Naslov",
-      "description": "Opis",
-      "category": "Kategorija",
-      "gender": "Spol",
-      "dateOfBirth": "Datum rođenja",
-      "size": "Veličina",
-      "breed": "Pasmina",
-      "vaccinated": "Cijepljeno",
-      "urgentAdoption": "Hitno udomljavanje",
-      "urgentDesc": "Životinja treba hitno udomljavanje",
-      "areaCode": "Pozivni broj",
-      "phoneNumber": "Broj telefona",
-      "email": "E-pošta",
-      "address": "Adresa",
-      "addressHint": "(pretraži ili klikni na kartu)"
-    },
-    "dragToReorder": "Povuci za promjenu redosljeda"
-  },
-  "editListing": {
-    "title": "Uredi oglas",
-    "subtitle": "Ažuriraj detalje svog oglasa.",
-    "save": "Spremi promjene",
-    "photosSubtitle": "Povuci za promjenu redosljeda. Potrebna je najmanje jedna fotografija.",
-    "atLeast3": "Najmanje 3 znaka",
-    "atLeast5": "Najmanje 5 znakova",
-    "uploadHint": "Prenesi do 8 slika"
-  },
-  "animalInfo": {
-    "adopted": "Udomljeno",
-    "urgent": "Hitno",
-    "addToFavourites": "Dodaj u omiljene",
-    "reportListing": "Prijavi oglas",
-    "interestedCount_one": "{{count}} osoba je zainteresirana",
-    "interestedCount_other": "{{count}} osoba je zainteresirano",
-    "beFirst": "Budi prvi koji pokazuje interes",
-    "letOwnerKnow": "Obavijesti vlasnika da bi volio udomiti ovu životinju.",
-    "imInterested": "Zainteresiran sam",
-    "interested": "Zainteresiran!",
-    "foundHome": "Ova životinja je pronašla dom!",
-    "noLongerAvailable": "Ovaj oglas više nije dostupan za udomljavanje.",
-    "description": "Opis",
-    "category": "Kategorija",
-    "gender": "Spol",
-    "size": "Veličina",
-    "breed": "Pasmina",
-    "dateOfBirth": "Datum rođenja",
-    "vaccinated": "Cijepljeno",
-    "urgent_info": "Hitno",
-    "interested_label": "Zainteresirani",
-    "location": "Lokacija",
-    "contactInfo": "Kontakt podaci",
-    "areaCode": "Pozivni broj",
-    "phoneNumber": "Broj telefona",
-    "email": "E-pošta"
-  },
-  "errors": {
-    "400": {
-      "title": "Neispravan zahtjev",
-      "description": "Zahtjev je bio neispravan ili ga nije moguće razumjeti."
-    },
-    "401": {
-      "title": "Neovlašteno",
-      "description": "Morate biti prijavljeni da biste vidjeli ovu stranicu."
-    },
-    "403": {
-      "title": "Zabranjeno",
-      "description": "Nemate dopuštenje za pristup ovom resursu."
-    },
-    "404": {
-      "title": "Stranica nije pronađena",
-      "description": "Stranica koju tražite ne postoji ili je premještena."
-    },
-    "408": {
-      "title": "Prekoračeno vrijeme zahtjeva",
-      "description": "Zahtjev je trajao predugo. Pokušajte ponovo."
-    },
-    "429": {
-      "title": "Previše zahtjeva",
-      "description": "Poslali ste previše zahtjeva. Usporite i pokušajte ponovo kasnije."
-    },
-    "500": {
-      "title": "Interna greška poslužitelja",
-      "description": "Nešto je pošlo krivo s naše strane. Pokušajte ponovo kasnije."
-    },
-    "502": {
-      "title": "Loš pristupnik",
-      "description": "Primili smo nevažeći odgovor od poslužitelja. Pokušajte ponovo."
-    },
-    "503": {
-      "title": "Usluga nedostupna",
-      "description": "Usluga je privremeno nedostupna radi održavanja. Pokušajte ponovo uskoro."
-    },
-    "default": {
-      "title": "Nešto je pošlo krivo",
-      "description": "Došlo je do neočekivane greške. Pokušajte ponovo."
-    },
-    "goBack": "Natrag",
-    "goHome": "Početna"
-  },
-  "footer": {
-    "allRightsReserved": "Sva prava pridržana.",
-    "browseAnimals": "Pretraži životinje",
-    "listAnAnimal": "Dodaj životinju",
-    "login": "Prijava",
-    "register": "Registracija"
-  },
-  "categories": {
+  "category": {
     "dog": "Pas",
     "cat": "Mačka",
     "rabbit": "Kunić",
     "bird": "Ptica",
-    "reptile": "Reptil",
+    "reptile": "Gmaz",
     "horse": "Konj",
     "other": "Ostalo"
   },
-  "genders": {
-    "male": "Muško",
-    "female": "Žensko"
+  "gender": {
+    "male": "Mužjak",
+    "female": "Ženka",
+    "unknown": "Nepoznato"
   },
-  "validation": {
-    "emailInvalid": "E-pošta mora biti valjana adresa",
-    "emailRequired": "E-pošta je obavezna",
-    "passwordRequired": "Lozinka je obavezna",
-    "firstNameRequired": "Ime je obavezno",
-    "lastNameRequired": "Prezime je obavezno",
-    "passwordComplexity": "Lozinka mora sadržavati najmanje 1 veliko slovo, 1 malo slovo, 1 broj ili poseban znak",
-    "confirmPasswordRequired": "Potvrda lozinke je obavezna",
-    "passwordsMismatch": "Lozinke se ne podudaraju.",
-    "termsRequired": "Morate prihvatiti uvjete korištenja",
-    "titleRequired": "Naslov je obavezan",
-    "titleMin": "Naslov mora imati najmanje 3 znaka",
-    "titleMax": "Naslov smije imati najviše 50 znakova",
-    "descriptionRequired": "Opis je obavezan",
-    "descriptionMin": "Opis mora imati najmanje 5 znakova",
-    "descriptionMax": "Opis smije imati najviše 500 znakova",
-    "imagesMax": "Možete prenijeti najviše 8 slika",
-    "phoneInvalid": "Broj telefona nije valjan",
-    "categoryRequired": "Kategorija je obavezna",
-    "dateOfBirthRequired": "Datum rođenja je obavezan",
-    "sizeNumber": "Veličina mora biti broj",
-    "sizeRequired": "Veličina je obavezna",
-    "genderRequired": "Spol je obavezan"
+  "listingType": {
+    "adoption": "Udomljavanje",
+    "lost": "Izgubljen",
+    "found": "Pronađen"
   },
-  "toast": {
-    "accountCreated": "Račun stvoren! Provjeri svoju e-poštu za potvrdu računa.",
-    "listingCreated": "Oglas je uspješno objavljen!",
-    "passwordChanged": "Lozinka je uspješno promijenjena!",
-    "passwordResetSent": "E-pošta za poništavanje lozinke je poslana. Provjeri svoju poštu!",
-    "imagesLimit": "Možeš prenijeti samo do 8 slika",
-    "imageTooLarge": "Veličina slike mora biti manja od 10MB",
-    "imageUploadFailed": "Prijenos slika nije uspio"
+  "age": {
+    "weeks_one": "{{count}} tjedan",
+    "weeks_few": "{{count}} tjedna",
+    "weeks_other": "{{count}} tjedana",
+    "months_one": "{{count}} mjesec",
+    "months_few": "{{count}} mjeseca",
+    "months_other": "{{count}} mjeseci",
+    "years_one": "{{count}} godina",
+    "years_few": "{{count}} godine",
+    "years_other": "{{count}} godina"
+  },
+  "traits": {
+    "vaccinated": "Cijepljen",
+    "sterilized": "Steriliziran / kastriran",
+    "microchipped": "Čipiran",
+    "goodWithKids": "Voli djecu",
+    "goodWithDogs": "Slaže se s psima",
+    "goodWithCats": "Slaže se s mačkama"
   },
   "listing": {
-    "newborn": "Novorođen",
-    "listed": "Objavljeno",
-    "loginToFavourite": "Moraš se prijaviti da bi dodao oglas u omiljene",
-    "removeFromFavourites": "Ukloni iz omiljenih"
+    "addFavourite": "Dodaj u favorite",
+    "removeFavourite": "Ukloni iz favorita",
+    "adopted": "Udomljen",
+    "reunited": "Vraćen vlasniku",
+    "delete": "Ukloni ljubimca",
+    "deleteConfirmTitle": "Ukloniti ljubimca?",
+    "deleteConfirmText": "Objava, fotografije i razgovori o ovom ljubimcu bit će trajno obrisani. Ovo se ne može poništiti.",
+    "edit": "Uredi",
+    "free": "Besplatno",
+    "hiddenByAdmin": "Uklonjen",
+    "interestSent": "Vlasnik je obaviješten o vašem interesu 🐾",
+    "loginToFavourite": "Prijavite se kako biste spremali favorite",
+    "pause": "Sakrij privremeno",
+    "paused": "Skriven",
+    "photo": "Fotografija",
+    "resume": "Ponovno prikaži",
+    "urgent": "Hitno"
   },
-  "language": {
-    "switchTo": "EN",
-    "current": "HR"
+  "landing": {
+    "badge": "Besplatno udomljavanje u Hrvatskoj",
+    "title1": "Pronađite prijatelja",
+    "title2": "za cijeli život.",
+    "subtitle": "Psi, mačke, kunići i ostali ljubimci traže topli dom. Upoznajte ljubimce iz skloništa i od ljudi u svom kraju - bez naknade, bez posrednika.",
+    "ctaBrowse": "Pregledaj životinje",
+    "ctaRegister": "Otvori besplatni račun",
+    "statAvailable": "životinja traži dom",
+    "statAdopted": "sretnih udomljavanja",
+    "statFree": "cijena objave",
+    "recentTitle": "Nedavno objavljeni",
+    "recentSubtitle": "Upoznajte najnovije prijatelje koji čekaju dom.",
+    "seeAll": "Prikaži sve",
+    "emptyTitle": "Još nema ljubimaca - budite prvi!",
+    "emptyCta": "Dodaj ljubimca",
+    "howTitle": "Kako funkcionira?",
+    "howSubtitle": "Od prvog pogleda do novog doma u tri koraka.",
+    "step1Title": "Pronađite ljubimca",
+    "step1Text": "Filtrirajte po vrsti, dobi, veličini i lokaciji. Spremite pretragu i javit ćemo vam kad stigne novi ljubimac.",
+    "step2Title": "Javite se vlasniku",
+    "step2Text": "Pošaljite poruku izravno kroz stranicu - bez objave svog broja ili e-maila.",
+    "step3Title": "Upoznajte se i udomite",
+    "step3Text": "Dogovorite susret, upoznajte životinju uživo i dovedite je kući.",
+    "lostTitle": "Izgubili ste ljubimca?",
+    "lostText": "Prijavite izgubljenu ili pronađenu životinju. Susjedi koji prate vaš kraj odmah će je vidjeti.",
+    "lostCount_one": "{{count}} životinja se trenutno traži",
+    "lostCount_few": "{{count}} životinje se trenutno traže",
+    "lostCount_other": "{{count}} životinja se trenutno traži",
+    "lostCta": "Izgubljeni i nađeni",
+    "lostReport": "Prijavi izgubljenu",
+    "shelterTitle": "Sklonište ili udruga?",
+    "shelterText": "Verificirajte svoju organizaciju i dobijte oznaku povjerenja uz sve svoje ljubimce te javni profil.",
+    "shelterCta": "Zatraži verifikaciju",
+    "storiesTitle": "Sretne priče",
+    "finalTitle": "Svaka životinja zaslužuje dom.",
+    "finalText": "Udomite, dodajte ljubimca ili podijelite priču - svaki korak pomaže."
+  },
+  "browse": {
+    "title": "Udomi ljubimca",
+    "subtitle": "Psi, mačke i ostali ljubimci koji traže novi dom.",
+    "searchPlaceholder": "Pretraži po imenu, pasmini, opisu…",
+    "sort": "Poredak",
+    "sortBy": {
+      "newest": "Najnovije",
+      "oldest": "Najstarije",
+      "nearest": "Najbliže",
+      "urgent": "Hitno prvo"
+    },
+    "results_one": "{{count}} ljubimac",
+    "results_few": "{{count}} ljubimca",
+    "results_other": "{{count}} ljubimaca",
+    "emptyTitle": "Nema rezultata",
+    "emptyText": "Pokušajte ukloniti neki filtar - ili spremite pretragu pa ćemo vam javiti kad stigne odgovarajući ljubimac.",
+    "errorTitle": "Ljubimci se nisu učitali",
+    "errorText": "Provjerite vezu i pokušajte ponovno."
+  },
+  "filters": {
+    "title": "Filtri",
+    "species": "Vrsta",
+    "location": "Lokacija",
+    "cityPlaceholder": "Grad ili mjesto…",
+    "radius": "Udaljenost",
+    "onlyThisCity": "Samo ovo mjesto",
+    "withinKm": "Do {{km}} km",
+    "useMyLocation": "Koristi moju lokaciju",
+    "nearMe": "Blizu mene",
+    "geoUnavailable": "Vaš preglednik ne podržava lokaciju.",
+    "geoDenied": "Pristup lokaciji nije dopušten.",
+    "gender": "Spol",
+    "age": "Dob",
+    "agePreset": {
+      "baby": "Mladunče (< 1 g.)",
+      "young": "Mlado (1-3 g.)",
+      "adult": "Odraslo (3-8 g.)",
+      "senior": "Starije (8+ g.)"
+    },
+    "size": "Veličina",
+    "sizePreset": {
+      "small": "Mali (< 10 kg)",
+      "medium": "Srednji (10-25 kg)",
+      "large": "Veliki (25+ kg)"
+    },
+    "health": "Zdravlje",
+    "temperament": "Narav",
+    "other": "Ostalo",
+    "urgentOnly": "Samo hitni",
+    "sheltersOnly": "Samo verificirana skloništa",
+    "freeOnly": "Samo bez naknade",
+    "reset": "Poništi filtre",
+    "showResults_one": "Prikaži {{count}} rezultat",
+    "showResults_few": "Prikaži {{count}} rezultata",
+    "showResults_other": "Prikaži {{count}} rezultata"
+  },
+  "savedSearch": {
+    "save": "Obavijesti me",
+    "title": "Spremi pretragu",
+    "description": "Javit ćemo vam (u aplikaciji i e-poštom) čim stigne novi ljubimac koji odgovara ovim filtrima.",
+    "name": "Naziv pretrage",
+    "defaultName": "Moja pretraga",
+    "confirm": "Spremi i obavještavaj",
+    "created": "Pretraga je spremljena - javit ćemo vam!",
+    "deleted": "Pretraga je obrisana",
+    "loginFirst": "Prijavite se kako biste spremili pretragu",
+    "open": "Otvori",
+    "since": "Spremljeno {{date}}",
+    "emptyTitle": "Nemate spremljenih pretraga",
+    "emptyText": "Na stranici s ljubimcima postavite filtre i kliknite \"Obavijesti me\"."
+  },
+  "lostFound": {
+    "title": "Izgubljeni i nađeni",
+    "subtitle": "Pomozite ljubimcima da se vrate kući. Objavite izgubljenu ili pronađenu životinju.",
+    "tabLost": "Izgubljeni",
+    "tabFound": "Pronađeni",
+    "report": {
+      "lost": "Prijavi izgubljenu",
+      "found": "Prijavi pronađenu"
+    }
+  },
+  "stories": {
+    "title": "Sretne priče",
+    "subtitle_one": "{{count}} životinja pronašla je dom.",
+    "subtitle_few": "{{count}} životinje pronašle su dom.",
+    "subtitle_other": "{{count}} životinja pronašlo je dom.",
+    "emptyTitle": "Prve priče tek stižu",
+    "emptyText": "Kad vlasnik označi ljubimca kao udomljenog, ovdje se pojavljuje njegova priča.",
+    "noStory": "Pronašao/la je novi dom. 🏡"
+  },
+  "detail": {
+    "about": "O ljubimcu {{name}}",
+    "details": "Detalji",
+    "species": "Vrsta",
+    "gender": "Spol",
+    "age": "Dob",
+    "weight": "Težina",
+    "breed": "Pasmina",
+    "fee": "Naknada",
+    "eventDate": {
+      "lost": "Izgubljen",
+      "found": "Pronađen"
+    },
+    "medicalNotes": "Zdravstvene napomene",
+    "story": "Priča o udomljavanju",
+    "location": "Lokacija",
+    "approximate": "približno područje",
+    "posted": "Objavljeno {{date}}",
+    "memberSince": "Član od {{date}}",
+    "imInterested": "Zainteresiran/a sam",
+    "interested": "Zainteresirani ste",
+    "interestCount_one": "{{count}} osoba je zainteresirana",
+    "interestCount_few": "{{count}} osobe su zainteresirane",
+    "interestCount_other": "{{count}} osoba je zainteresirano",
+    "yourListing_one": "Ovo je vaš ljubimac · {{count}} zainteresirana osoba",
+    "yourListing_few": "Ovo je vaš ljubimac · {{count}} zainteresirane osobe",
+    "yourListing_other": "Ovo je vaš ljubimac · {{count}} zainteresiranih",
+    "showPhone": "Prikaži broj telefona",
+    "safetyTip": "Savjet: upoznajte životinju uživo prije dogovora i nikad ne plaćajte unaprijed nepoznatim osobama.",
+    "similar": "Možda vam se svidi i…",
+    "hiddenBanner": "Ovaj ljubimac je uklonjen nakon prijave i nije javno vidljiv.",
+    "adoptedBanner": "Ovaj ljubimac je pronašao dom! 🎉",
+    "reunitedBanner": "Ova životinja vraćena je vlasniku! 🎉",
+    "pausedBanner": "Ovaj ljubimac je privremeno skriven i nije javno vidljiv."
+  },
+  "contact": {
+    "button": "Pošalji poruku ({{name}})",
+    "title": "Poruka za: {{name}}",
+    "description": "Vaša e-mail adresa ostaje skrivena - razgovarate kroz Udomi me.",
+    "send": "Pošalji poruku",
+    "loginFirst": "Prijavite se kako biste poslali poruku",
+    "template": {
+      "adoption": "Pozdrav! Zanima me {{title}}. Je li još uvijek dostupan/na za udomljavanje? Rado bih se upoznao/la.",
+      "lost": "Pozdrav! Mislim da sam vidio/la ljubimca \"{{title}}\".",
+      "found": "Pozdrav! Mislim da je \"{{title}}\" moj ljubimac."
+    }
+  },
+  "report": {
+    "title": "Prijavi problem",
+    "description": "Prijava je anonimna - vlasnik neće znati tko ju je poslao.",
+    "details": "Dodatni opis",
+    "submit": "Pošalji prijavu",
+    "sent": "Hvala! Pregledat ćemo prijavu.",
+    "reason": {
+      "scam": "Prijevara ili traženje novca unaprijed",
+      "animal_welfare": "Zlostavljanje ili zanemarivanje životinje",
+      "selling": "Prodaja životinje radi zarade",
+      "inappropriate": "Neprimjeren sadržaj",
+      "duplicate": "Dupla objava",
+      "other": "Drugo"
+    }
+  },
+  "adopt": {
+    "title": {
+      "adopted": "Označi kao udomljen",
+      "reunited": "Označi kao vraćen vlasniku"
+    },
+    "description": {
+      "adopted": "Čestitamo! Ljubimac nestaje iz pretrage i pojavljuje se među sretnim pričama.",
+      "reunited": "Divno! Ljubimac nestaje iz pretrage i pojavljuje se među sretnim pričama."
+    },
+    "confirm": {
+      "adopted": "Udomljen je! 🎉",
+      "reunited": "Vraćen je! 🎉"
+    },
+    "menu": {
+      "adopted": "Označi kao udomljen",
+      "reunited": "Označi kao vraćen"
+    },
+    "editStory": "Uredi priču",
+    "story": "Kratka priča",
+    "storyHint": "Prikazuje se na stranici Sretne priče.",
+    "storyPlaceholder": "Kako se snalazi u novom domu?"
+  },
+  "listingForm": {
+    "createTitle": {
+      "adoption": "Dodaj ljubimca za udomljavanje",
+      "lost": "Prijava izgubljene životinje",
+      "found": "Prijava pronađene životinje"
+    },
+    "createSubtitle": "Objava je besplatna. Što više detalja, to brže pronalazi pravi dom.",
+    "editTitle": "Uredi ljubimca",
+    "typeTitle": "Što objavljujete?",
+    "type": {
+      "adoption": "Udomljavanje",
+      "lost": "Izgubljena",
+      "found": "Pronađena"
+    },
+    "typeHint": {
+      "adoption": "Tražim novi dom za životinju",
+      "lost": "Moj ljubimac je nestao",
+      "found": "Pronašao/la sam životinju"
+    },
+    "photos": "Fotografije",
+    "photosHint": "Prva fotografija je naslovna. Povucite za promjenu redoslijeda.",
+    "basics": "Osnovni podaci",
+    "title": "Naslov / ime",
+    "titleHint": {
+      "adoption": "Npr. ime ljubimca i ključna osobina.",
+      "lost": "Ime ljubimca i gdje je nestao.",
+      "found": "Kratko opišite životinju i mjesto."
+    },
+    "titlePlaceholder": {
+      "adoption": "Luna - umiljata ženka",
+      "lost": "Nestao Rex, Trnje",
+      "found": "Pronađen crni mačak, Split"
+    },
+    "category": "Vrsta",
+    "gender": "Spol",
+    "dateOfBirth": "Datum rođenja",
+    "dateOfBirthHint": "Približan datum je u redu.",
+    "eventDate": {
+      "lost": "Datum nestanka",
+      "found": "Datum pronalaska"
+    },
+    "breed": "Pasmina",
+    "breedPlaceholder": "Mješanac, labrador…",
+    "size": "Težina",
+    "description": "Opis",
+    "descriptionHint": {
+      "adoption": "Narav, navike, što voli, kakav dom joj odgovara.",
+      "lost": "Izgled, posebne oznake, ogrlica, gdje i kada je viđen zadnji put.",
+      "found": "Izgled, stanje, gdje je pronađen i gdje je sada."
+    },
+    "descriptionPlaceholder": {
+      "adoption": "Luna je razigrana i voli maženje…",
+      "lost": "Rex ima crvenu ogrlicu i bijelu mrlju na prsima…",
+      "found": "Pronađen kod parka, mirna i dobro uhranjena…"
+    },
+    "health": "Zdravlje i narav",
+    "temperament": "Narav",
+    "medicalNotes": "Zdravstvene napomene",
+    "medicalNotesPlaceholder": "Lijekovi, alergije, posebna prehrana…",
+    "fee": "Naknada za udomljavanje",
+    "feeHint": "Samo za pokrivanje troškova (cijepljenje, čip, sterilizacija). Prodaja radi zarade nije dopuštena.",
+    "feeMode": {
+      "free": "Besplatno",
+      "fee": "Uz naknadu",
+      "unspecified": "Po dogovoru"
+    },
+    "feeAmount": "Iznos",
+    "location": "Lokacija",
+    "locationHint": {
+      "adoption": "Gdje se životinja nalazi. Na karti prikazujemo samo približno područje.",
+      "lost": "Gdje je ljubimac nestao.",
+      "found": "Gdje je životinja pronađena."
+    },
+    "contact": "Kontakt (neobavezno)",
+    "contactHint": "Zainteresirani vam uvijek mogu pisati kroz Udomi me. Broj ili e-mail ovdje bit će javno vidljivi.",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "urgent": "Hitno udomljavanje",
+    "urgentHint": "Označite ako životinja mora što prije pronaći dom.",
+    "publish": "Objavi ljubimca",
+    "save": "Spremi promjene"
+  },
+  "location": {
+    "country": "Država",
+    "city": "Grad / mjesto",
+    "cityPlaceholder": "Počnite tipkati…",
+    "area": "Kvart",
+    "areaPlaceholder": "Npr. Trnje"
+  },
+  "upload": {
+    "add": "Dodaj",
+    "cover": "Naslovna",
+    "remove": "Ukloni fotografiju",
+    "hint": "Do {{max}} fotografija, JPG/PNG/HEIC do 15 MB.",
+    "limit": "Najviše {{max}} fotografija.",
+    "tooLarge": "{{name}} je prevelika (najviše 15 MB).",
+    "failed": "Učitavanje {{name}} nije uspjelo."
+  },
+  "messages": {
+    "title": "Poruke",
+    "empty": "Još nemate razgovora. Javite se vlasniku nekog ljubimca!",
+    "pickTitle": "Odaberite razgovor",
+    "pickText": "Vaši razgovori s vlasnicima i zainteresiranima prikazuju se ovdje.",
+    "notFound": "Razgovor ne postoji.",
+    "placeholder": "Napišite poruku…",
+    "send": "Pošalji",
+    "viewListing": "Pogledaj ljubimca",
+    "listingRemoved": "Ljubimac više nije objavljen",
+    "userUnavailable": "Ovaj korisnik više nije dostupan.",
+    "team": "Udomi me tim",
+    "official": "Službeno",
+    "officialThread": "Službena poruka",
+    "officialHint": "Poruka od administratora stranice. Možete odgovoriti.",
+    "teamBadge": "Tim"
+  },
+  "notifications": {
+    "markAllRead": "Označi sve pročitano",
+    "empty": "Nema obavijesti",
+    "emptyText": "Ovdje stižu poruke, interes za vaše ljubimce i novi ljubimci iz spremljenih pretraga.",
+    "viewAll": "Sve obavijesti",
+    "message": "{{name}} vam je poslao/la poruku",
+    "interest": "{{name}} je zainteresiran/a za {{title}}",
+    "savedSearch": "Novi ljubimac za \"{{search}}\": {{title}}",
+    "listingHidden": "\"{{title}}\" je uklonjen nakon prijave",
+    "shelterVerified": "{{name}} je verificirano sklonište ✅",
+    "shelterRejected": "Zahtjev za verifikaciju {{name}} nije odobren",
+    "shelterApplication": "Novi zahtjev za sklonište: {{name}}",
+    "generic": "Nova obavijest",
+    "listingRemoved": "Administrator je obrisao vašu objavu \"{{title}}\""
+  },
+  "profile": {
+    "viewPublic": "Pogledaj javni profil",
+    "tabListings": "Moji ljubimci",
+    "tabFavorites": "Favoriti",
+    "tabSearches": "Spremljene pretrage",
+    "tabSettings": "Postavke",
+    "listingsCount_one": "{{count}} ljubimac",
+    "listingsCount_few": "{{count}} ljubimca",
+    "listingsCount_other": "{{count}} ljubimaca",
+    "noListings": "Još niste dodali ljubimca",
+    "noListingsText": "Objava je besplatna i traje par minuta.",
+    "noFavorites": "Nemate favorita",
+    "noFavoritesText": "Kliknite srce kod ljubimca da ga spremite.",
+    "statActive": "aktivnih",
+    "statAdopted": "udomljenih",
+    "listingsOf": "Ljubimci: {{name}}",
+    "noPublicListings": "Trenutno nema ljubimaca."
+  },
+  "settings": {
+    "profile": "Profil",
+    "profileHint": "Drugi korisnici vide vaše ime i inicijal prezimena.",
+    "changePhoto": "Promijeni fotografiju",
+    "emailHint": "E-mail adresa nije javno vidljiva.",
+    "notifications": "Obavijesti",
+    "emailNotifications": "Obavijesti e-poštom",
+    "emailNotificationsHint": "Nove poruke, interes za vaše ljubimce i novi ljubimci iz spremljenih pretraga.",
+    "password": "Lozinka",
+    "currentPassword": "Trenutna lozinka",
+    "newPassword": "Nova lozinka",
+    "changePassword": "Promijeni lozinku",
+    "passwordChanged": "Lozinka je promijenjena",
+    "privacy": "Privatnost i podaci",
+    "privacyHint": "Vaša prava prema GDPR-u.",
+    "export": "Preuzmi svoje podatke",
+    "exportHint": "Svi podaci koje čuvamo o vama, u JSON datoteci.",
+    "exportButton": "Preuzmi",
+    "delete": "Obriši račun",
+    "deleteHint": "Trajno briše račun, ljubimce, fotografije i poruke.",
+    "deleteButton": "Obriši račun",
+    "deleteConfirmTitle": "Trajno obrisati račun?",
+    "deleteConfirmText": "Račun {{email}} i svi vaši ljubimci, fotografije i poruke bit će trajno obrisani. Za potvrdu upišite \"{{word}}\".",
+    "deleteWord": "obriši"
+  },
+  "shelter": {
+    "title": "Sklonište ili udruga",
+    "hint": "Verificirane organizacije dobivaju oznaku uz sve svoje ljubimce i javni profil.",
+    "name": "Naziv organizacije",
+    "city": "Grad",
+    "website": "Web stranica",
+    "phone": "Telefon",
+    "description": "Opis",
+    "descriptionHint": "Tko ste, koliko dugo djelujete, OIB udruge ako ga imate - pomaže nam pri provjeri.",
+    "descriptionMin": "Opis mora imati barem 20 znakova",
+    "apply": "Zatraži verifikaciju",
+    "update": "Spremi podatke",
+    "withdraw": "Odustani od statusa skloništa",
+    "submitted": "Zahtjev je poslan. Javit ćemo vam nakon pregleda.",
+    "statusVerified": "Vaša organizacija je verificirana.",
+    "statusPending": "Zahtjev čeka pregled administratora.",
+    "statusRejected": "Zahtjev nije odobren. Dopunite podatke i pošaljite ponovno.",
+    "verified": "Verificirano sklonište",
+    "verifiedHint": "Administratori su provjerili ovu organizaciju."
+  },
+  "auth": {
+    "loginTitle": "Dobrodošli natrag",
+    "loginSubtitle": "Prijavite se kako biste nastavili.",
+    "registerTitle": "Otvorite račun",
+    "registerSubtitle": "Besplatno, za par sekundi.",
+    "continueWithGoogle": "Nastavi s Googleom",
+    "registerWithGoogle": "Registracija s Googleom",
+    "or": "ili",
+    "email": "E-mail",
+    "password": "Lozinka",
+    "confirmPassword": "Ponovite lozinku",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "forgot": "Zaboravili ste lozinku?",
+    "login": "Prijava",
+    "register": "Registracija",
+    "createAccount": "Otvori račun",
+    "noAccount": "Nemate račun?",
+    "haveAccount": "Već imate račun?",
+    "acceptTerms": "Prihvaćam <terms>uvjete korištenja</terms> i <privacy>izjavu o privatnosti</privacy>.",
+    "passwordRules": "Najmanje 8 znakova, veliko i malo slovo te broj ili znak.",
+    "showPassword": "Prikaži lozinku",
+    "hidePassword": "Sakrij lozinku",
+    "strength": {
+      "0": "Slaba",
+      "1": "Osrednja",
+      "2": "Dobra",
+      "3": "Jaka"
+    },
+    "forgotTitle": "Zaboravljena lozinka",
+    "forgotSubtitle": "Upišite e-mail i poslat ćemo vam poveznicu za novu lozinku.",
+    "forgotSent": "Ako postoji račun s tom adresom, poslali smo poveznicu. Provjerite i mapu neželjene pošte.",
+    "sendLink": "Pošalji poveznicu",
+    "backToLogin": "Natrag na prijavu",
+    "resetTitle": "Nova lozinka",
+    "resetSubmit": "Spremi lozinku",
+    "resetDone": "Lozinka je promijenjena. Sad se možete prijaviti.",
+    "requestNewLink": "Zatraži novu poveznicu",
+    "quote": "\"Dok ne zavoliš životinju, dio tvoje duše ostaje neprobuđen.\"",
+    "quoteSub": "- Anatole France"
+  },
+  "verify": {
+    "banner": "Potvrdite e-mail adresu ({{email}}) kako biste mogli dodavati ljubimce i slati poruke.",
+    "resend": "Pošalji ponovno",
+    "resent": "Poslali smo novu poveznicu za potvrdu.",
+    "resentShort": "Poslano ✓",
+    "requiredTitle": "Potvrdite e-mail adresu",
+    "requiredText": "Poslali smo poveznicu na {{email}}. Nakon potvrde možete dodati ljubimca.",
+    "successTitle": "E-mail je potvrđen!",
+    "successText": "Sve je spremno - sad možete dodavati ljubimce i slati poruke.",
+    "failTitle": "Potvrda nije uspjela"
+  },
+  "cookies": {
+    "title": "Kolačići",
+    "text": "Koristimo samo nužne kolačiće (prijava i odabrani jezik) - bez praćenja i oglasa.",
+    "more": "Saznajte više",
+    "ok": "U redu"
+  },
+  "share": {
+    "title": "Podijeli",
+    "copyLink": "Kopiraj poveznicu",
+    "copied": "Poveznica je kopirana",
+    "copyFailed": "Kopiranje nije uspjelo"
+  },
+  "admin": {
+    "title": "Administracija",
+    "subtitle": "Moderiranje ljubimaca, skloništa i korisnika.",
+    "tabOverview": "Pregled",
+    "tabReports": "Prijave",
+    "tabShelters": "Skloništa",
+    "tabUsers": "Korisnici",
+    "statUsers": "korisnika",
+    "statListings": "objavljenih ljubimaca",
+    "statAdopted": "udomljenih",
+    "statReports": "otvorenih prijava",
+    "statPending": "skloništa čeka pregled",
+    "statShelters": "verificiranih skloništa",
+    "reportStatus": {
+      "open": "Otvorene",
+      "resolved": "Riješene",
+      "dismissed": "Odbačene"
+    },
+    "noReports": "Nema prijava 🎉",
+    "owner": "Vlasnik",
+    "reporter": "Prijavio",
+    "deletedUser": "obrisani korisnik",
+    "dismiss": "Odbaci",
+    "hideListing": "Sakrij ljubimca",
+    "unhideListing": "Vrati ljubimca",
+    "banOwner": "Blokiraj vlasnika",
+    "action": {
+      "hide_listing": "Ljubimac je sakriven",
+      "ban_user": "Vlasnik je blokiran"
+    },
+    "noShelters": "Nema zahtjeva na čekanju",
+    "approve": "Odobri",
+    "reject": "Odbij",
+    "searchUsers": "Traži po imenu ili e-mailu…",
+    "roleAdmin": "Admin",
+    "unverified": "Nepotvrđen",
+    "banned": "Blokiran",
+    "ban": "Blokiraj",
+    "unban": "Odblokiraj",
+    "done": "Gotovo",
+    "activityHint": "Svaka radnja administratora bilježi se ovdje: tko je što napravio i kada.",
+    "allTypes": "Sve vrste objava",
+    "deleteListing": "Obriši objavu",
+    "deleteListingTitle": "Trajno obrisati objavu?",
+    "deleteListingText": "Objava \"{{title}}\", njezine fotografije i razgovori o njoj bit će trajno obrisani. Vlasnik će dobiti obavijest.",
+    "deleteUser": "Obriši korisnika",
+    "deleteUserTitle": "Trajno obrisati korisnika?",
+    "deleteUserText": "Račun {{email}}, svi njegovi ljubimci, fotografije i poruke bit će trajno obrisani. Ovo se ne može poništiti. Za potvrdu upišite e-mail adresu korisnika.",
+    "history": "Povijest",
+    "joined": "Registriran",
+    "language": "Jezik",
+    "noHistory": "Još nema zabilježenih radnji",
+    "noPets": "Nema objava",
+    "noPhotos": "Bez fotografija",
+    "noUsers": "Nema korisnika",
+    "protectedAccount": "Administratorski računi (i vaš vlastiti) ne mogu se blokirati ni obrisati iz panela.",
+    "reportsAgainst": "Prijave protiv",
+    "reportsFiled": "Podnesene prijave",
+    "searchPets": "Traži po nazivu, opisu, gradu ili e-mailu vlasnika...",
+    "shelterPending": "Sklonište na čekanju",
+    "statBanned": "blokiranih korisnika",
+    "statHidden": "sakrivenih objava",
+    "statusActive": "Aktivna",
+    "tabActivity": "Aktivnost",
+    "tabPets": "Ljubimci",
+    "typeEmail": "E-mail za potvrdu",
+    "userPets": "Ljubimci",
+    "usersCount_one": "{{count}} korisnik",
+    "usersCount_few": "{{count}} korisnika",
+    "usersCount_other": "{{count}} korisnika",
+    "viewPublic": "Otvori javnu stranicu",
+    "userFilter": {
+      "all": "Svi",
+      "reported": "S prijavama",
+      "banned": "Blokirani",
+      "unverified": "Nepotvrđeni",
+      "shelters": "Skloništa",
+      "admins": "Administratori"
+    },
+    "petStatus": {
+      "all": "Sve",
+      "reported": "S prijavama",
+      "active": "Aktivne",
+      "paused": "Skrivene (vlasnik)",
+      "adopted": "Udomljene",
+      "hidden": "Uklonjene (admin)"
+    },
+    "actionLog": {
+      "ban_user": "je blokirao/la korisnika",
+      "unban_user": "je odblokirao/la korisnika",
+      "delete_user": "je obrisao/la korisnika",
+      "hide_listing": "je sakrio/la objavu",
+      "unhide_listing": "je vratio/la objavu",
+      "delete_listing": "je obrisao/la objavu",
+      "dismiss_report": "je odbacio/la prijavu za",
+      "approve_shelter": "je odobrio/la sklonište",
+      "reject_shelter": "je odbio/la sklonište",
+      "message_user": "je poslao/la poruku korisniku",
+      "broadcast_message": "je poslao/la poruku korisnicima:"
+    },
+    "tabMessages": "Poruke",
+    "sendMessage": "Pošalji poruku",
+    "messageTitle": "Poruka za: {{name}}",
+    "messageHint": "Stiže u korisnikove Poruke kao poruka od \"Udomi me tima\". Korisnik može odgovoriti, a odgovor stiže u vaše Poruke.",
+    "messageSent": "Poruka je poslana",
+    "openConversation": "Otvori razgovor",
+    "broadcastTitle": "Poruka korisnicima",
+    "broadcastHint": "Svaki korisnik dobiva poruku u svoje Poruke, od \"Udomi me tima\", i može odgovoriti.",
+    "broadcastMessage": "Poruka",
+    "broadcastPlaceholder": "Npr. Pozdrav! Uveli smo novu mogućnost spremanja pretraga...",
+    "broadcastSend": "Pošalji",
+    "recipients_one": "{{count}} primatelj",
+    "recipients_few": "{{count}} primatelja",
+    "recipients_other": "{{count}} primatelja",
+    "broadcastConfirmTitle_one": "Poslati poruku {{count}} korisniku?",
+    "broadcastConfirmTitle_few": "Poslati poruku {{count}} korisnika?",
+    "broadcastConfirmTitle_other": "Poslati poruku {{count}} korisnika?",
+    "broadcastSent_one": "Poruka je poslana {{count}} korisniku",
+    "broadcastSent_few": "Poruka je poslana {{count}} korisnika",
+    "broadcastSent_other": "Poruka je poslana {{count}} korisnika",
+    "broadcastInfo1": "Poruke stižu samo u aplikaciju (Poruke + obavijest), bez e-maila.",
+    "broadcastInfo2": "Blokirani korisnici i vi ne primate poruku.",
+    "broadcastInfo3": "Ako korisnik odgovori, odgovor stiže u vaše Poruke kao zaseban razgovor.",
+    "audience": {
+      "all": "Svi korisnici",
+      "posters": "Korisnici s ljubimcima",
+      "shelters": "Verificirana skloništa"
+    },
+    "audienceHint": {
+      "all": "Svi osim blokiranih",
+      "posters": "Objavili su barem jednog ljubimca",
+      "shelters": "Samo odobrena skloništa"
+    }
+  },
+  "toast": {
+    "saved": "Spremljeno",
+    "listingCreated": "Ljubimac je objavljen! 🐾",
+    "listingUpdated": "Promjene su spremljene",
+    "listingDeleted": "Ljubimac je uklonjen",
+    "listingActivated": "Ljubimac je ponovno vidljiv",
+    "listingPaused": "Ljubimac je privremeno skriven",
+    "markedAdopted": "Čestitamo! 🎉"
+  },
+  "validation": {
+    "required": "Obavezno polje",
+    "titleRequired": "Upišite naslov",
+    "titleMin": "Naslov mora imati barem 3 znaka",
+    "titleMax": "Naslov može imati najviše 60 znakova",
+    "descriptionRequired": "Upišite opis",
+    "descriptionMin": "Opis mora imati barem 5 znakova",
+    "descriptionMax": "Opis može imati najviše 2000 znakova",
+    "imagesRequired": "Dodajte barem jednu fotografiju",
+    "imagesMax": "Najviše 8 fotografija",
+    "categoryRequired": "Odaberite vrstu",
+    "genderRequired": "Odaberite spol",
+    "dateOfBirthRequired": "Upišite datum rođenja (DD.MM.GGGG)",
+    "eventDateRequired": "Upišite datum (DD.MM.GGGG)",
+    "dateFuture": "Datum ne može biti u budućnosti",
+    "sizeInvalid": "Upišite težinu između 0 i 200 kg",
+    "feeRequired": "Upišite iznos",
+    "feeInvalid": "Iznos mora biti između 1 i 10 000 €",
+    "cityRequired": "Odaberite grad ili mjesto",
+    "phoneInvalid": "Neispravan broj telefona",
+    "emailInvalid": "Neispravna e-mail adresa",
+    "emailRequired": "Upišite e-mail",
+    "passwordRequired": "Upišite lozinku",
+    "passwordMin": "Lozinka mora imati barem 8 znakova",
+    "passwordMax": "Lozinka može imati najviše 72 znaka",
+    "passwordWeak": "Lozinka mora sadržavati veliko i malo slovo te broj ili znak",
+    "passwordsMatch": "Lozinke se ne podudaraju",
+    "confirmRequired": "Ponovite lozinku",
+    "firstNameRequired": "Upišite ime",
+    "lastNameRequired": "Upišite prezime",
+    "acceptTerms": "Za registraciju trebate prihvatiti uvjete",
+    "urlInvalid": "Upišite adresu s https://"
+  },
+  "errors": {
+    "generic": "Nešto nije u redu. Provjerite podatke i pokušajte ponovno.",
+    "server": "Poslužitelj trenutno nije dostupan. Pokušajte malo kasnije.",
+    "rateLimited": "Previše pokušaja. Pričekajte minutu pa pokušajte ponovno.",
+    "unauthorized": "Prijavite se kako biste nastavili.",
+    "forbidden": "Nemate ovlasti za ovu radnju.",
+    "notFound": "Traženo ne postoji.",
+    "INVALID_CREDENTIALS": "Pogrešan e-mail ili lozinka.",
+    "GOOGLE_ACCOUNT": "Ovaj račun koristi prijavu putem Googlea.",
+    "EMAIL_TAKEN": "Račun s ovom e-mail adresom već postoji.",
+    "EMAIL_NOT_VERIFIED": "Najprije potvrdite e-mail adresu.",
+    "ALREADY_REPORTED": "Već ste ovo prijavili - pregledavamo prijavu.",
+    "WRONG_PASSWORD": "Trenutna lozinka nije točna.",
+    "INVALID_RESET_LINK": "Poveznica za novu lozinku je neispravna ili je istekla.",
+    "INVALID_VERIFICATION_LINK": "Poveznica za potvrdu je neispravna ili je već iskorištena.",
+    "ACCOUNT_BANNED": "Ovaj račun je blokiran zbog kršenja pravila.",
+    "EMAIL_NOT_CONFIGURED": "Slanje e-pošte trenutno nije dostupno."
+  },
+  "errorPage": {
+    "home": "Naslovnica",
+    "400": {
+      "title": "Neispravan zahtjev",
+      "text": "Nešto nije u redu sa zahtjevom."
+    },
+    "401": {
+      "title": "Potrebna prijava",
+      "text": "Prijavite se kako biste vidjeli ovu stranicu."
+    },
+    "403": {
+      "title": "Pristup odbijen",
+      "text": "Nemate ovlasti za ovu stranicu."
+    },
+    "404": {
+      "title": "Stranica nije pronađena",
+      "text": "Izgleda da je ovaj ljubimac odlutao. Možda je uklonjen ili je poveznica pogrešna."
+    },
+    "408": {
+      "title": "Isteklo vrijeme",
+      "text": "Zahtjev je trajao predugo. Pokušajte ponovno."
+    },
+    "429": {
+      "title": "Polako 🐢",
+      "text": "Previše zahtjeva. Pričekajte trenutak."
+    },
+    "500": {
+      "title": "Greška poslužitelja",
+      "text": "Nešto je pošlo po zlu kod nas. Pokušajte malo kasnije."
+    },
+    "502": {
+      "title": "Poslužitelj nedostupan",
+      "text": "Pokušajte ponovno za minutu."
+    },
+    "503": {
+      "title": "Održavanje",
+      "text": "Stranica se trenutno ažurira. Vratite se uskoro."
+    }
+  },
+  "crash": {
+    "title": "Ups, nešto je puklo",
+    "description": "Dogodila se neočekivana greška. Osvježite stranicu ili se vratite na naslovnicu.",
+    "home": "Na naslovnicu",
+    "details": "Tehnički detalji"
+  },
+  "footer": {
+    "tagline": "Besplatna platforma za udomljavanje životinja u Hrvatskoj. Svaka životinja zaslužuje dom.",
+    "explore": "Istraži",
+    "account": "Račun",
+    "legal": "Pravno",
+    "shelters": "Skloništa",
+    "privacy": "Privatnost",
+    "terms": "Uvjeti korištenja",
+    "rights": "Sva prava pridržana.",
+    "madeWith": "Napravljeno s 🐾 u Hrvatskoj"
+  },
+  "legal": {
+    "effective": "Vrijedi od {{date}}",
+    "privacyTitle": "Izjava o privatnosti",
+    "termsTitle": "Uvjeti korištenja"
   }
 }

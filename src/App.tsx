@@ -1,19 +1,18 @@
-import 'react-toastify/dist/ReactToastify.css';
-import 'leaflet/dist/leaflet.css';
-import { ToastContainer } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AxiosProvider, GlobalProvider, Routing } from '_app';
 import { ErrorBoundary } from '_app/ui/ErrorBoundary';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { NextUIProvider } from '@nextui-org/react';
+import { Toaster, TooltipProvider } from '_shared';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: (failureCount, error: any) => {
-        const status = error?.response?.status;
-        if (status === 401 || status === 403 || status === 404) return false;
+      retry: (failureCount, error: unknown) => {
+        const status = (error as { response?: { status?: number } })?.response
+          ?.status;
+        if (status && status >= 400 && status < 500) return false;
         return failureCount < 2;
       },
+      refetchOnWindowFocus: false,
     },
   },
 });
@@ -22,21 +21,14 @@ function App() {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <NextUIProvider>
-          <AxiosProvider>
-            <GlobalProvider>
+        <AxiosProvider>
+          <GlobalProvider>
+            <TooltipProvider delayDuration={300}>
               <Routing />
-              <ToastContainer
-                position='bottom-right'
-                autoClose={4000}
-                hideProgressBar
-                newestOnTop
-                closeOnClick
-                pauseOnHover
-              />
-            </GlobalProvider>
-          </AxiosProvider>
-        </NextUIProvider>
+              <Toaster />
+            </TooltipProvider>
+          </GlobalProvider>
+        </AxiosProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   );

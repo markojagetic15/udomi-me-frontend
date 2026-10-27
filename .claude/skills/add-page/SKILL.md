@@ -12,9 +12,9 @@ description: Use when adding a new route/page to the Udomi Me frontend (e.g. a n
    - `index.ts` (page root) — `export * from './ui'` (add `export * from './hooks'` only if the hook is consumed outside the page)
 
 2. Register the route in `src/_app/Routing.tsx`:
-   - Add a `lazy(() => import('_pages/<name>').then((m) => ({ default: m.<Name> })))` import.
-   - Add `<Route path='/<path>' element={<...Name />} />` inside `<Routes>`. Wrap in `<ProtectedRoute>` or `<GuestRoute>` (from `./api/AuthGuard`) if the page needs an auth gate.
-   - If the navbar or footer should be hidden on this route, add the path to `hideAppDrawerRoutes` / `hideFooterRoutes` arrays in `AppLayout`.
+   - Add `const <Name> = page(() => import('_pages/<name>'), '<Name>');` (the `page()` helper wraps `lazy` and auto-reloads stale chunks after a deploy).
+   - Add `<Route path='/<path>' element={<...Name />} />` inside `<Routes>`. Wrap in `<ProtectedRoute>`, `<GuestRoute>` or `<AdminRoute>` (from `./api/AuthGuard`) if the page needs an auth gate.
+   - Full-screen pages without header/footer (like auth) go in `BARE_ROUTES` in `AppLayout`.
 
 3. Add any new translation keys to **both** `src/locales/en.json` and `src/locales/hr.json` under a new top-level key named after the page (see `add-translation-key` skill).
 

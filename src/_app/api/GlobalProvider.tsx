@@ -1,8 +1,8 @@
-import { useGetMe, User } from '_entities/user';
-import { createContext, useEffect, useState } from 'react';
+import { createContext } from 'react';
+import { useGetMe, Me } from '_entities/user';
 
 export type GlobalContextType = {
-  user: User | null;
+  user: Me | null;
   isAuthLoading: boolean;
 };
 
@@ -12,16 +12,14 @@ export const GlobalContext = createContext<GlobalContextType>({
 });
 
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-
-  const { user: me, isLoading: isAuthLoading } = useGetMe();
-
-  useEffect(() => {
-    setUser(me ?? null);
-  }, [me]);
+  // Read straight from the query — copying it into state via useEffect lagged
+  // one render behind isAuthLoading, so ProtectedRoute saw user=null on refresh.
+  const { getMe } = useGetMe();
 
   return (
-    <GlobalContext.Provider value={{ user, isAuthLoading }}>
+    <GlobalContext.Provider
+      value={{ user: getMe.data ?? null, isAuthLoading: getMe.isLoading }}
+    >
       {children}
     </GlobalContext.Provider>
   );

@@ -12,10 +12,12 @@ i18n
       en: { translation: en },
       hr: { translation: hr },
     },
-    fallbackLng: 'en',
+    fallbackLng: 'hr',
     supportedLngs: ['en', 'hr'],
+    load: 'languageOnly',
     detection: {
-      order: ['localStorage', 'navigator'],
+      // No 'navigator': Croatian is the default unless the user picked a language.
+      order: ['localStorage'],
       caches: ['localStorage'],
       lookupLocalStorage: 'udomi-lang',
     },
@@ -23,5 +25,12 @@ i18n
       escapeValue: false,
     },
   });
+
+// Keep <html lang> in sync for screen readers and hyphenation.
+document.documentElement.lang = i18n.language === 'en' ? 'en' : 'hr';
+i18n.on(
+  'languageChanged',
+  (lng) => (document.documentElement.lang = lng === 'en' ? 'en' : 'hr')
+);
 
 export default i18n;
