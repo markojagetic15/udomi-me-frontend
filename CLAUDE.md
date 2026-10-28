@@ -14,7 +14,7 @@ npx prettier --write "src/**/*.{ts,tsx}"
 
 ## Stack
 
-React 18 · Vite 5 · React Router 6 · TanStack Query 5 · React Hook Form + Yup · Axios · **shadcn/ui** (Radix primitives + Tailwind 3, components live in `src/_shared/ui/` — edit them freely) · lucide-react icons · sonner toasts · react-day-picker · i18next (hr default, en) · React Leaflet · Photon (komoot) for geocoding — **not Nominatim** (its policy forbids autocomplete). Fonts self-hosted via @fontsource (Google Fonts would be a GDPR issue). Sentry is opt-in and lazy-loaded (`VITE_SENTRY_DSN`).
+React 18 · Vite 5 · React Router 6 · TanStack Query 5 · React Hook Form + Yup · Axios · **shadcn/ui** (Radix primitives + Tailwind 3, components live in `src/_shared/ui/` — edit them freely) · lucide-react icons · sonner toasts · react-day-picker · i18next (hr default, en) · Google Maps keyless iframe embed (listing location, coords rounded to ~1 km; nginx CSP `frame-src https://www.google.com`) · Photon (komoot) for geocoding — **not Nominatim** (its policy forbids autocomplete). Fonts self-hosted via @fontsource (Google Fonts would be a GDPR issue). Sentry is opt-in and lazy-loaded (`VITE_SENTRY_DSN`).
 
 ## Architecture (Feature-Sliced-ish)
 

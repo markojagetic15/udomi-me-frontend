@@ -1,14 +1,23 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Clock, Link2Off } from 'lucide-react';
 import { AuthLayout, PasswordInput, PasswordStrength } from '_features/auth';
-import { Button, FormField } from '_shared';
+import { Button, FormField, Spinner } from '_shared';
 import { useResetPasswordPage } from '../hooks';
 
 export const ResetPassword = () => {
   const { t } = useTranslation();
-  const { form, token, done, serverError, isPending, onSubmit } =
-    useResetPasswordPage();
+  const {
+    form,
+    done,
+    checking,
+    linkError,
+    linkExpired,
+    accountEmail,
+    serverError,
+    isPending,
+    onSubmit,
+  } = useResetPasswordPage();
   const {
     register,
     watch,
@@ -24,15 +33,31 @@ export const ResetPassword = () => {
             <Link to='/login'>{t('auth.login')}</Link>
           </Button>
         </div>
-      ) : !token ? (
+      ) : checking ? (
+        <div className='flex items-center gap-3 text-muted-foreground'>
+          <Spinner className='h-5 w-5' /> {t('auth.checkingLink')}
+        </div>
+      ) : linkError ? (
         <div className='flex flex-col items-start gap-4'>
-          <p className='text-destructive'>{t('errors.INVALID_RESET_LINK')}</p>
-          <Button variant='outline' asChild>
+          <div className='flex items-start gap-3 rounded-lg bg-destructive/10 p-4 text-sm text-destructive'>
+            {linkExpired ? (
+              <Clock className='mt-0.5 h-5 w-5 shrink-0' />
+            ) : (
+              <Link2Off className='mt-0.5 h-5 w-5 shrink-0' />
+            )}
+            <p role='alert'>{linkError}</p>
+          </div>
+          <Button asChild>
             <Link to='/forgot-password'>{t('auth.requestNewLink')}</Link>
           </Button>
         </div>
       ) : (
         <form onSubmit={onSubmit} className='flex flex-col gap-4' noValidate>
+          {accountEmail && (
+            <p className='text-sm text-muted-foreground'>
+              {t('auth.resetFor', { email: accountEmail })}
+            </p>
+          )}
           <FormField
             label={t('settings.newPassword')}
             error={errors.password?.message}

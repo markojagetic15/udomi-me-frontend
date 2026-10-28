@@ -1,5 +1,5 @@
 import { useAxios } from '_app';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Me } from '../model';
 
 // Auth mutations. Errors are surfaced by the calling form (inline), so no
@@ -60,6 +60,23 @@ export const useForgotPassword = ({
     onError,
   });
   return { forgotPassword: mutation.mutate, isPending: mutation.isPending };
+};
+
+// Validates a reset link on page load (before the user types a password).
+// Errors: INVALID_RESET_LINK (unknown/used) or RESET_LINK_EXPIRED.
+export const useCheckResetToken = (token: string | null) => {
+  const { axios } = useAxios();
+  const checkResetToken = useQuery({
+    queryKey: ['reset-token', token],
+    queryFn: async (): Promise<{ valid: true; email: string }> =>
+      axios.get(
+        `/reset-password/check?token=${encodeURIComponent(token ?? '')}`
+      ),
+    enabled: !!token,
+    retry: false,
+    staleTime: Infinity,
+  });
+  return { checkResetToken };
 };
 
 export const useResetPassword = ({

@@ -1,6 +1,5 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/nunito';
-import 'leaflet/dist/leaflet.css';
 import './_app/ui/global.css';
 import './i18n';
 import { initMonitoring, reloadForNewBuild } from '_shared/lib/monitoring';

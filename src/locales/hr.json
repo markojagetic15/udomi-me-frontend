@@ -534,7 +534,9 @@
     "resetDone": "Lozinka je promijenjena. Sad se možete prijaviti.",
     "requestNewLink": "Zatraži novu poveznicu",
     "quote": "\"Dok ne zavoliš životinju, dio tvoje duše ostaje neprobuđen.\"",
-    "quoteSub": "- Anatole France"
+    "quoteSub": "- Anatole France",
+    "checkingLink": "Provjeravamo poveznicu...",
+    "resetFor": "Nova lozinka za račun {{email}}"
   },
   "verify": {
     "banner": "Potvrdite e-mail adresu ({{email}}) kako biste mogli dodavati ljubimce i slati poruke.",
@@ -748,10 +750,11 @@
     "EMAIL_NOT_VERIFIED": "Najprije potvrdite e-mail adresu.",
     "ALREADY_REPORTED": "Već ste ovo prijavili - pregledavamo prijavu.",
     "WRONG_PASSWORD": "Trenutna lozinka nije točna.",
-    "INVALID_RESET_LINK": "Poveznica za novu lozinku je neispravna ili je istekla.",
+    "INVALID_RESET_LINK": "Poveznica za novu lozinku nije ispravna ili je već iskorištena.",
     "INVALID_VERIFICATION_LINK": "Poveznica za potvrdu je neispravna ili je već iskorištena.",
     "ACCOUNT_BANNED": "Ovaj račun je blokiran zbog kršenja pravila.",
-    "EMAIL_NOT_CONFIGURED": "Slanje e-pošte trenutno nije dostupno."
+    "EMAIL_NOT_CONFIGURED": "Slanje e-pošte trenutno nije dostupno.",
+    "RESET_LINK_EXPIRED": "Poveznica za novu lozinku je istekla (vrijedi 1 sat). Zatražite novu."
   },
   "errorPage": {
     "home": "Naslovnica",

@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
+  useCheckResetToken,
   useForgotPassword,
   useLogin,
   useRegister,
@@ -99,6 +100,7 @@ export const useResetPasswordPage = () => {
   const token = searchParams.get('token');
   const [done, setDone] = useState(false);
   const [serverError, setServerError] = useState('');
+  const { checkResetToken } = useCheckResetToken(token);
   const form = useForm({ resolver: yupResolver(resetSchema(t)) });
   const { resetPassword, isPending } = useResetPassword({
     onSuccess: () => setDone(true),
@@ -108,6 +110,16 @@ export const useResetPasswordPage = () => {
     form,
     token,
     done,
+    // Link state: checked before showing the form.
+    checking: !!token && checkResetToken.isLoading,
+    linkError: !token
+      ? t('errors.INVALID_RESET_LINK')
+      : checkResetToken.isError
+        ? errorMessage(checkResetToken.error, t)
+        : '',
+    linkExpired:
+      (checkResetToken.error as Error | null)?.message === 'RESET_LINK_EXPIRED',
+    accountEmail: checkResetToken.data?.email ?? '',
     serverError,
     isPending,
     onSubmit: form.handleSubmit(

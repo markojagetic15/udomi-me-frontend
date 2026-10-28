@@ -48,11 +48,6 @@
   h4 {
     @apply font-display tracking-tight;
   }
-
-  /* Leaflet's tiles sit above Radix popovers by default. */
-  .leaflet-container {
-    z-index: 0;
-  }
 }
 
 @layer utilities {

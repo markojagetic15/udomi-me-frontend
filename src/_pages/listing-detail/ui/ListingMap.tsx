@@ -1,27 +1,21 @@
-import { MapContainer, TileLayer, Circle } from 'react-leaflet';
+import { useTranslation } from 'react-i18next';
 
-// Approximate area only (500 m circle), never a pin on someone's house.
-export const ListingMap = ({ lat, lng }: { lat: number; lng: number }) => (
-  <div className='h-64 overflow-hidden rounded-xl border'>
-    <MapContainer
-      center={[lat, lng]}
-      zoom={13}
-      scrollWheelZoom={false}
-      className='h-full w-full'
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+// Approximate area only, never a pin on someone's house: the keyless Google
+// embed can only show a pin, so coordinates are rounded to 2 decimals (~1 km).
+const approx = (n: number) => n.toFixed(2);
+
+export const ListingMap = ({ lat, lng }: { lat: number; lng: number }) => {
+  const { t, i18n } = useTranslation();
+  const q = `${approx(lat)},${approx(lng)}`;
+  return (
+    <div className='h-64 overflow-hidden rounded-xl border'>
+      <iframe
+        title={t('detail.location')}
+        src={`https://www.google.com/maps?q=${q}&z=13&hl=${i18n.language}&output=embed`}
+        className='h-full w-full border-0'
+        loading='lazy'
+        referrerPolicy='no-referrer-when-downgrade'
       />
-      <Circle
-        center={[lat, lng]}
-        radius={500}
-        pathOptions={{
-          color: '#3f6b55',
-          fillColor: '#8eaf9d',
-          fillOpacity: 0.35,
-        }}
-      />
-    </MapContainer>
-  </div>
-);
+    </div>
+  );
+};
